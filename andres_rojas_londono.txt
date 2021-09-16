@@ -1,5 +1,0 @@
-Nombre del Equipo: Turing
-Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferentes tecnogías, tales como mongodb, nodejs,javascript,html5,css,react,etc.
-Nombre miembro del equipo: Andres Felipe Rojas Londoño
-Rol para el sprint1: administrador de BD
-Rol en todo el proyecto: desarrollador
