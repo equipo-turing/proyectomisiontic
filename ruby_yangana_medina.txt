@@ -1,0 +1,6 @@
+Nombre del Equipo: Turing
+Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferentes tecnogías, tales como mongodb, nodejs,javascript,html5,css,react,etc.
+Nombre miembro del equipo: Ruby Estela Yangana Medina
+Rol para el sprint1: Analista
+Rol en todo el proyecto: desarrollador
+© 2021 GitHub, Inc.
