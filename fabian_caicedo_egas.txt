@@ -1,6 +1,6 @@
 
 Nombre del Equipo: Turing
-Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferentes tecnogías, tales como mongodb, nodejs,javascript,html5,css,react,etc.
+Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferentes tecnogías, tales como mongodb, nodejs, javascript, html5, css, react, etc.
 Nombre miembro del equipo: Fabián Caicedo Egas
 Rol para el sprint1: desarrollador
 Rol en todo el proyecto: desarrollador
