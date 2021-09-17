@@ -1,5 +1,5 @@
 Nombre del Equipo: Turing
-Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferentes tecnogías, tales como mongodb, nodejs, javascript, html5, css, react, etc.
+Descripción del Proyecto: Proyecto de desarrollo de aplicacion web que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerle el correspondiente seguimiento. Donde se usarán diferentes tecnogías, tales como mongodb, nodejs, javascript, html5, css, react, etc.
 Nombre miembro del equipo: Diana Cristina Tobon Manrique
 Rol para el sprint1: Product Owner
 Rol en todo el proyecto: Desarrollador
