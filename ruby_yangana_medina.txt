@@ -3,4 +3,6 @@ Descripción del Proyecto: Proyecto de desarrollo web donde se usarán diferente
 Nombre miembro del equipo: Ruby Estela Yangana Medina
 Rol para el sprint1: Analista
 Rol en todo el proyecto: desarrollador
+Tener claro que los roles se rotaran durante todo el proyecto
+
 © 2021 GitHub, Inc.
