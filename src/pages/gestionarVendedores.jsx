@@ -1,6 +1,10 @@
 //La gestion de ventas será nuestro pagina de inicio o index
 import chulito from 'media/chulito.png';
 import agregar from 'media/anadir.png';
+import plus_circle from 'media/plus-circle1.png';
+
+import pencil from 'media/pencil1.png';
+
 import { Link } from 'react-router-dom';
 
 const GestionarVendedor =()=>{
@@ -9,7 +13,7 @@ const GestionarVendedor =()=>{
             <div className="encabezado_vendedores">
                 <Link to='/anadirVendedor'>
                     <div className="contenedorImagen imagen_gestionar">
-                        <img src={agregar} alt="" />
+                        <img src={plus_circle} alt="" />
                     </div>
                 </Link>
                 <div className="title_vendedor">
@@ -35,7 +39,7 @@ const GestionarVendedor =()=>{
                         <td>
                             <Link to='/actualizarvendedor'>
 
-                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                                <div className="contenedorImagen editar"><img src={pencil} alt="" /></div>
                             </Link>
                         </td>
 
@@ -50,7 +54,7 @@ const GestionarVendedor =()=>{
                         <td>
                             <Link to='/actualizarvendedor'>
 
-                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                                <div className="contenedorImagen editar"><img src={pencil} alt="" /></div>
                             </Link>
                         </td>
                     </tr>
@@ -63,7 +67,7 @@ const GestionarVendedor =()=>{
                         <td>
                             <Link to='/actualizarvendedor'>
 
-                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                                <div className="contenedorImagen editar"><img src={pencil} alt="" /></div>
                             </Link>
                         </td>
                     </tr>

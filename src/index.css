@@ -20,7 +20,7 @@ table, td, th {
 }
 td{
   width :15%;
-  background: grey;
+  background: #C4C4C4;
   
 }
 table {
@@ -31,7 +31,7 @@ table {
   background: green;
 }
 .encabezado_tabla{
-  background: rgb(101, 124, 197);
+  background: #255AAA;
 }
 .encabezado_vendedores{
   background-color: white;
@@ -64,4 +64,10 @@ table {
   margin-right: 140px;
   width: 5vh;
   height: 1vh;
+}
+
+.editar{
+  width: 5vh;
+  height: 5vh;
+  padding-left: 50%;
 }
