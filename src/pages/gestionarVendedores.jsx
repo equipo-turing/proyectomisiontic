@@ -1,11 +1,17 @@
 //La gestion de ventas será nuestro pagina de inicio o index
 import chulito from 'media/chulito.png';
+import agregar from 'media/anadir.png';
 
 const GestionarVendedor =()=>{
     return(
         <section>
             <div className="encabezado_vendedores">
-                <h1>GESTIONAR VENDEDORES</h1>
+                <div className="contenedorImagen imagen_gestionar">
+                    <img src={agregar} alt="" />
+                </div>
+                <div className="title_vendedor">
+                    <h1>GESTIONAR VENDEDORES</h1>
+                </div>
             </div>
             <div className="color_tabla">
                 <table>

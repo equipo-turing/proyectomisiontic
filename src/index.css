@@ -57,3 +57,11 @@ table {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
+.encabezado_vendedores{
+  padding-top: 40px;
+}
+.imagen_gestionar{
+  margin-right: 140px;
+  width: 5vh;
+  height: 1vh;
+}
