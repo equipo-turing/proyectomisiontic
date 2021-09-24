@@ -71,3 +71,35 @@ table {
   height: 5vh;
   padding-left: 50%;
 }
+
+.actualizar_usuario {
+  display: flex;
+  justify-content: center;
+}
+.formulario_act{
+  background-color: red;
+  padding-bottom: 30vh;
+  padding-left: 12vh;
+  padding-right: 12vh;
+  margin-top: 70px;
+
+}
+.encabezado_formulario{
+  background-color: #255AAA;
+}
+.formulario_act > label{
+  padding-right: 40px;
+}
+.formulario_act > input{
+  padding-right: 40px;
+  background-color: chartreuse;
+  margin-top: 10px;
+}
+.formulario_act >h2{
+  background-color: coral;
+}
+.actualizar_usuario>h2{
+  background-color: blue;
+  height: 20px;
+  margin-left: 100vh;
+}

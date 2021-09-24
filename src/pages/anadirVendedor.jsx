@@ -2,23 +2,28 @@ const AnadirVendedor =()=>{
     return(
         <div>
             <div>
-                <h2>Añadir Vendedor</h2>
+               
             </div>
-            <div>
-                <span>Identificacion:10583868</span>
-                <form>
-                    <label for="fname">Nombre</label>
-                    <input type="text" id="fname" name="fname"/>
-                    <br />
-                    <label for="lname">Especialidad</label>
-                    <input type="text" id="lname" name="lname"/>
-                    <br />
-                    <label for="lname">Telefono</label>
-                    <input type="text" id="lname" name="lname"/>
-                    <br />
-                    <label for="lname">Fecha Ingreso</label>
-                    <input type="date" id="lname" name="lname"/>
-                </form>
+            <div className="actualizar_usuario">
+                
+                    <form className="formulario_act">
+                        <h2>Añadir Vendedor</h2>
+                        
+                        <span>Identificacion:10583868</span>
+                        <br />
+                        <label for="fname">Nombre      </label>
+                        <input type="text" id="fname" name="fname"/>
+                        <br />
+                        <label for="especialidad">Especialidad</label>
+                        <input type="text" id="especialidad" name="especialidad"/>
+                        <br />
+                        <label for="telefono">Telefono     </label>
+                        <input type="text" id="telefono" name="telefono"/>
+                        <br />
+                        <label for="fecha_ingreso">Fecha Ingreso</label>
+                        <input type="date" id="fecha_ingreso" name="lname"/>
+                    </form>
+                
             </div>
         </div>
     );
