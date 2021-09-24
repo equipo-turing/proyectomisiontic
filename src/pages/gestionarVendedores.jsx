@@ -1,14 +1,17 @@
 //La gestion de ventas será nuestro pagina de inicio o index
 import chulito from 'media/chulito.png';
 import agregar from 'media/anadir.png';
+import { Link } from 'react-router-dom';
 
 const GestionarVendedor =()=>{
     return(
         <section>
             <div className="encabezado_vendedores">
-                <div className="contenedorImagen imagen_gestionar">
-                    <img src={agregar} alt="" />
-                </div>
+                <Link to='/anadirVendedor'>
+                    <div className="contenedorImagen imagen_gestionar">
+                        <img src={agregar} alt="" />
+                    </div>
+                </Link>
                 <div className="title_vendedor">
                     <h1>GESTIONAR VENDEDORES</h1>
                 </div>
@@ -29,7 +32,14 @@ const GestionarVendedor =()=>{
                         <td>Venta de calzado</td>
                         <td>312704055</td>
                         <td>22/09/2021</td>
-                        <td><div className="contenedorImagen"><img src={chulito} alt="" /></div></td>
+                        <td>
+                            <Link to='/actualizarvendedor'>
+
+                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                            </Link>
+                        </td>
+
+
                     </tr>
                     <tr>
                         <td>10527868</td>
@@ -37,7 +47,12 @@ const GestionarVendedor =()=>{
                         <td>Venta de calzado</td>
                         <td>312704055</td>
                         <td>22/09/2021</td>
-                        <td><div className="contenedorImagen"><img src={chulito} alt="" /></div></td>
+                        <td>
+                            <Link to='/actualizarvendedor'>
+
+                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                            </Link>
+                        </td>
                     </tr>
                     <tr>
                         <td>10527868</td>
@@ -45,7 +60,12 @@ const GestionarVendedor =()=>{
                         <td>Venta de calzado</td>
                         <td>312704055</td>
                         <td>22/09/2021</td>
-                        <td className='td_actualizar'><div className="contenedorImagen"><img src={chulito} alt="" /></div></td>
+                        <td>
+                            <Link to='/actualizarvendedor'>
+
+                                <div className="contenedorImagen"><img src={chulito} alt="" /></div>
+                            </Link>
+                        </td>
                     </tr>
                 </table>
             </div>
