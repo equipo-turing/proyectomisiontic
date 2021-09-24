@@ -3,6 +3,7 @@
 const Index =()=>{
     return(
         <section>
+            <button>Agragar Venta</button>
             <h1>GESTIONAR VENTAS</h1>
             <table>
                 Tabla con las ventas
