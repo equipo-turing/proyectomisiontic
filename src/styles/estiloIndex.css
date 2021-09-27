@@ -1,0 +1,30 @@
+/*aqui va el codigo css para ventas del proyecto*/
+.tituloGestionarVenta{
+    text-align: center;
+    margin-top: 100px;
+}
+.contenedorTablaVentas{
+    margin-top: 10px;
+    
+
+}
+.contenedorTablaVentas > table{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+
+}
+.encabezadoTablaVentas{
+    background-color:#255AAA;
+    color: white;
+}
+td,th{
+    border:1px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
