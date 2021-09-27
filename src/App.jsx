@@ -5,7 +5,8 @@ import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import 'styles/styles.css';
+import 'styles/index.css';
+
 
 
 function App() {
