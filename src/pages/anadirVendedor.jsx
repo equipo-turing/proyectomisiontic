@@ -1,9 +1,6 @@
 const AnadirVendedor =()=>{
     return(
         <div>
-            <div>
-               
-            </div>
             <div className="actualizar_usuario">
                 
                     <form className="formulario_act">
@@ -23,8 +20,9 @@ const AnadirVendedor =()=>{
                         <label for="fecha_ingreso">Fecha Ingreso</label>
                         <input type="date" id="fecha_ingreso" name="lname"/>
                     </form>
-                
+
             </div>
+           
         </div>
     );
   }
