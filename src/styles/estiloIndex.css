@@ -1,12 +1,15 @@
-/*aqui va el codigo css para ventas del proyecto*/
-.tituloGestionarVenta{
-    text-align: center;
-    margin-top: 100px;
-}
 .contenedorTablaVentas{
     margin-top: 10px;
-    
+}
+.contenedorImagenTitulo{
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+   
+}
 
+.contenedorImagenTitulo>h1{
+    padding-left: 100px;
 }
 .contenedorTablaVentas > table{
     margin-left: auto;
@@ -25,6 +28,7 @@ td,th{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 
 
 

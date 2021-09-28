@@ -1,13 +1,22 @@
 //La gestion de ventas será nuestro pagina de inicio o index
+import { Link } from 'react-router-dom';
+import plus_circle from 'media/plus-circle1.png';
 import 'styles/estiloIndex.css';
 
 const Index =()=>{
     return(
         <section>
-            <div className="contenedorImgCrearVenta">
+            <div className="contenedorImagenTitulo">
                 
-            </div>
-            <h1 className="tituloGestionarVenta">LISTADO DE VENTAS</h1>
+                <Link to='/agregarVenta'>          
+                    <img src={plus_circle} alt="Crear Venta" />      
+                </Link>
+
+                           
+                <h1 className="tituloGestionarVenta">LISTADO DE VENTAS</h1>                
+
+            </div>         
+            
             
             <div className="contenedorTablaVentas">
             <table>
