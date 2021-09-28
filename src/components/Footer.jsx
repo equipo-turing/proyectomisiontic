@@ -4,11 +4,9 @@ import 'styles/estiloFooter.css'
 const Footer = () => {
     return (
         <footer>
-            <div className="contenedorFooter">
-           <h3>Este es el footer</h3>
-
-            </div>
             
+           <h3>Este es el footer</h3>
+                    
         </footer>
     )
 }

@@ -1,11 +1,10 @@
 
-.contenedorFooter{
-    background-color:#17202A;
+footer{
+    background-color:#05243E;
     color: white;
     height: 100px;
     display:flex;
     justify-content: center;
-    align-items: center;
-   
+    align-items: center;   
 
 }
