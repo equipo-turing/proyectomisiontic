@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
+import 'styles/estiloMenuLateral.css'
 
 const Menu = () => {
     return (
-        <>
-        <div className="menuLateral">
+       <nav className="menuLateral">
+           <h3>Menu Lateral</h3>
 
-        </div>
-        </>     
+       </nav>   
     );
 }
 

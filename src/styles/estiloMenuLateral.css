@@ -1,0 +1,14 @@
+.menuLateral{
+    width: 280px; 
+     
+    background-color:#255AAA;
+    
+}
+.mainContainer{
+  display: flex;    
+  height: 89.7vh;
+  overflow: hidden;  
+}
+.mainContainer>main{    
+    width: 100%;    
+}
