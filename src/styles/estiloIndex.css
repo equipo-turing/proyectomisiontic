@@ -17,6 +17,10 @@
     border-collapse: collapse;
 
 }
+img:hover{
+    cursor: pointer;
+   transform: scale(1.1);
+}
 .encabezadoTablaVentas{
     background-color:#255AAA;
     color: white;

@@ -8,7 +8,7 @@ const Index =()=>{
         <section>
             <div className="contenedorImagenTitulo">
                 
-                <Link to='/agregarVenta'>          
+                <Link to='/formularioCrearVenta'>          
                     <img src={plus_circle} alt="Crear Venta" />      
                 </Link>
 
