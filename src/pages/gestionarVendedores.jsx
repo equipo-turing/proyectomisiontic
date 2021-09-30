@@ -1,6 +1,4 @@
 //La gestion de ventas será nuestro pagina de inicio o index
-
-import agregar from 'media/anadir.png';
 import plus_circle from 'media/plus-circle1.png';
 
 import pencil from 'media/pencil1.png';

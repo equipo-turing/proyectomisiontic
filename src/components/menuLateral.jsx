@@ -33,7 +33,7 @@ const Menu = () => {
             </li>
 
             <li>
-            <Link to='/' className="itemMenuLateral"> 
+            <Link to='/gestionarUsuarios' className="itemMenuLateral"> 
                 <img src={iconoAdmin} alt="Ícono administración de usuarios" />
                 <h4>Administración de Usuarios</h4>
             </Link>
