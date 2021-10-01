@@ -1,6 +1,8 @@
 import React, {useEffect,useState} from 'react'
 import "styles/estiloFormularioVenta.css"
 
+
+
 const formularioCrearVenta = () => {
     return ( 
      

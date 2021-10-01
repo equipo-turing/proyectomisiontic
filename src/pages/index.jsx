@@ -1,20 +1,44 @@
 //La gestion de ventas será nuestro pagina de inicio o index
 import { Link } from 'react-router-dom';
+import React, {useEffect,useState} from 'react'
 import plus_circle from 'media/plus-circle1.png';
 import 'styles/estiloIndex.css';
 
-const Index =()=>{
-    return(
+//objeto venta con ventas ya creadas manualmente;
+const venta=()=>[
+    {
+        codigo:"12345",
+        valorVenta:"5.700.600",
+        fechaVenta:"22/09/2021",
+        fechaPago:"22/10/2021",
+        responsable:"Andres Rojas",
+        descripcion:"Venta Zapatos"
+    },
+
+    {
+        codigo:"15555",
+        valorVenta:"600000",
+        fechaVenta:"21/09/2021",
+        fechaPago:"05/10/2021",
+        responsable:"Walter Medina",
+        descripcion:"Venta Tenis"
+    }
+    
+];
+
+//funcion donde está el formulario ventas, recibe como parámeto una lista de ventas
+const TablaVentas=({listaVenta})=>{
+
+    return (
         <section>
             <div className="contenedorImagenTitulo">
                 
                 <Link to='/formularioCrearVenta' > 
                 <div className="iconoVentas">
-                <img  src={plus_circle} alt="Crear Venta" /> 
-                    </div>         
+                <img  src={plus_circle} alt="Crear Venta" />
+               </div>        
                          
                 </Link>
-
                            
                 <h1 className="tituloGestionarVenta">LISTADO DE VENTAS</h1>                
 
@@ -34,47 +58,47 @@ const Index =()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>12345</td>
-                        <td>5.700.600</td>
-                        <td>22/09/2021</td>
-                        <td>22/10/2021</td>
-                        <td>Andres Rojas</td>
-                        <td>Venta Zapatos</td>                        
-                    </tr>
-                    <tr>
-                        <td>2358</td>
-                        <td>300.000</td>
-                        <td>28/09/2021</td>
-                        <td>30/10/2021</td>
-                        <td>Ruby Medina</td>
-                        <td>Venta Pantalon</td>                        
-                    </tr>
-                    <tr>
-                        <td>00989</td>
-                        <td>150.000</td>
-                        <td>22/10/2021</td>
-                        <td>22/11/2021</td>
-                        <td>Fabian Caicedo</td>
-                        <td>Venta Bolso Cuero</td>                        
-                    </tr>
-                    <tr>
-                        <td>0098888</td>
-                        <td>450.000</td>
-                        <td>2/10/2021</td>
-                        <td>2/11/2021</td>
-                        <td>Diana Tobón</td>
-                        <td>Venta Blusa</td>                        
-                    </tr>
+                  
+               
+                    {listaVenta.map((venta)=>{
+                        return (
+                            <tr>
+                            <td>{venta.codigo}</td>
+                            <td>{venta.valorVenta}</td>
+                            <td>{venta.fechaVenta}</td>
+                            <td>{venta.fechaPago}</td>
+                            <td>{venta.responsable}</td>
+                            <td>{venta.descripcion}</td>                        
+                        </tr>
 
-                </tbody>
+                        )
+                       
 
-                
+                    })}                   
+
+                </tbody>                
             </table>
 
             </div>
            
         </section>
+    )
+
+}
+
+
+const Index =()=>{  
+    const [ventas,setVentas]=useState([]);
+    useEffect(()=>{
+        //se trae la lista de ventas desde el backend, en este caso desde el objeto venta y lo coloca en setVentas
+        setVentas(venta);
+       },[])  
+
+    return(  
+        //llamo a la funcion TablaVentas  y le paso a la lista la variable ventas, variable que tiene todos las ventas de la bd
+        <TablaVentas listaVenta={ventas}/>       
+
+        
 
     );
 
