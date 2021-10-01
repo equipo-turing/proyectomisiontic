@@ -8,8 +8,11 @@ const Index =()=>{
         <section>
             <div className="contenedorImagenTitulo">
                 
-                <Link to='/formularioCrearVenta'>          
-                    <img src={plus_circle} alt="Crear Venta" />      
+                <Link to='/formularioCrearVenta' > 
+                <div className="iconoVentas">
+                <img  src={plus_circle} alt="Crear Venta" /> 
+                    </div>         
+                         
                 </Link>
 
                            

@@ -1,15 +1,59 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
+import "styles/estiloFormularioVenta.css"
 
 const formularioCrearVenta = () => {
-    return (
-        <div>
-            <h1>Vormualrio para crear ventas</h1>
-            <form action="">
-                <input type="text" />
-                <input type="text" /><input type="text" />
+    return ( 
+     
+              
+            <div className="formularioCrearVentas">
+                <div className="contenedorTituloRegistroVenta">
+                <h1>Registrar Venta</h1>                    
+                </div>
+
+                <form >
+                                
+                
+                <label className="labelCampos" htmlFor="codigo">
+                    Código
+                <input className="camposRegistroVenta" type="text" />
+                </label>
+
+                <label className="labelCampos" htmlFor="valorVenta">
+                    Valor Venta
+                <input className="camposRegistroVenta" type="text" />
+                </label>
+
+                <label className="labelCampos"  htmlFor="fechaVenta">
+                    Fecha Venta
+                <input className="camposRegistroVenta" type="date" />
+                </label>
+
+                <label className="labelCampos"  htmlFor="fechaVenta">
+                    Fecha Pago
+                <input className="camposRegistroVenta" type="date" />
+                </label>
+
+                <label className="labelCampos"  htmlFor="fechaVenta">
+                    Responsable
+                <input className="camposRegistroVenta" type="text" />
+                </label>
+
+                <label className="labelCampos"  htmlFor="fechaVenta">
+                    Descripción
+                <input className="camposRegistroVenta" type="text" />
+                </label>
+
+                <div className="contBotonGuardarVenta">
+                <input className="botonCancelar" type="submit" value="Cancelar" />
+                <input className="botonGuardar" type="submit" value="Guardar" />           
+
+                </div>          
 
             </form>
-        </div>
+
+            </div>
+            
+      
     )
 }
 
