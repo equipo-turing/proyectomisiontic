@@ -4,6 +4,7 @@ import plus_circle from 'media/plus-circle1.png';
 import 'styles/estiloIndex.css';
 
 const Index =()=>{
+
     return(
         <section>
             <div className="contenedorImagenTitulo">

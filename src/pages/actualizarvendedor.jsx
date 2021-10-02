@@ -1,36 +1,60 @@
 
-import 'styles/actualiza_vendedor.css'
+import React, {useEffect,useState} from 'react';
+import "styles/estiloFormularioVenta.css";
 const Actualizarvendedor =()=>{
-    return (<div className="contenedorForm">
-      <form className="formulario" action="">
-        <h1>Actualizar vendedor</h1>
-        <span>10002313</span>
-        <div className="datosLlenar">
-          <div className="row">
-            <label htmlFor="nombre">
-              Nombre
-            </label>
-            <input type="text" />
-          </div>
-          <div className="row">
-            <label htmlFor="especialidad">
-              especialidad
-            </label> 
-            <input type="text" />
-               
-          </div>
+  const [codigo,setCodigo]=useState('');
+  useEffect(()=>{
+      console.log("este es el codio: ",codigo);
 
-          <div className="row">
-            <label htmlFor="telefono">
-              telefono
-            </label>  
-            <input type="text" />
-              
+  },[]);
+
+  const metodo=()=>{
+      console.log("este es el codio: ",codigo);
+  }
+  return ( 
+   
             
+          <div className="formularioCrearVentas">
+              <div className="contenedorTituloRegistroVenta">
+              <h1>Actualizar Vendedor</h1>                    
+              </div>
+              <form >
+                          
+              <label className="labelCampos" htmlFor="nombre">
+                  Nombre
+              <input onChange={(e)=>{
+                  setCodigo(e.target.value);
+
+              }} className="camposRegistroVenta" type="text" />
+              </label>
+
+              <label className="labelCampos" htmlFor="especialidad">
+              especialidad
+              <input className="camposRegistroVenta" type="text" />
+              </label>
+
+              <label className="labelCampos"  htmlFor="telefono">
+              telefono
+              <input className="camposRegistroVenta" type="number" />
+              </label>
+
+              <label className="labelCampos"  htmlFor="fechaingreso">
+                  Fecha Ingreso
+              <input className="camposRegistroVenta" type="date" />
+              </label>
+
+              <div className="contBotonGuardarVenta">
+              <input className="botonCancelar" type="submit" value="Cancelar" />
+              <input type="button" onClick={metodo} className="botonGuardar"  value="Guardar" />           
+
+              </div>          
+
+          </form>
+
           </div>
-        </div>
-      </form>
-    </div>);
+          
+    
+  )
   }
   
   export default Actualizarvendedor;
