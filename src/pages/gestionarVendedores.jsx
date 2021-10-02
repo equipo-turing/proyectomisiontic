@@ -1,5 +1,5 @@
 //La gestion de ventas será nuestro pagina de inicio o index
-import chulito from 'media/chulito.png';
+
 import agregar from 'media/anadir.png';
 import plus_circle from 'media/plus-circle1.png';
 

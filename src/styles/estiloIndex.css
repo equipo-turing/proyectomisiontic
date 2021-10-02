@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+.contenedorTablaVentas{
+    margin-top: 10px;
+}
+.contenedorImagenTitulo{
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+   
+}
+
+.contenedorImagenTitulo>h1{
+    padding-left: 100px;
+}
+.contenedorTablaVentas > table{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+
+}
+.iconoVentas:hover{
+    cursor: pointer;
+  transform: scale(1.2);
+}
+.encabezadoTablaVentas{
+    background-color:#255AAA;
+    color: white;
+}
+td,th{
+    border:1px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+

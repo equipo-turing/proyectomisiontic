@@ -3,9 +3,11 @@ import Index from 'pages';
 import GestionarVendedor from 'pages/gestionarVendedores';
 import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
+import FormularioCrearVentas from 'pages/formularioCrearVenta';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import 'styles/styles.css';
+
+
 
 
 function App() {
@@ -15,6 +17,9 @@ function App() {
           <Switch>
             <Route path='/' exact>
               <Index />
+            </Route> 
+            <Route path='/formularioCrearVenta' exact>
+              <FormularioCrearVentas />
             </Route> 
             <Route path='/gestionar_vendedor' exact>
               <GestionarVendedor />
