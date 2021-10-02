@@ -4,7 +4,7 @@ import agregar from 'media/anadir.png';
 import plus_circle from 'media/plus-circle1.png';
 
 import pencil from 'media/pencil1.png';
-
+import 'styles/style_gestionar_vendedor.css';
 import { Link } from 'react-router-dom';
 
 const GestionarVendedor =()=>{
@@ -20,7 +20,7 @@ const GestionarVendedor =()=>{
                     <h1>GESTIONAR VENDEDORES</h1>
                 </div>
             </div>
-            <div className="color_tabla">
+            <div className="contenedorGestionarVendedores">
                 <table>
                     <tr className="encabezado_tabla">
                         <th>Identificacion</th>
