@@ -6,6 +6,8 @@ import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
 import FormularioCrearVentas from 'pages/formularioCrearVenta';
 
+
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -21,6 +23,7 @@ function App() {
             </Route>            
             <Route path='/formularioCrearVenta' exact>
               <FormularioCrearVentas />
+              
             </Route> 
             <Route path='/formularioCrearUsuario' exact>
               <formularioCrearUsuario/>
@@ -34,6 +37,8 @@ function App() {
             <Route path='/anadirVendedor' exact>
               <AnadirVendedor />
             </Route>
+
+           
             <Route path='/actualizarvendedor' exact>
               <Actualizarvendedor />
             </Route> 

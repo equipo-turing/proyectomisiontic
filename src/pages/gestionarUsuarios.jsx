@@ -1,9 +1,12 @@
 //import agregar from "media/plus-circle1.png";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, {useEffect,useState} from 'react'
 //import { Link } from 'react-router-dom';
-import 'styles/stylesGestionarUsuario.css';
+
 import penciles from 'media/pencil1.png';
+import plus_circle from 'media/plus-circle1.png';
+import iconoDelete from 'media/delete.png';
+import 'styles/stylesGestionarUsuario.css';
 
 
 
@@ -15,33 +18,36 @@ const usuario=()=>[
  nombre:"Ruby Medina",
  rol:"vendedor"
  
-
 },
 {
  identificacion:"1144765432",
  nombre:"Isaias Medina",
  rol:"Administrador"
 
+},
+{
+  identificacion:"1151786543",
+  nombre:"Sebastian Perez",
+  rol:"Director"
+ 
 
 }
+
 
 ];
  const TablaGestionarUsuarios=({listaUsuarios})=> {
    return (
      <section>
-       <div className="contenedorImagenTitulo">
-         <link to = '/formularioCrearUsuario'>
-           
-          
-
-           
-            </link>
-
+       <div className="contenedorImagenTituloUsuario">
+        <Link to ='/formularioCrearUsuario'>
+          <div className="iconoUsuario">
+          <img src={plus_circle} alt="crear Usuario" />
+          </div>
+            
+          </Link>
        <h1 className="tituloGestionarUsuario">GESTIONAR USUARIOS</h1>
 
        </div>
-      
-       
       
        <div className="contenedorTablaUsuarios">
          <table>
@@ -51,6 +57,7 @@ const usuario=()=>[
               <th>Nombre</th>
               <th>Rol</th>
               <th>Actualizar</th>
+              <th>Eliminar</th>
 
             </tr>
 
@@ -62,7 +69,9 @@ const usuario=()=>[
                    <td>{usuario.identificacion}</td>
                    <td>{usuario.nombre}</td>
                    <td>{usuario.rol}</td>
-                   <td>  <img  src={penciles } alt="Crear Venta" /></td>
+                   <td>  <img  src={penciles } alt="actualizar usuario" /></td>
+                   <td>  <img  src={iconoDelete } alt=" eliminar usuario" /></td>
+
                   
                   
                     </tr>

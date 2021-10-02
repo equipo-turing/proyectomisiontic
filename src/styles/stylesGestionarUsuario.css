@@ -39,6 +39,16 @@
  }
 
  .contenedorImagenTituloUsuario{
-  padding-left: 100px;
+   margin-top: 10px;
+   display: flex;
+   justify-content: center;
 }
 
+.iconoUsuario:hover{
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.contenedorImagenTituloUsuario>h1{
+    margin-left: 60px;
+}
