@@ -2,9 +2,13 @@
 footer{
     background-color:#05243E;
     color: white;
+    width: 100%;
     height: 100px;
-    display:flex;
-    justify-content: center;
-    align-items: center;   
+    display:flex;   
+    flex-direction: column;    
+    align-items: center; 
+}
 
+footer>h1,h5{
+    margin: 0;
 }

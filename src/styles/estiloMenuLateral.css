@@ -6,7 +6,8 @@
 }
 .mainContainer{
   display: flex;    
-  height:89.3vh;
+  height:100vh;
+ 
    
 }
 .mainContainer>main{    
@@ -25,12 +26,9 @@
   font-size: 25px;
 }
 
-
-
 .menuLateral >ul,li{
   list-style: none;
   padding:0px; 
-
   
 }
 .itemMenuLateral:hover{
