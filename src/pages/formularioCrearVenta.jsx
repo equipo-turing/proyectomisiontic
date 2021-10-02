@@ -1,9 +1,18 @@
-import React, {useEffect,useState} from 'react'
-import "styles/estiloFormularioVenta.css"
+import React, {useEffect,useState} from 'react';
+import "styles/estiloFormularioVenta.css";
 
 
 
-const formularioCrearVenta = () => {
+const FormularioCrearVenta = () => {
+    const [codigo,setCodigo]=useState('');
+    useEffect(()=>{
+        console.log("este es el codio: ",codigo);
+
+    },[]);
+
+    const metodo=()=>{
+        console.log("este es el codio: ",codigo);
+    }
     return ( 
      
               
@@ -17,7 +26,10 @@ const formularioCrearVenta = () => {
                 
                 <label className="labelCampos" htmlFor="codigo">
                     Código
-                <input className="camposRegistroVenta" type="text" />
+                <input onChange={(e)=>{
+                    setCodigo(e.target.value);
+
+                }} className="camposRegistroVenta" type="text" />
                 </label>
 
                 <label className="labelCampos" htmlFor="valorVenta">
@@ -47,7 +59,7 @@ const formularioCrearVenta = () => {
 
                 <div className="contBotonGuardarVenta">
                 <input className="botonCancelar" type="submit" value="Cancelar" />
-                <input className="botonGuardar" type="submit" value="Guardar" />           
+                <input type="button" onClick={metodo} className="botonGuardar"  value="Guardar" />           
 
                 </div>          
 
@@ -59,4 +71,4 @@ const formularioCrearVenta = () => {
     )
 }
 
-export default formularioCrearVenta
+export default FormularioCrearVenta

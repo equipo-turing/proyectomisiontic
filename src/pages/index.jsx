@@ -55,6 +55,8 @@ const TablaVentas=({listaVenta})=>{
                         <th>Fecha Pago</th>
                         <th>Responsable</th>
                         <th>Descripción</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,11 +70,11 @@ const TablaVentas=({listaVenta})=>{
                             <td>{venta.fechaVenta}</td>
                             <td>{venta.fechaPago}</td>
                             <td>{venta.responsable}</td>
-                            <td>{venta.descripcion}</td>                        
+                            <td>{venta.descripcion}</td>
+                            <td>Actualizar</td>
+                            <td>Eliminar</td>                         
                         </tr>
-
-                        )
-                       
+                        )                      
 
                     })}                   
 
@@ -86,22 +88,18 @@ const TablaVentas=({listaVenta})=>{
 
 }
 
-
+//funcion principal la cual se importa para ser enrutada en el archivo app.jsx
 const Index =()=>{  
-    const [ventas,setVentas]=useState([]);
+    const [ventas,setVentas]=useState([]);//el [] indica que el arreglo será vacío inicialmente
     useEffect(()=>{
         //se trae la lista de ventas desde el backend, en este caso desde el objeto venta y lo coloca en setVentas
         setVentas(venta);
-       },[])  
+       },[])  //si [] se deja vacio se ejecuta una sola vez, para este contexto necesitamos que la tabla se muestre una sola vez cuando la pagina se renderiza
 
     return(  
         //llamo a la funcion TablaVentas  y le paso a la lista la variable ventas, variable que tiene todos las ventas de la bd
-        <TablaVentas listaVenta={ventas}/>       
-
-        
-
-    );
-
+        <TablaVentas listaVenta={ventas}/> 
+        );
 }
 
 export default Index;
