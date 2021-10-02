@@ -5,16 +5,7 @@ import GestionarVendedor from 'pages/gestionarVendedores';
 import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
 import FormularioCrearVentas from 'pages/formularioCrearVenta';
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 53578a5245defa7c0a1b3a8a21a3c67654dd1985
-
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-
-
 
 function App() {
   return (
