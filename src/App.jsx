@@ -22,6 +22,9 @@ function App() {
             <Route path='/formularioCrearVenta' exact>
               <FormularioCrearVentas />
             </Route> 
+            <Route path='/formularioCrearUsuario' exact>
+              <formularioCrearUsuario/>
+            </Route> 
             <Route path='/gestionarUsuarios' exact>
               <GestionarUsuario />
             </Route> 
