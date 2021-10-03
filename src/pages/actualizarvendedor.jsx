@@ -54,7 +54,7 @@ const Actualizarvendedor =()=>{
           </div>
           
     
-  )
+    )
   }
   
   export default Actualizarvendedor;
