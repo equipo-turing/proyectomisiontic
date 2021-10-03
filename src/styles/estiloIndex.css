@@ -23,7 +23,7 @@ body {
 }
 
 .contenedorImagenTitulo>h1{
-    padding-left: 100px;
+    padding-left: 60px;
 }
 .contenedorTablaVentas > table{
     margin-left: auto;
@@ -45,6 +45,9 @@ td,th{
     padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.iconoElminarActualizar{
+  text-align: center;
 }
 
 

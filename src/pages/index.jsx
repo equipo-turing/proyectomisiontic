@@ -1,7 +1,7 @@
 //La gestion de ventas será nuestro pagina de inicio o index
-import { Link } from 'react-router-dom';
 import React, {useEffect,useState} from 'react'
-import plus_circle from 'media/plus-circle1.png';
+import TablaVenta from 'components/tablaVentas';
+import FormularioCrearVenta from 'pages/formularioCrearVenta';
 import 'styles/estiloIndex.css';
 
 //objeto venta con ventas ya creadas manualmente;
@@ -22,71 +22,20 @@ const venta=()=>[
         fechaPago:"05/10/2021",
         responsable:"Walter Medina",
         descripcion:"Venta Tenis"
-    }
+    },
+    {
+        codigo:"15555",
+        valorVenta:"600000",
+        fechaVenta:"21/09/2021",
+        fechaPago:"05/10/2021",
+        responsable:"Walter Medina",
+        descripcion:"Venta Tenis"
+    },
+    
     
 ];
 
 //funcion donde está el formulario ventas, recibe como parámeto una lista de ventas
-const TablaVentas=({listaVenta})=>{
-
-    return (
-        <section>
-            <div className="contenedorImagenTitulo">
-                
-                <Link to='/formularioCrearVenta' > 
-                <div className="iconoVentas">
-                <img  src={plus_circle} alt="Crear Venta" />
-               </div>        
-                         
-                </Link>
-                           
-                <h1 className="tituloGestionarVenta">LISTADO DE VENTAS</h1>                
-
-            </div>         
-            
-            
-            <div className="contenedorTablaVentas">
-            <table>
-                <thead className="encabezadoTablaVentas">
-                    <tr>
-                        <th>Código</th>
-                        <th>Valor Venta</th>
-                        <th>Fecha Venta</th>
-                        <th>Fecha Pago</th>
-                        <th>Responsable</th>
-                        <th>Descripción</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  
-               
-                    {listaVenta.map((venta)=>{
-                        return (
-                            <tr>
-                            <td>{venta.codigo}</td>
-                            <td>{venta.valorVenta}</td>
-                            <td>{venta.fechaVenta}</td>
-                            <td>{venta.fechaPago}</td>
-                            <td>{venta.responsable}</td>
-                            <td>{venta.descripcion}</td>
-                            <td>Actualizar</td>
-                            <td>Eliminar</td>                         
-                        </tr>
-                        )                      
-
-                    })}                   
-
-                </tbody>                
-            </table>
-
-            </div>
-           
-        </section>
-    )
-
-}
 
 //funcion principal la cual se importa para ser enrutada en el archivo app.jsx
 const Index =()=>{  
@@ -97,8 +46,14 @@ const Index =()=>{
        },[])  //si [] se deja vacio se ejecuta una sola vez, para este contexto necesitamos que la tabla se muestre una sola vez cuando la pagina se renderiza
 
     return(  
+        <div>
+        <TablaVenta listaVenta={ventas}   /> 
+        
+        
+
+        </div>
         //llamo a la funcion TablaVentas  y le paso a la lista la variable ventas, variable que tiene todos las ventas de la bd
-        <TablaVentas listaVenta={ventas}/> 
+        
         );
 }
 
