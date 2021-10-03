@@ -31,23 +31,9 @@ const GestionarVendedor =()=>{
         <section>
             {mostrarTabla ? (
               <div>
-                <div>
-                <div className="contenedorImagenTitulo">                
-                    <div className="iconoVentas">
-                      <button 
-                        onClick={() => {
-                          setMostrarTabla(!mostrarTabla);
-                        }}
-                      ><img src={plus_circle} alt="" /></button>
-                    </div>
                 
-                <div className="tituloGestionarVenta">
-                    <h1>GESTIONAR VENDEDORES</h1>
-                </div>
-            </div>
-                </div>
                 <div className="contenedorTablaVentas">
-                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores}/>
+                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
                 </div>
               </div>
               ) : (
@@ -65,7 +51,7 @@ const GestionarVendedor =()=>{
 }
 
 
-const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores }) =>{
+const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla }) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
     const eliminarVendedor =(identificacion)=>{
       let listaVendedoresTemp = [...listaVendedores];
@@ -93,35 +79,52 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
         {actualizaVendedor ? (
           <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor}/>
           ) : (
-          <div className='contenedorTablaVentas'>
-            <table>
-              <thead className="encabezadoTablaVentas">
-                <tr>
-                  <th>Identificacion</th>
-                  <th>Nombre</th>
-                  <th>Especialidad</th>
-                  <th>Telefono</th>
-                  <th>Fecha de Ingreso</th>
-                  <th>Actualizar</th>
-                  <th>Eliminar</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listaVendedores.map((vendedor) => {
-                  return (
-                    <tr >
-                      <td>{vendedor.identificacion}</td>
-                      <td>{vendedor.nombre}</td>
-                      <td>{vendedor.especialidad}</td>
-                      <td>{vendedor.telefono}</td>
-                      <td>{vendedor.fecha_ingreso}</td>
-                      <td><button onClick={() => actVendedor(vendedor.identificacion)}>Actualizar</button></td>
-                      <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > Eliminar</button></td>
-                    </tr>
-                  );
-              })}
-            </tbody>
-          </table>
+          <div>
+                <div>
+                  <div className="contenedorImagenTitulo">                
+                    <div className="iconoVentas">
+                      <button 
+                        onClick={() => {
+                          setMostrarTabla(!mostrarTabla);
+                        }}
+                      ><img src={plus_circle} alt="" /></button>
+                    </div>
+                  
+                    <div className="tituloGestionarVenta">
+                      <h1>GESTIONAR VENDEDORES</h1>
+                    </div>
+                  </div>
+                </div>
+            <div className='contenedorTablaVentas'>
+              <table>
+                <thead className="encabezadoTablaVentas">
+                  <tr>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Especialidad</th>
+                    <th>Telefono</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Actualizar</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {listaVendedores.map((vendedor) => {
+                    return (
+                      <tr >
+                        <td>{vendedor.identificacion}</td>
+                        <td>{vendedor.nombre}</td>
+                        <td>{vendedor.especialidad}</td>
+                        <td>{vendedor.telefono}</td>
+                        <td>{vendedor.fecha_ingreso}</td>
+                        <td><button onClick={() => actVendedor(vendedor.identificacion)}>Actualizar</button></td>
+                        <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > Eliminar</button></td>
+                      </tr>
+                    );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
           )}
         
@@ -211,8 +214,6 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       }
     }
     setActualizaVendedor(false);
-    // Spreed operator
-    //setVendedores([...listaVendedores,nuevoVendedor])
   };
   return ( 
     <div className="formularioCrearVentas">
