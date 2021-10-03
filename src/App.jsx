@@ -16,10 +16,7 @@ function App() {
             <Route path='/' exact>
               <Index />
             </Route>            
-            <Route path='/formularioCrearVenta' exact>
-              <FormularioCrearVentas />
-              
-            </Route> 
+             
             <Route path='/actualizarVenta' exact>
               <ActualizarVenta />
               

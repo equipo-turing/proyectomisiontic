@@ -2,8 +2,8 @@
 import React, {useEffect,useState,useRef} from 'react'
 
 import plus_circle from 'media/plus-circle1.png';
-
-import 'styles/estiloFormularioVenta.css';
+import penciles from 'media/pencil1.png';
+import iconoDelete from 'media/delete.png';
 
 import 'styles/estiloIndex.css';
 
@@ -44,7 +44,7 @@ const venta=()=>[
 const Index =()=>{  
     const [ventas,setVentas]=useState([]);//el [] indica que el arreglo será vacío inicialmente
     const [mostrarTabla, setMostrarTabla] = useState(true);
-    const [actualizaVenta, setActualizaVenta] = useState(false);
+    const [actualizarVenta, setActualizarVentas] = useState(false);
 
     useEffect(()=>{
         //se trae la lista de ventas desde el backend, en este caso desde el objeto venta y lo coloca en setVentas
@@ -60,7 +60,7 @@ const Index =()=>{
         
         {mostrarTabla ? (
               
-                  <TablaVentas listaVenta={ventas} actualizarVenta={actualizaVenta} setActualizaVenta={setActualizaVenta} setVentas={setVentas} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
+                  <TablaVentas listaVenta={ventas} actualizarVenta={actualizarVenta} setActualizarVentas={setActualizarVentas} setVentas={setVentas} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
               
               ) : 
               (
@@ -81,10 +81,10 @@ const Index =()=>{
 }
 
 
-const TablaVentas=({ listaVenta , actualizaVenta , setActualizaVenta , setVentas, setMostrarTabla, mostrarTabla })=>{
+const TablaVentas=({ listaVenta , actualizarVenta , setActualizarVentas , setVentas, setMostrarTabla, mostrarTabla })=>{
 
 
-    const [codigoVenta, setCodigoVenta] = useState();
+    const [codigoVenta, setcodigoVenta] = useState();
     const eliminarVenta =(codigo)=>{
       let listaVentaTemp = [...listaVenta];
       for(let i=0;i<listaVenta.length;i++){
@@ -98,17 +98,17 @@ const TablaVentas=({ listaVenta , actualizaVenta , setActualizaVenta , setVentas
 
     
     const actVenta =(codigo)=>{
-      console.log("Identificacion => ",codigo)
+      console.log("codigo => ",codigo)
       for(let i=0;i<listaVenta.length;i++){
         console.log('indice = >',i," -> ",listaVenta[i]);
       }
-      setCodigoVenta(codigo);
-      setActualizaVenta(!actualizaVenta);
+      setcodigoVenta(codigo);
+      setActualizarVentas(!actualizarVenta);
     }
     return (
         <section>
-            {actualizaVenta? 
-            (<ActualizarVenta listaVenta={listaVenta} actualizaVenta={actualizaVenta} setActualizaVenta={setActualizaVenta} setVentas={setVentas} identificacionVenta={codigoVenta}/>
+            {actualizarVenta? 
+            (<ActualizarVenta listaVenta={listaVenta} actualizarVenta={actualizarVenta} setActualizarVentas={setActualizarVentas} setVentas={setVentas} codigoVenta={codigoVenta}/>
                 ):
             (
 
@@ -158,9 +158,10 @@ const TablaVentas=({ listaVenta , actualizaVenta , setActualizaVenta , setVentas
                                 <td>{venta.fechaVenta}</td>
                                 <td>{venta.fechaPago}</td>
                                 <td>{venta.responsable}</td>
-                                <td>{venta.descripcion}</td>
-                                <td><button onClick={() => actVenta(venta.codigo)}>Actualizar</button></td>
-                                <td><button onClick={() => eliminarVenta(venta.codigo)} > Eliminar</button></td>                     
+                                <td>{venta.descripcion}</td>                              
+
+                                <td>  <img onClick={() => actVenta(venta.codigo)} src={penciles } alt="actualizar usuario" /></td>
+                                <td>  <img onClick={() => eliminarVenta(venta.codigo)} src={iconoDelete } alt=" eliminar usuario" /></td>                   
                             </tr>
                         )                      
 
@@ -190,7 +191,7 @@ const TablaVentas=({ listaVenta , actualizaVenta , setActualizaVenta , setVentas
 
 const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
     const form = useRef(null);
-    const [codigo,setCodigo]=useState('');
+    const [codigo,setcodigo]=useState('');
     const submitForm = async (e) => {
       e.preventDefault();
       const fd = new FormData(form.current);
@@ -211,8 +212,8 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
           <h1>Crear Venta</h1>                    
           </div>
         <form ref={form} onSubmit={submitForm}>
-          <label className="labelCampos" htmlFor="identificacion">
-            Codigo
+          <label className="labelCampos" htmlFor="codigo">
+            codigo
             <input name='codigo' className="camposRegistroVenta" type="text" />
           </label>      
           <label className="labelCampos" htmlFor="nombre">
@@ -232,7 +233,7 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
   
           <label className="labelCampos"  htmlFor="fecha_ingreso">
             Responsable
-            <input name='responsable' className="camposRegistroVenta" type="date" />
+            <input name='responsable' className="camposRegistroVenta" type="text" />
           </label>
 
           <label className="labelCampos"  htmlFor="fecha_ingreso">
@@ -255,9 +256,9 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
       )
   }
   
-  const ActualizarVenta =({ listaVenta , actualizaVenta , setActualizaVenta , setVentas ,identificacionVenta})=>{
+  const ActualizarVenta =({ listaVenta , actualizarVenta , setActualizarVentas , setVentas ,codigoVenta})=>{
     const form = useRef(null);
-    console.log("Desde el actualiza -> ",identificacionVenta)
+    console.log("Desde el actualiza -> ",codigoVenta)
     const submitForm = async (e) => {
       e.preventDefault();
       const fd = new FormData(form.current);
@@ -270,12 +271,12 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
       console.log(nuevaVenta);
       let listaVentaTemp = [...listaVenta];
       for(let i=0;i<listaVenta.length;i++){
-        if(listaVenta[i].codigo===identificacionVenta){
+        if(listaVenta[i].codigo===codigoVenta){
           listaVenta[i] = nuevaVenta;
           break;
         }
       }
-      setActualizaVenta(false);
+      setActualizarVentas(false);
     };
     return ( 
       <div className="formularioCrearVentas">
@@ -283,9 +284,9 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
           <h1>Actualizar Venta</h1>                    
         </div>
         <form ref={form} onSubmit={submitForm}>
-          <label className="labelCampos" htmlFor="identificacion">
+          <label className="labelCampos" htmlFor="codigo">
             Código
-            <input name='codigo' className="camposRegistroVenta" type="text" value={identificacionVenta}/>
+            <input name='codigo' className="camposRegistroVenta" type="text" value={codigoVenta}/>
           </label>      
           <label className="labelCampos" htmlFor="nombre">
               Valor Venta
@@ -315,7 +316,7 @@ const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
           <div className="contBotonGuardarVenta">
             {/*<input className="botonCancelar" type="submit" value="Cancelar" />
             <input type="submit" className="botonGuardar"  value="Guardar" />   */}        
-            <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setActualizaVenta(false)}>Cancelar</button>
+            <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setActualizarVentas(false)}>Cancelar</button>
             <button className="botonGuardar" type="submit" value="Guardar">Actualizar</button>
   
           </div>          
