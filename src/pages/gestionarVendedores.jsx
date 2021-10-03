@@ -1,12 +1,9 @@
 //La gestion de ventas será nuestro pagina de inicio o index
 import React, {useEffect,useState,useRef} from 'react';
 
-import agregar from 'media/anadir.png';
 import plus_circle from 'media/plus-circle1.png';
 
-import pencil from 'media/pencil1.png';
 
-import { Link } from 'react-router-dom';
 import 'styles/estiloIndex.css';
 
 let vendedoresBackend = [
@@ -50,7 +47,7 @@ const GestionarVendedor =()=>{
             </div>
                 </div>
                 <div className="contenedorTablaVentas">
-                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} vendedores={vendedores}/>
+                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores}/>
                 </div>
               </div>
               ) : (
@@ -68,15 +65,33 @@ const GestionarVendedor =()=>{
 }
 
 
-const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , vendedores }) =>{
+const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores }) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
-    const eliminarDato =(asda)=>{
-      console.log(" holi")
+    const eliminarVendedor =(identificacion)=>{
+      let listaVendedoresTemp = [...listaVendedores];
+      for(let i=0;i<listaVendedores.length;i++){
+        if(listaVendedores[i].identificacion===identificacion){
+          listaVendedoresTemp.splice(i, 1);
+          break;
+        }
+      }
+      setVendedores([...listaVendedoresTemp])
     }
+
+    
+    const actVendedor =(identificacion)=>{
+      console.log("Identificacion => ",identificacion)
+      for(let i=0;i<listaVendedores.length;i++){
+        console.log('indice = >',i," -> ",listaVendedores[i]);
+      }
+      setIdentificacionVendedor(identificacion);
+      setActualizaVendedor(!actualizaVendedor);
+    }
+    
     return (
       <section>
         {actualizaVendedor ? (
-          <Actualizarvendedor listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} vendedores={vendedores}/>
+          <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor}/>
           ) : (
           <div className='contenedorTablaVentas'>
             <table>
@@ -100,16 +115,8 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                       <td>{vendedor.especialidad}</td>
                       <td>{vendedor.telefono}</td>
                       <td>{vendedor.fecha_ingreso}</td>
-                      <td><button key={vendedor.identificacion}
-                        onClick={({vendedor}) => {
-                          setActualizaVendedor(!actualizaVendedor);
-
-                          console.log("essssssssssssssssss ")
-                        }}
-                      >Actualizar</button></td>
-                      <td ><button onClick={() => {
-                          alert("Vendedor Eliminado")
-                        }}> Eliminar</button></td>
+                      <td><button onClick={() => actVendedor(vendedor.identificacion)}>Actualizar</button></td>
+                      <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > Eliminar</button></td>
                     </tr>
                   );
               })}
@@ -183,8 +190,9 @@ const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
     )
 }
 
-const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , vendedores })=>{
+const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor})=>{
   const form = useRef(null);
+  console.log("Desde el actualiza -> ",identificacionVendedor)
   const submitForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(form.current);
@@ -193,7 +201,15 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
     fd.forEach((value, key) => {
       nuevoVendedor[key] = value;
     });
-    console.log(nuevoVendedor)
+    
+    console.log(nuevoVendedor);
+    let listaVendedoresTemp = [...listaVendedores];
+    for(let i=0;i<listaVendedores.length;i++){
+      if(listaVendedores[i].identificacion===identificacionVendedor){
+        listaVendedores[i] = nuevoVendedor;
+        break;
+      }
+    }
     setActualizaVendedor(false);
     // Spreed operator
     //setVendedores([...listaVendedores,nuevoVendedor])
@@ -206,7 +222,7 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       <form ref={form} onSubmit={submitForm}>
         <label className="labelCampos" htmlFor="identificacion">
           Identificacion
-          <input name='identificacion' className="camposRegistroVenta" type="text" />
+          <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionVendedor}/>
         </label>      
         <label className="labelCampos" htmlFor="nombre">
             Nombre
