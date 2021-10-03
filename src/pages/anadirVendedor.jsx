@@ -1,32 +1,58 @@
-const AnadirVendedor =()=>{
-    return(
-        <div>
-            <div>
-               
-            </div>
-            <div className="actualizar_usuario">
-                
-                    <form className="formulario_act">
-                        <h2>Añadir Vendedor</h2>
-                        
-                        <span>Identificacion:10583868</span>
-                        <br />
-                        <label for="fname">Nombre      </label>
-                        <input type="text" id="fname" name="fname"/>
-                        <br />
-                        <label for="especialidad">Especialidad</label>
-                        <input type="text" id="especialidad" name="especialidad"/>
-                        <br />
-                        <label for="telefono">Telefono     </label>
-                        <input type="text" id="telefono" name="telefono"/>
-                        <br />
-                        <label for="fecha_ingreso">Fecha Ingreso</label>
-                        <input type="date" id="fecha_ingreso" name="lname"/>
-                    </form>
-                
-            </div>
+
+import React, {useEffect,useState,useParams,useLocation } from 'react';
+import "styles/estiloFormularioVenta.css";
+
+
+const AnadirVendedor =(props)=>{
+    console.log("about ",props)
+    const [codigo,setCodigo]=useState('');
+    {/*useEffect(()=>{
+        console.log("este es el codio: ",listVendedores);
+    },[listVendedores]);*/}
+
+    const metodo=()=>{
+        console.log("este es el codio: ",codigo);
+    }
+    return ( 
+     
+              
+        <div className="formularioCrearVentas">
+        <div className="contenedorTituloRegistroVenta">
+        <h1>Crear Vendedor</h1>                    
         </div>
-    );
+        <form >
+                    
+        <label className="labelCampos" htmlFor="nombre">
+            Nombre
+            <input className="camposRegistroVenta" type="text" />
+        </label>
+
+        <label className="labelCampos" htmlFor="especialidad">
+            especialidad
+            <input className="camposRegistroVenta" type="text" />
+        </label>
+
+        <label className="labelCampos"  htmlFor="telefono">
+            telefono
+            <input className="camposRegistroVenta" type="number" />
+        </label>
+
+        <label className="labelCampos"  htmlFor="fechaingreso">
+            Fecha Ingreso
+            <input className="camposRegistroVenta" type="date" />
+        </label>
+
+        <div className="contBotonGuardarVenta">
+        <input className="botonCancelar" type="submit" value="Cancelar" />
+        <input type="button" onClick={metodo} className="botonGuardar"  value="Guardar" />           
+
+        </div>          
+
+    </form>
+
+    </div>
+            
+    )
   }
   
   export default AnadirVendedor;
