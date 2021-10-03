@@ -50,6 +50,8 @@ td,th{
   text-align: center;
 }
 
+
+
 /* Quitamos todos los estilos que tiene el boton por defecto*/
 button, input[type="submit"], input[type="reset"] {
 	background: none;
