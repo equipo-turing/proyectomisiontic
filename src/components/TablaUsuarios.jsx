@@ -45,7 +45,7 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                     </div>
                   
                     <div className="tituloGestionarVenta">
-                      <h1>GESTIONAR VENDEDORES</h1>
+                      <h1>GESTIONAR USUARIOS</h1>
                     </div>
                   </div>
                 </div>
