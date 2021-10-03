@@ -181,8 +181,10 @@ const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
         </label>
 
         <div className="contBotonGuardarVenta">
-          <input className="botonCancelar" type="submit" value="Cancelar" />
-          <input type="submit" className="botonGuardar"  value="Guardar" />           
+          {/*<input className="botonCancelar" type="submit" value="Cancelar" />
+          <input type="submit" className="botonGuardar"  value="Guardar" />*/}
+          <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setMostrarTabla(true)}>Cancelar</button>
+          <button className="botonGuardar" type="submit" value="Guardar">Crear</button>
 
         </div>          
 
@@ -246,8 +248,10 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
         </label>
 
         <div className="contBotonGuardarVenta">
-          <input className="botonCancelar" type="submit" value="Cancelar" />
-          <input type="submit" className="botonGuardar"  value="Guardar" />           
+          {/*<input className="botonCancelar" type="submit" value="Cancelar" />
+          <input type="submit" className="botonGuardar"  value="Guardar" />   */}        
+          <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setActualizaVendedor(false)}>Cancelar</button>
+          <button className="botonGuardar" type="submit" value="Guardar">Actualizar</button>
 
         </div>          
 
