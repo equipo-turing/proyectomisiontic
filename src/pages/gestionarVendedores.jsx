@@ -10,28 +10,26 @@ import { Link } from 'react-router-dom';
 import 'styles/estiloIndex.css';
 
 let vendedoresBackend = [
-    {identificacion:"12123",nombre:"andres",especialidad:"Venta de calzado",telefono:"1331",fecha_ingreso:"22-09-2021"},
-    {identificacion:"213123",nombre:"walter",especialidad:"Venta de ropa",telefono:"231321",fecha_ingreso:"21-09-2021"},
-    {identificacion:"4112",nombre:"fabian",especialidad:"Venta de manillas",telefono:"123123",fecha_ingreso:"20-09-2021"},
-    {identificacion:"3412",nombre:"diana",especialidad:"Venta de electrodomesticos",telefono:"12312",fecha_ingreso:"19-09-2021"},
-    {identificacion:"56531",nombre:"ruby",especialidad:"Venta de celulares",telefono:"123341",fecha_ingreso:"17-09-2021"}
-
+  {identificacion:"12123",nombre:"andres",especialidad:"Venta de calzado",telefono:"1331",fecha_ingreso:"22-09-2021"},
+  {identificacion:"213123",nombre:"walter",especialidad:"Venta de ropa",telefono:"231321",fecha_ingreso:"21-09-2021"},
+  {identificacion:"4112",nombre:"fabian",especialidad:"Venta de manillas",telefono:"123123",fecha_ingreso:"20-09-2021"},
+  {identificacion:"3412",nombre:"diana",especialidad:"Venta de electrodomesticos",telefono:"12312",fecha_ingreso:"19-09-2021"},
+  {identificacion:"56531",nombre:"ruby",especialidad:"Venta de celulares",telefono:"123341",fecha_ingreso:"17-09-2021"}
 ]
 
 const GestionarVendedor =()=>{
     const [vendedores, setVendedores] = useState([]);
     const [mostrarTabla, setMostrarTabla] = useState(true);
+    const [actualizaVendedor, setActualizaVendedor] = useState(false);
 
     useEffect(() => {
         setVendedores(vendedoresBackend);
         console.log(vendedores)
     }, []);
     useEffect(() => {
-      //obtener lista de vehículos desde el backend
-      //if (mostrarTabla) {
-      //  obtenerVehiculos();
-      //}
     }, [mostrarTabla]);
+
+
     return(
         <section>
             {mostrarTabla ? (
@@ -52,7 +50,7 @@ const GestionarVendedor =()=>{
             </div>
                 </div>
                 <div className="contenedorTablaVentas">
-                  <TablaVendedores listaVendedores={vendedores}/>
+                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} vendedores={vendedores}/>
                 </div>
               </div>
               ) : (
@@ -70,41 +68,57 @@ const GestionarVendedor =()=>{
 }
 
 
-const TablaVendedores = ({ listaVendedores }) =>{
-    useEffect(() => {
-        console.log('este es el listado de vendedores en el componente de tabla', listaVendedores);
-      }, [listaVendedores]);
+const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , vendedores }) =>{
+    const [identificacionVendedor, setIdentificacionVendedor] = useState();
+    const eliminarDato =(asda)=>{
+      console.log(" holi")
+    }
     return (
-        <div className='contenedorTablaVentas'>
-          <table>
-            <thead className="encabezadoTablaVentas">
-              <tr>
-                <th>Identificacion</th>
-                <th>Nombre</th>
-                <th>Especialidad</th>
-                <th>Telefono</th>
-                <th>Fecha de Ingreso</th>
-                <th>Actualizar</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listaVendedores.map((vendedor) => {
-                return (
-                  <tr>
-                    <td>{vendedor.identificacion}</td>
-                    <td>{vendedor.nombre}</td>
-                    <td>{vendedor.especialidad}</td>
-                    <td>{vendedor.telefono}</td>
-                    <td>{vendedor.fecha_ingreso}</td>
-                    <td>Actualizar</td>
-                    <td>Eliminar</td>
-                  </tr>
-                );
+      <section>
+        {actualizaVendedor ? (
+          <Actualizarvendedor listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} vendedores={vendedores}/>
+          ) : (
+          <div className='contenedorTablaVentas'>
+            <table>
+              <thead className="encabezadoTablaVentas">
+                <tr>
+                  <th>Identificacion</th>
+                  <th>Nombre</th>
+                  <th>Especialidad</th>
+                  <th>Telefono</th>
+                  <th>Fecha de Ingreso</th>
+                  <th>Actualizar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {listaVendedores.map((vendedor) => {
+                  return (
+                    <tr >
+                      <td>{vendedor.identificacion}</td>
+                      <td>{vendedor.nombre}</td>
+                      <td>{vendedor.especialidad}</td>
+                      <td>{vendedor.telefono}</td>
+                      <td>{vendedor.fecha_ingreso}</td>
+                      <td><button key={vendedor.identificacion}
+                        onClick={({vendedor}) => {
+                          setActualizaVendedor(!actualizaVendedor);
+
+                          console.log("essssssssssssssssss ")
+                        }}
+                      >Actualizar</button></td>
+                      <td ><button onClick={() => {
+                          alert("Vendedor Eliminado")
+                        }}> Eliminar</button></td>
+                    </tr>
+                  );
               })}
             </tbody>
           </table>
         </div>
+          )}
+        
+      </section>
       );
 }
 
@@ -126,94 +140,106 @@ const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
     setVendedores([...listaVendedores,nuevoVendedor])
   };
   return ( 
-   
-            
-          <div  className="formularioCrearVentas">
-            
-              <div className="contenedorTituloRegistroVenta">
-              <h1>Crear Vendedor</h1>                    
-              </div>
-            <form ref={form} onSubmit={submitForm}>
-              <label className="labelCampos" htmlFor="identificacion">
-                Identificacion
-                <input name='identificacion' className="camposRegistroVenta" type="text" />
-              </label>      
-              <label className="labelCampos" htmlFor="nombre">
-                  Nombre
-                <input name='nombre' className="camposRegistroVenta" type="text" />
-              </label>
+    <div  className="formularioCrearVentas">
+      
+        <div className="contenedorTituloRegistroVenta">
+        <h1>Crear Vendedor</h1>                    
+        </div>
+      <form ref={form} onSubmit={submitForm}>
+        <label className="labelCampos" htmlFor="identificacion">
+          Identificacion
+          <input name='identificacion' className="camposRegistroVenta" type="text" />
+        </label>      
+        <label className="labelCampos" htmlFor="nombre">
+            Nombre
+          <input name='nombre' className="camposRegistroVenta" type="text" />
+        </label>
 
-              <label className="labelCampos" htmlFor="especialidad">
-                especialidad
-                <input className="camposRegistroVenta" type="text" name='especialidad' />
-              </label>
+        <label className="labelCampos" htmlFor="especialidad">
+          especialidad
+          <input className="camposRegistroVenta" type="text" name='especialidad' />
+        </label>
 
-              <label className="labelCampos"  htmlFor="telefono">
-                telefono
-                <input name='telefono' className="camposRegistroVenta" type="number" />
-              </label>
+        <label className="labelCampos"  htmlFor="telefono">
+          telefono
+          <input name='telefono' className="camposRegistroVenta" type="number" />
+        </label>
 
-              <label className="labelCampos"  htmlFor="fecha_ingreso">
-                Fecha Ingreso
-                <input name='fecha_ingreso' className="camposRegistroVenta" type="date" />
-              </label>
+        <label className="labelCampos"  htmlFor="fecha_ingreso">
+          Fecha Ingreso
+          <input name='fecha_ingreso' className="camposRegistroVenta" type="date" />
+        </label>
 
-              <div className="contBotonGuardarVenta">
-                <input className="botonCancelar" type="submit" value="Cancelar" />
-                <input type="submit" className="botonGuardar"  value="Guardar" />           
+        <div className="contBotonGuardarVenta">
+          <input className="botonCancelar" type="submit" value="Cancelar" />
+          <input type="submit" className="botonGuardar"  value="Guardar" />           
 
-              </div>          
+        </div>          
 
-          </form>
+    </form>
 
-          </div>
+    </div>
       
     )
 }
-const Actualizarvendedor =()=>{
-  const [codigo,setCodigo]=useState('');
+
+const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , vendedores })=>{
+  const form = useRef(null);
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
+
+    const nuevoVendedor = {};
+    fd.forEach((value, key) => {
+      nuevoVendedor[key] = value;
+    });
+    console.log(nuevoVendedor)
+    setActualizaVendedor(false);
+    // Spreed operator
+    //setVendedores([...listaVendedores,nuevoVendedor])
+  };
   return ( 
-   
-            
-          <div className="formularioCrearVentas">
-              <div className="contenedorTituloRegistroVenta">
-              <h1>Actualizar Vendedor</h1>                    
-              </div>
-              <form >
-                          
-              <label className="labelCampos" htmlFor="nombre">
-                  Nombre
-              <input onChange={(e)=>{
-                  setCodigo(e.target.value);
+    <div className="formularioCrearVentas">
+      <div className="contenedorTituloRegistroVenta">
+        <h1>Actualizar Vendedor</h1>                    
+      </div>
+      <form ref={form} onSubmit={submitForm}>
+        <label className="labelCampos" htmlFor="identificacion">
+          Identificacion
+          <input name='identificacion' className="camposRegistroVenta" type="text" />
+        </label>      
+        <label className="labelCampos" htmlFor="nombre">
+            Nombre
+          <input name='nombre' className="camposRegistroVenta" type="text" />
+        </label>
 
-              }} className="camposRegistroVenta" type="text" />
-              </label>
+        <label className="labelCampos" htmlFor="especialidad">
+          especialidad
+          <input className="camposRegistroVenta" type="text" name='especialidad' />
+        </label>
 
-              <label className="labelCampos" htmlFor="especialidad">
-              especialidad
-              <input className="camposRegistroVenta" type="text" />
-              </label>
+        <label className="labelCampos"  htmlFor="telefono">
+          telefono
+          <input name='telefono' className="camposRegistroVenta" type="number" />
+        </label>
 
-              <label className="labelCampos"  htmlFor="telefono">
-              telefono
-              <input className="camposRegistroVenta" type="number" />
-              </label>
+        <label className="labelCampos"  htmlFor="fecha_ingreso">
+          Fecha Ingreso
+          <input name='fecha_ingreso' className="camposRegistroVenta" type="date" />
+        </label>
 
-              <label className="labelCampos"  htmlFor="fechaingreso">
-                  Fecha Ingreso
-              <input className="camposRegistroVenta" type="date" />
-              </label>
+        <div className="contBotonGuardarVenta">
+          <input className="botonCancelar" type="submit" value="Cancelar" />
+          <input type="submit" className="botonGuardar"  value="Guardar" />           
 
-              <div className="contBotonGuardarVenta">
-              <input className="botonCancelar" type="submit" value="Cancelar" />
-              <input type="button" className="botonGuardar"  value="Guardar" />           
+        </div>          
 
-              </div>          
+      </form>
 
-          </form>
-
-          </div>
+    </div>
       
     )
 }
+
+
 export default GestionarVendedor;
