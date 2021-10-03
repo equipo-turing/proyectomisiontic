@@ -1,5 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react';
+import penciles from 'media/pencil1.png';
 import plus_circle from 'media/plus-circle1.png';
+import iconoDelete from 'media/delete.png';
 import Actualizarvendedor from 'components/ActualizarVendedor'
 import 'styles/estiloIndex.css';
 
@@ -70,8 +72,8 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                         <td>{vendedor.especialidad}</td>
                         <td>{vendedor.telefono}</td>
                         <td>{vendedor.fecha_ingreso}</td>
-                        <td><button onClick={() => actVendedor(vendedor.identificacion)}>Actualizar</button></td>
-                        <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > Eliminar</button></td>
+                        <td><button onClick={() => actVendedor(vendedor.identificacion)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
+                        <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
                       </tr>
                     );
                 })}

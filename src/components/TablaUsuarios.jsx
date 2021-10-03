@@ -1,5 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react';
+import penciles from 'media/pencil1.png';
 import plus_circle from 'media/plus-circle1.png';
+import iconoDelete from 'media/delete.png';
 import ActualizaUsuario from 'components/ActualizaUsuario'
 import 'styles/estiloIndex.css';
 
@@ -67,8 +69,8 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                         <td>{usuario.identificacion}</td>
                         <td>{usuario.nombre}</td>
                         <td>{usuario.rol}</td>
-                        <td><button onClick={() => actUsuario(usuario.identificacion)}>Actualizar</button></td>
-                        <td><button onClick={() => eliminaUsuario(usuario.identificacion)}>Eliminar</button></td>
+                        <td><button onClick={() => actUsuario(usuario.identificacion)}><img  src={penciles } alt="actualizar usuario" /></button></td>
+                        <td><button onClick={() => eliminaUsuario(usuario.identificacion)}><img  src={iconoDelete } alt=" eliminar usuario" /></button></td>
                       </tr>
                     );
                 })}
