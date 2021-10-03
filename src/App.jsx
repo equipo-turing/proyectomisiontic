@@ -4,6 +4,7 @@ import GestionarVendedor from 'pages/gestionarVendedores';
 import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
 import FormularioCrearVentas from 'pages/formularioCrearVenta';
+import AdministrarUsuarios from 'pages/AdministrarUsuarios';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -30,6 +31,10 @@ function App() {
             <Route path='/actualizarvendedor' exact>
               <Actualizarvendedor />
             </Route> 
+            <Route path='/AdministrarUsuarios' exact>
+              <AdministrarUsuarios />
+            </Route> 
+            
           </Switch>
         </Layout>
       </Router>
