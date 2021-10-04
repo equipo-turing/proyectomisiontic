@@ -6,16 +6,29 @@ import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
 import FormularioCrearVentas from 'pages/formularioCrearVenta';
 import ActualizarVenta from 'pages/actualizarVenta';
+
 import AdministrarUsuarios from 'pages/AdministrarUsuarios';
+import Ventas from 'pages/ventas';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-        <Layout>
+      
+     
+
+        
+        
           <Switch>
-            <Route path='/' exact>
+
+          <Route path='/' exact>
               <Index />
+            </Route> 
+            <Layout>
+
+            
+            <Route path='/ventas' exact>
+              <Ventas />
             </Route>            
              
             <Route path='/actualizarVenta' exact>
@@ -45,9 +58,9 @@ function App() {
             <Route path='/AdministrarUsuarios' exact>
               <AdministrarUsuarios />
             </Route> 
-            
+            </Layout>
           </Switch>
-        </Layout>
+        
       </Router>
   );
 }

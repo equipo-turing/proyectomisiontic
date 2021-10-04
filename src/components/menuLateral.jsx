@@ -19,7 +19,7 @@ const Menu = () => {
             </li>
 
             <li>
-            <Link to='/' className="itemMenuLateral"> 
+            <Link to='/ventas' className="itemMenuLateral"> 
                 <img src={iconoVenta} alt="Ícono Venta" />
                 <h4>Ventas</h4>
             </Link>                 
@@ -41,7 +41,7 @@ const Menu = () => {
             </li>
 
             <li>
-            <Link to='#' className="itemMenuLateral"> 
+            <Link to='/' className="itemMenuLateral"> 
                 <img src={iconoSesion} alt="Ícono cerrar sesión" />
                 <h4>Cerrar Sesión</h4>
             </Link>
