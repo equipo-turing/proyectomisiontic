@@ -50,6 +50,12 @@ td,th{
   text-align: center;
 }
 
+.ContenedorLogin{
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+}
+
 
 
 /* Quitamos todos los estilos que tiene el boton por defecto*/
