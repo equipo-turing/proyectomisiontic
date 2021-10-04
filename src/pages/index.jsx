@@ -29,7 +29,7 @@ const Index = () => {
           </div >
           
 
-          <input type="submit" value="Registrase"/>
+          <input type="submit" value="Registrarse"/>
          
         </form>
       </div>
