@@ -1,4 +1,6 @@
-.formularioCrearVentas{
+
+.formularioCrearUsuarios{
+
     width: 100%;
     max-width: 400px;
     margin: auto;
@@ -10,42 +12,41 @@
     box-shadow: 2px 2px black;  
     font-family: 'calibri';  
     background-color: #F3F6F9(226, 221, 226);
-     
-}
-.formularioCrearVentas > form{
-    padding: 15px;    
 }
 
+.formularioCrearUsuarios > form{
+  padding: 15px;    
+}
 
-.contenedorTituloRegistroVenta{
+.contenedorTituloRegistroUsuario{
+
     text-align: center;
     background-color: #255AAA;
     color: white;   
     margin-bottom: 5px;
     height: 70px;
-    
-
 }
 .labelCampos{
     font-size:18px;
 }
-.camposRegistroVenta{
+
+.camposRegistroUsuario{
+
     width: 95%;
     padding: 10px;   
     border-radius: 4px;
     margin-bottom: 10px;
     border: 2.5px solid #607ba3;
-    
 }
 
+.contBotonGuardarUsuario{
 
-.contBotonGuardarVenta {
-       
     color: white;   
     align-content: rigth;
     float: right;
 
 }
+
 .botonCancelar{
     margin-right: 25px;
     padding: 10px;
@@ -73,6 +74,3 @@
     color: white;
 
 }
-
-
-    

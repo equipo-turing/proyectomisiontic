@@ -4,15 +4,10 @@ import GestionarUsuario from 'pages/gestionarUsuarios';
 import GestionarVendedor from 'pages/gestionarVendedores';
 import AnadirVendedor from 'pages/anadirVendedor';
 import Actualizarvendedor from 'pages/actualizarvendedor';
-import FormularioCrearVentas from 'pages/formularioCrearVenta';
-<<<<<<< HEAD
+import FormularioCrearUsuario from 'pages/formularioCrearUsuario';
 
-
-=======
->>>>>>> 53578a5245defa7c0a1b3a8a21a3c67654dd1985
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 
 
 
@@ -24,27 +19,23 @@ function App() {
             <Route path='/' exact>
               <Index />
             </Route>            
-            <Route path='/formularioCrearVenta' exact>
-              <FormularioCrearVentas />
-              
-            </Route> 
-            <Route path='/formularioCrearUsuario' exact>
-              <formularioCrearUsuario/>
-            </Route> 
+          
+           
             <Route path='/gestionarUsuarios' exact>
               <GestionarUsuario />
             </Route> 
-            <Route path='/formularioCrearVenta' exact>
-              <FormularioCrearVentas />
+            <Route path='/formularioCrearUsuario' exact>
+              <FormularioCrearUsuario />
             </Route> 
+           
+             
             <Route path='/gestionar_vendedor' exact>
               <GestionarVendedor />
             </Route>
             <Route path='/anadirVendedor' exact>
               <AnadirVendedor />
             </Route>
-
-           
+  
             <Route path='/actualizarvendedor' exact>
               <Actualizarvendedor />
             </Route> 
