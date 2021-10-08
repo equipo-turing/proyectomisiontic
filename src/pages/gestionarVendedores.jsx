@@ -6,6 +6,7 @@ import React, {useEffect,useState,useRef} from 'react'
 import TablaVendedores from 'components/TablaVendedores'
 import AnadirVendedor from 'components/AnadirVendedor';
 import 'styles/estiloIndex.css';
+import { obtenerVendedores } from 'utils/api';
 
 let vendedoresBackend = [
   {identificacion:"12123",nombre:"andres",especialidad:"Venta de calzado",telefono:"1331",fecha_ingreso:"22-09-2021"},
@@ -19,12 +20,21 @@ const GestionarVendedor =()=>{
     const [vendedores, setVendedores] = useState([]);
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [actualizaVendedor, setActualizaVendedor] = useState(false);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
+  
+    useEffect(() => {
+        console.log('consulta', ejecutarConsulta);
+        if (ejecutarConsulta) {
+            obtenerVendedores(setVendedores, setEjecutarConsulta);
+        }
+    }, [ejecutarConsulta]);
 
     useEffect(() => {
-        setVendedores(vendedoresBackend);
-        console.log(vendedores)
-    }, []);
-    useEffect(() => {
+        //Si esta en true deberia volver a hacer la peticion a la api
+        if (mostrarTabla) {
+            setEjecutarConsulta(true);
+        }
     }, [mostrarTabla]);
 
 
