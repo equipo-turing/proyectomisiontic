@@ -45,22 +45,22 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
           </label>      
           <label className="labelCampos" htmlFor="nombre">
               Nombre
-            <input name='nombre' className="camposRegistroVenta" type="text" />
+            <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionVendedor.nombre} />
           </label>
   
           <label className="labelCampos" htmlFor="especialidad">
             especialidad
-            <input className="camposRegistroVenta" type="text" name='especialidad' />
+            <input className="camposRegistroVenta" type="text" name='especialidad' defaultValue={identificacionVendedor.especialidad} />
           </label>
   
           <label className="labelCampos"  htmlFor="telefono">
             telefono
-            <input name='telefono' className="camposRegistroVenta" type="number" />
+            <input name='telefono' className="camposRegistroVenta" type="number" defaultValue={identificacionVendedor.telefono}/>
           </label>
   
           <label className="labelCampos"  htmlFor="fecha_ingreso">
             Fecha Ingreso
-            <input name='fecha_ingreso' className="camposRegistroVenta" type="date" />
+            <input name='fecha_ingreso' className="camposRegistroVenta" type="date" defaultValue={identificacionVendedor.fecha_ingreso}/>
           </label>
   
           <div className="contBotonGuardarVenta">     
