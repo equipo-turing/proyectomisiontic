@@ -1,8 +1,9 @@
 import React, {useEffect,useState,useRef} from 'react';
 import plus_circle from 'media/plus-circle1.png';
+import axios from 'axios';
 
 import 'styles/estiloIndex.css';
-const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor})=>{
+const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor,setEjecutarConsulta})=>{
     const form = useRef(null);
     console.log("Desde el actualiza -> ",identificacionVendedor)
     const submitForm = async (e) => {
@@ -13,15 +14,23 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       fd.forEach((value, key) => {
         nuevoVendedor[key] = value;
       });
-      
-      console.log(nuevoVendedor);
-      let listaVendedoresTemp = [...listaVendedores];
-      for(let i=0;i<listaVendedores.length;i++){
-        if(listaVendedores[i].identificacion===identificacionVendedor){
-          listaVendedores[i] = nuevoVendedor;
-          break;
-        }
-      }
+      const options = {
+        method: 'PATCH',
+        url: `http://localhost:5000/vendedores/${identificacionVendedor._id}/`,
+        headers: { 'Content-Type': 'application/json' },
+        data: nuevoVendedor,
+      };
+      await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        //toast.success('Vehículo modificado con éxito');
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        //toast.error('Error modificando el vehículo');
+        console.error(error);
+      });
       setActualizaVendedor(false);
     };
     return ( 
@@ -32,7 +41,7 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
         <form ref={form} onSubmit={submitForm}>
           <label className="labelCampos" htmlFor="identificacion">
             Identificacion
-            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionVendedor}/>
+            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionVendedor.identificacion}/>
           </label>      
           <label className="labelCampos" htmlFor="nombre">
               Nombre

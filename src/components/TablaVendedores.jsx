@@ -42,7 +42,7 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
     return (
       <section>
         {actualizaVendedor ? (
-          <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor}/>
+          <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor} setEjecutarConsulta={setEjecutarConsulta}/>
           ) : (
           <div>
                 <div>
@@ -82,7 +82,7 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                         <td>{vendedor.especialidad}</td>
                         <td>{vendedor.telefono}</td>
                         <td>{vendedor.fecha_ingreso}</td>
-                        <td><button onClick={() => actVendedor(vendedor._id)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
+                        <td><button onClick={() => actVendedor(vendedor)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
                         <td><button onClick={() => eliminarVendedor(vendedor._id)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
                       </tr>
                     );
