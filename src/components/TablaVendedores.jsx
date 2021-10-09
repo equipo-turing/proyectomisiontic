@@ -5,18 +5,28 @@ import iconoDelete from 'media/delete.png';
 import Actualizarvendedor from 'components/ActualizarVendedor'
 import 'styles/estiloIndex.css';
 
+import axios from 'axios';
 
-const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla }) =>{
+const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
-    const eliminarVendedor =(identificacion)=>{
-      let listaVendedoresTemp = [...listaVendedores];
-      for(let i=0;i<listaVendedores.length;i++){
-        if(listaVendedores[i].identificacion===identificacion){
-          listaVendedoresTemp.splice(i, 1);
-          break;
-        }
-      }
-      setVendedores([...listaVendedoresTemp])
+    const eliminarVendedor = async (id)=>{
+      const options = {
+        method: 'DELETE',
+        url: `http://localhost:5000/vendedores/${id}/`,
+        headers: { 'Content-Type': 'application/json' },
+      };
+  
+      await axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          //toast.success('vehículo eliminado con éxito');
+          setEjecutarConsulta(true);
+        })
+        .catch(function (error) {
+          console.error(error);
+          //toast.error('Error eliminando el vehículo');
+        });
     }
 
     
@@ -72,8 +82,8 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                         <td>{vendedor.especialidad}</td>
                         <td>{vendedor.telefono}</td>
                         <td>{vendedor.fecha_ingreso}</td>
-                        <td><button onClick={() => actVendedor(vendedor.identificacion)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
-                        <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
+                        <td><button onClick={() => actVendedor(vendedor._id)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
+                        <td><button onClick={() => eliminarVendedor(vendedor._id)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
                       </tr>
                     );
                 })}

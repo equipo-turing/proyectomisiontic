@@ -44,7 +44,7 @@ const GestionarVendedor =()=>{
               <div>
                 
                 <div className="contenedorTablaVentas">
-                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
+                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setEjecutarConsulta={setEjecutarConsulta}/>
                 </div>
               </div>
               ) : (
