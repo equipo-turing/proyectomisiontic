@@ -4,29 +4,45 @@ import plus_circle from 'media/plus-circle1.png';
 import iconoDelete from 'media/delete.png';
 import Actualizarvendedor from 'components/ActualizarVendedor'
 import 'styles/estiloIndex.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 import axios from 'axios';
-
+import swal from 'sweetalert';
 const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
-    const eliminarVendedor = async (id)=>{
-      const options = {
-        method: 'DELETE',
-        url: `http://localhost:5000/vendedores/${id}/`,
-        headers: { 'Content-Type': 'application/json' },
-      };
-  
-      await axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          //toast.success('vehículo eliminado con éxito');
-          setEjecutarConsulta(true);
-        })
-        .catch(function (error) {
-          console.error(error);
-          //toast.error('Error eliminando el vehículo');
-        });
+    const eliminarVendedor = (id)=>{
+
+      const elimina = async (id)=>{
+        const options = {
+          method: 'DELETE',
+          url: `http://localhost:5000/vendedores/${id}/`,
+          headers: { 'Content-Type': 'application/json' },
+        };
+    
+        await axios
+          .request(options)
+          .then(function (response) {
+            console.log(response.data);
+            toast.success('Vendedor eliminado con éxito');
+            setEjecutarConsulta(true);
+          })
+          .catch(function (error) {
+            console.error(error);
+            toast.error('Error eliminando el vendedor');
+          });
+      }
+      
+      swal({
+        title:"Eliminar",
+        text:"Estas seguro que deseas eliminar este vendedor?",
+        icon:"warning",
+        buttons:["No","Si"]
+      }).then(respuesta=>{
+        if(respuesta){
+          elimina(id);
+        }
+      })
+      
     }
 
     

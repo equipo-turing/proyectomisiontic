@@ -1,6 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react';
 import plus_circle from 'media/plus-circle1.png';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 import 'styles/estiloIndex.css';
 const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor,setEjecutarConsulta})=>{
@@ -24,11 +25,11 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       .request(options)
       .then(function (response) {
         console.log(response.data);
-        //toast.success('Vehículo modificado con éxito');
+        toast.success('Vendedor modificado con éxito');
         setEjecutarConsulta(true);
       })
       .catch(function (error) {
-        //toast.error('Error modificando el vehículo');
+        toast.error('Error modificando el vendedor');
         console.error(error);
       });
       setActualizaVendedor(false);

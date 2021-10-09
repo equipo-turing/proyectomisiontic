@@ -3,6 +3,8 @@ import React, {useEffect,useState,useRef} from 'react';
 import 'styles/estiloIndex.css';
 import plus_circle from 'media/plus-circle1.png';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
     const form = useRef(null);
@@ -29,11 +31,11 @@ const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
         .request(options)
         .then(function (response) {
           console.log(response.data);
-          //toast.success('Vehículo agregado con éxito');
+          toast.success('Vendedor agregado con éxito');
         })
         .catch(function (error) {
           console.error(error);
-          //toast.error('Error creando un vehículo');
+          toast.error('Error creando un vendedor');
         });
       setMostrarTabla(true);
 

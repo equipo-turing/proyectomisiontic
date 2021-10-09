@@ -2,6 +2,8 @@
 import plus_circle from 'media/plus-circle1.png';
 //La gestion de ventas será nuestro pagina de inicio o index
 import React, {useEffect,useState,useRef} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TablaVendedores from 'components/TablaVendedores'
 import AnadirVendedor from 'components/AnadirVendedor';
@@ -54,7 +56,7 @@ const GestionarVendedor =()=>{
                 setVendedores={setVendedores}
                 />
             )}
-
+          <ToastContainer position='bottom-center' autoClose={3000} />
         </section>
 
     );
