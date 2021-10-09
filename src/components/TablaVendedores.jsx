@@ -4,19 +4,45 @@ import plus_circle from 'media/plus-circle1.png';
 import iconoDelete from 'media/delete.png';
 import Actualizarvendedor from 'components/ActualizarVendedor'
 import 'styles/estiloIndex.css';
+import { ToastContainer, toast } from 'react-toastify';
 
-
-const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla }) =>{
+import axios from 'axios';
+import swal from 'sweetalert';
+const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
-    const eliminarVendedor =(identificacion)=>{
-      let listaVendedoresTemp = [...listaVendedores];
-      for(let i=0;i<listaVendedores.length;i++){
-        if(listaVendedores[i].identificacion===identificacion){
-          listaVendedoresTemp.splice(i, 1);
-          break;
-        }
+    const eliminarVendedor = (id)=>{
+
+      const elimina = async (id)=>{
+        const options = {
+          method: 'DELETE',
+          url: `http://localhost:5000/vendedores/${id}/`,
+          headers: { 'Content-Type': 'application/json' },
+        };
+    
+        await axios
+          .request(options)
+          .then(function (response) {
+            console.log(response.data);
+            toast.success('Vendedor eliminado con éxito');
+            setEjecutarConsulta(true);
+          })
+          .catch(function (error) {
+            console.error(error);
+            toast.error('Error eliminando el vendedor');
+          });
       }
-      setVendedores([...listaVendedoresTemp])
+      
+      swal({
+        title:"Eliminar",
+        text:"Estas seguro que deseas eliminar este vendedor?",
+        icon:"warning",
+        buttons:["No","Si"]
+      }).then(respuesta=>{
+        if(respuesta){
+          elimina(id);
+        }
+      })
+      
     }
 
     
@@ -32,7 +58,7 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
     return (
       <section>
         {actualizaVendedor ? (
-          <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor}/>
+          <Actualizarvendedor listaVendedores={listaVendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} identificacionVendedor={identificacionVendedor} setEjecutarConsulta={setEjecutarConsulta}/>
           ) : (
           <div>
                 <div>
@@ -72,8 +98,8 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                         <td>{vendedor.especialidad}</td>
                         <td>{vendedor.telefono}</td>
                         <td>{vendedor.fecha_ingreso}</td>
-                        <td><button onClick={() => actVendedor(vendedor.identificacion)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
-                        <td><button onClick={() => eliminarVendedor(vendedor.identificacion)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
+                        <td><button onClick={() => actVendedor(vendedor)}><img  src={penciles } alt="actualizar vendedor" /></button></td>
+                        <td><button onClick={() => eliminarVendedor(vendedor._id)} > <img  src={iconoDelete } alt=" eliminar vendedor" /></button></td>
                       </tr>
                     );
                 })}

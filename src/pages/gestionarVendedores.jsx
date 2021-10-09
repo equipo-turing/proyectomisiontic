@@ -2,10 +2,13 @@
 import plus_circle from 'media/plus-circle1.png';
 //La gestion de ventas será nuestro pagina de inicio o index
 import React, {useEffect,useState,useRef} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import TablaVendedores from 'components/TablaVendedores'
 import AnadirVendedor from 'components/AnadirVendedor';
 import 'styles/estiloIndex.css';
+import { obtenerVendedores } from 'utils/api';
 
 let vendedoresBackend = [
   {identificacion:"12123",nombre:"andres",especialidad:"Venta de calzado",telefono:"1331",fecha_ingreso:"22-09-2021"},
@@ -19,12 +22,21 @@ const GestionarVendedor =()=>{
     const [vendedores, setVendedores] = useState([]);
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [actualizaVendedor, setActualizaVendedor] = useState(false);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
+  
+    useEffect(() => {
+        console.log('consulta', ejecutarConsulta);
+        if (ejecutarConsulta) {
+            obtenerVendedores(setVendedores, setEjecutarConsulta);
+        }
+    }, [ejecutarConsulta]);
 
     useEffect(() => {
-        setVendedores(vendedoresBackend);
-        console.log(vendedores)
-    }, []);
-    useEffect(() => {
+        //Si esta en true deberia volver a hacer la peticion a la api
+        if (mostrarTabla) {
+            setEjecutarConsulta(true);
+        }
     }, [mostrarTabla]);
 
 
@@ -34,7 +46,7 @@ const GestionarVendedor =()=>{
               <div>
                 
                 <div className="contenedorTablaVentas">
-                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
+                  <TablaVendedores listaVendedores={vendedores} actualizaVendedor={actualizaVendedor} setActualizaVendedor={setActualizaVendedor} setVendedores={setVendedores} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setEjecutarConsulta={setEjecutarConsulta}/>
                 </div>
               </div>
               ) : (
@@ -44,7 +56,7 @@ const GestionarVendedor =()=>{
                 setVendedores={setVendedores}
                 />
             )}
-
+          <ToastContainer position='bottom-center' autoClose={3000} />
         </section>
 
     );

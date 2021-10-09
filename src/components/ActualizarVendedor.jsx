@@ -1,8 +1,10 @@
 import React, {useEffect,useState,useRef} from 'react';
 import plus_circle from 'media/plus-circle1.png';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 import 'styles/estiloIndex.css';
-const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor})=>{
+const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor,setEjecutarConsulta})=>{
     const form = useRef(null);
     console.log("Desde el actualiza -> ",identificacionVendedor)
     const submitForm = async (e) => {
@@ -13,15 +15,23 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       fd.forEach((value, key) => {
         nuevoVendedor[key] = value;
       });
-      
-      console.log(nuevoVendedor);
-      let listaVendedoresTemp = [...listaVendedores];
-      for(let i=0;i<listaVendedores.length;i++){
-        if(listaVendedores[i].identificacion===identificacionVendedor){
-          listaVendedores[i] = nuevoVendedor;
-          break;
-        }
-      }
+      const options = {
+        method: 'PATCH',
+        url: `http://localhost:5000/vendedores/${identificacionVendedor._id}/`,
+        headers: { 'Content-Type': 'application/json' },
+        data: nuevoVendedor,
+      };
+      await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success('Vendedor modificado con éxito');
+        setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+        toast.error('Error modificando el vendedor');
+        console.error(error);
+      });
       setActualizaVendedor(false);
     };
     return ( 
@@ -32,26 +42,26 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
         <form ref={form} onSubmit={submitForm}>
           <label className="labelCampos" htmlFor="identificacion">
             Identificacion
-            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionVendedor}/>
+            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionVendedor.identificacion}/>
           </label>      
           <label className="labelCampos" htmlFor="nombre">
               Nombre
-            <input name='nombre' className="camposRegistroVenta" type="text" />
+            <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionVendedor.nombre} />
           </label>
   
           <label className="labelCampos" htmlFor="especialidad">
             especialidad
-            <input className="camposRegistroVenta" type="text" name='especialidad' />
+            <input className="camposRegistroVenta" type="text" name='especialidad' defaultValue={identificacionVendedor.especialidad} />
           </label>
   
           <label className="labelCampos"  htmlFor="telefono">
             telefono
-            <input name='telefono' className="camposRegistroVenta" type="number" />
+            <input name='telefono' className="camposRegistroVenta" type="number" defaultValue={identificacionVendedor.telefono}/>
           </label>
   
           <label className="labelCampos"  htmlFor="fecha_ingreso">
             Fecha Ingreso
-            <input name='fecha_ingreso' className="camposRegistroVenta" type="date" />
+            <input name='fecha_ingreso' className="camposRegistroVenta" type="date" defaultValue={identificacionVendedor.fecha_ingreso}/>
           </label>
   
           <div className="contBotonGuardarVenta">     
