@@ -9,6 +9,7 @@ import ActualizarVenta from 'pages/actualizarVenta';
 
 import AdministrarUsuarios from 'pages/AdministrarUsuarios';
 import Ventas from 'pages/ventas';
+import Productos from 'pages/gestionar_producto';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
            
             <Route path='/actualizarvendedor' exact>
               <Actualizarvendedor />
+            </Route> 
+            <Route path='/gestionar_producto' exact>
+              <Productos />
             </Route> 
             <Route path='/AdministrarUsuarios' exact>
               <AdministrarUsuarios />
