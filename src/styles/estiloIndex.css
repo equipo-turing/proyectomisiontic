@@ -69,11 +69,5 @@ button, input[type="submit"], input[type="reset"] {
 	cursor: pointer;
 	outline: inherit;
 }
-.colorVerde{
-  background-color: green;
-}
-.colorRojo{
-  background-color: red;
-}
 
 
