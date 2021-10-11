@@ -10,6 +10,7 @@ import {eliminarElVendedor} from 'utils/api'
 
 const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
+
     const eliminarVendedor = (id)=>{
 
       const elimina = async (id)=>{
@@ -42,10 +43,7 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
 
     
     const actVendedor =(identificacion)=>{
-      console.log("Identificacion => ",identificacion)
-      for(let i=0;i<listaVendedores.length;i++){
-        console.log('indice = >',i," -> ",listaVendedores[i]);
-      }
+
       setIdentificacionVendedor(identificacion);
       setActualizaVendedor(!actualizaVendedor);
     }

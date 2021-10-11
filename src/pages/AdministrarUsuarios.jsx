@@ -7,6 +7,8 @@ import TablaUsuarios from 'components/TablaUsuarios'
 import AnadirUsuario from 'components/AnadirUsuario';
 import 'styles/estiloIndex.css';
 import {obtenerUsuarios} from 'utils/api'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 let usuariosBackend = [
     {identificacion:"12123",nombre:"andres",rol:"Venta de calzado"},
@@ -25,7 +27,14 @@ const AdministrarUsuarios = () => {
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+            obtenerUsuarios(
+            (response)=>{
+                setUsuarios(response.data)
+                setEjecutarConsulta(false);
+            },
+            (error)=>{
+                console.log("Error",error)
+            });
         }
     }, [ejecutarConsulta]);
     
@@ -34,23 +43,23 @@ const AdministrarUsuarios = () => {
         if (mostrarTabla) {
           setEjecutarConsulta(true);
         }
-      }, [mostrarTabla]);
+    }, [mostrarTabla,actualizaUsuario]);
+    
     return(
         <section>
             {mostrarTabla ? (
               <div>
-                
                 <div className="contenedorTablaVentas">
-                  <TablaUsuarios listaUsuarios={usuarios} actualizaUsuario={actualizaUsuario} setActualizaUsuario={setActualizaUsuario} setUsuarios={setUsuarios} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
+                  <TablaUsuarios listaUsuarios={usuarios} actualizaUsuario={actualizaUsuario} setActualizaUsuario={setActualizaUsuario} setUsuarios={setUsuarios} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setEjecutarConsulta={setEjecutarConsulta}/>
                 </div>
               </div>
               ) : (
                 <AnadirUsuario
                     setMostrarTabla={setMostrarTabla}
-                    listaUsuarios={usuarios}
-                    setUsuarios={setUsuarios}
+                    setEjecutarConsulta={setEjecutarConsulta}
                 />
             )}
+          <ToastContainer position='bottom-center' autoClose={3000} />
 
         </section>
 

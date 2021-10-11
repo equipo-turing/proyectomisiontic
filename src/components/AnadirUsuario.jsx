@@ -2,23 +2,33 @@ import React, {useEffect,useState,useRef} from 'react';
 
 import 'styles/estiloIndex.css';
 import plus_circle from 'media/plus-circle1.png';
-
-const AnadirUsuario = ({setMostrarTabla,listaUsuarios,setUsuarios}) => {
+import {crearUsuario} from 'utils/api'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const AnadirUsuario = ({setMostrarTabla,setEjecutarConsulta}) => {
     const form = useRef(null);
     const [codigo,setCodigo]=useState('');
     const submitForm = async (e) => {
       e.preventDefault();
       const fd = new FormData(form.current);
   
-      const nuevoVendedor = {};
+      const nuevoUsuario = {};
       fd.forEach((value, key) => {
-        nuevoVendedor[key] = value;
+        nuevoUsuario[key] = value;
       });
-      console.log(nuevoVendedor)
-      setMostrarTabla(true);
+      console.log(nuevoUsuario)
       // Spreed operator
-      //setUsuarios([...listaUsuarios,nuevoVendedor])
-      
+      await crearUsuario(nuevoUsuario,
+      (response)=>{
+        console.log(response.data);
+        toast.success('Usuario agregado con éxito');
+        setEjecutarConsulta(true);
+      },(error)=>{
+        console.error(error);
+        toast.error('Error creando un usuario');
+      })
+      setMostrarTabla(true);
+
     };
     return ( 
       <div  className="formularioCrearVentas">

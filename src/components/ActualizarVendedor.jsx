@@ -3,7 +3,7 @@ import plus_circle from 'media/plus-circle1.png';
 import { ToastContainer, toast } from 'react-toastify';
 import {actualizarElVendedor} from 'utils/api'
 import 'styles/estiloIndex.css';
-const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor,setEjecutarConsulta})=>{
+const Actualizarvendedor =({ setActualizaVendedor ,identificacionVendedor,setEjecutarConsulta})=>{
     const form = useRef(null);
     console.log("Desde el actualiza -> ",identificacionVendedor)
     const submitForm = async (e) => {

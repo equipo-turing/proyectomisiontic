@@ -7,6 +7,7 @@ export const obtenerVendedores = async (callBackResponse,callBackError) => {
     .then(callBackResponse)
     .catch(callBackError);
 };
+
 export const crearVendedor = async (data,callBackResponse,callBackError) => {
   const options = { method: 'POST', url: 'http://localhost:5000/vendedores/' ,data};
   await axios
@@ -40,7 +41,7 @@ export const eliminarElVendedor = async (id,callBackResponse,callBackError) => {
     .catch(callBackError);
 };
 
-export const obtenerUsuarios = async (setUsuarios,callBackResponse,callBackError) => {
+export const obtenerUsuarios = async (callBackResponse,callBackError) => {
   const options = { method: 'GET', url: 'http://localhost:5000/usuarios/' };
   await axios
     .request(options)
@@ -48,11 +49,35 @@ export const obtenerUsuarios = async (setUsuarios,callBackResponse,callBackError
     .catch(callBackError);
 };
 
-export const crearUsuario = async (setUsuario,callBackResponse,callBackError) => {
-  const options = { method: 'GET', url: 'http://localhost:5000/usuarios/' };
+export const crearUsuario = async (nuevoUsuario,callBackResponse,callBackError) => {
+  const options = { method: 'POST', url: 'http://localhost:5000/usuarios/' ,data:nuevoUsuario};
   await axios
     .request(options)
     .then(callBackResponse)
     .catch(callBackError);
-  //setEjecutarConsulta(false);
+};
+
+export const actualizarElUsuario = async (identificacionUsuario,nuevoUsuario,callBackResponse,callBackError) => {
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:5000/usuarios/${identificacionUsuario._id}/`,
+    headers: { 'Content-Type': 'application/json' },
+    data: nuevoUsuario,
+  };
+  await axios
+    .request(options)
+    .then(callBackResponse)
+    .catch(callBackError);
+};
+
+export const eliminarElUsuario = async (id,callBackResponse,callBackError) => {
+  const options = {
+    method: 'DELETE',
+    url: `http://localhost:5000/usuarios/${id}/`,
+    headers: { 'Content-Type': 'application/json' },
+  };
+  await axios
+    .request(options)
+    .then(callBackResponse)
+    .catch(callBackError);
 };

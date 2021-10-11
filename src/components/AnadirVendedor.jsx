@@ -5,7 +5,7 @@ import plus_circle from 'media/plus-circle1.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {crearVendedor} from 'utils/api'
-const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
+const AnadirVendedor =({setMostrarTabla})=>{
     const form = useRef(null);
     const [codigo,setCodigo]=useState('');
     const submitForm = async (e) => {

@@ -4,28 +4,44 @@ import plus_circle from 'media/plus-circle1.png';
 import iconoDelete from 'media/delete.png';
 import ActualizaUsuario from 'components/ActualizaUsuario'
 import 'styles/estiloIndex.css';
+import {eliminarElUsuario} from 'utils/api'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import swal from 'sweetalert';
 
-const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario , setUsuarios, setMostrarTabla, mostrarTabla }) => {
+const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario , setUsuarios, setMostrarTabla, mostrarTabla,setEjecutarConsulta }) => {
     const [identificacionUsuario, setIdentificacionUsuario] = useState();
     
-    const eliminaUsuario =(identificacion)=>{
-      let listaUsuariosTemp = [...listaUsuarios];
-      for(let i=0;i<listaUsuarios.length;i++){
-        if(listaUsuarios[i].identificacion===identificacion){
-          listaUsuariosTemp.splice(i, 1);
-          break;
+    const eliminaUsuario = (identificacion)=>{
+      const elUsuario = async (identificacion)=>{
+        await eliminarElUsuario(identificacion,
+          (respuesta)=>{
+            console.log("respuesta ->" ,respuesta)
+            console.log("Usuario Eliminado");
+            toast.success('Usuario eliminado con éxito');
+    
+            setEjecutarConsulta(true)
+          },(error)=>{
+            console.error(error);
+            toast.error('Error eliminando el usuario');
+          })
         }
-      }
-      setUsuarios([...listaUsuariosTemp])
+      swal({
+        title:"Eliminar",
+        text:"Estas seguro que deseas eliminar este vendedor?",
+        icon:"warning",
+        buttons:["No","Si"]
+      }).then(respuesta=>{
+        if(respuesta){
+          elUsuario(identificacion);
+        }
+      })
+
     }
+      
 
     
     const actUsuario =(identificacion)=>{
-      console.log("Identificacion => ",identificacion)
-      for(let i=0;i<listaUsuarios.length;i++){
-        console.log('indice = >',i," -> ",listaUsuarios[i]);
-      }
-      console.log(actualizaUsuario)
       setIdentificacionUsuario(identificacion);
       setActualizaUsuario(true);
     }
@@ -69,8 +85,8 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                         <td>{usuario.identificacion}</td>
                         <td>{usuario.nombre}</td>
                         <td>{usuario.rol}</td>
-                        <td><button onClick={() => actUsuario(usuario.identificacion)}><img  src={penciles } alt="actualizar usuario" /></button></td>
-                        <td><button onClick={() => eliminaUsuario(usuario.identificacion)}><img  src={iconoDelete } alt=" eliminar usuario" /></button></td>
+                        <td><button onClick={() => actUsuario(usuario)}><img  src={penciles } alt="actualizar usuario" /></button></td>
+                        <td><button onClick={() => eliminaUsuario(usuario._id)}><img  src={iconoDelete } alt=" eliminar usuario" /></button></td>
                       </tr>
                     );
                 })}

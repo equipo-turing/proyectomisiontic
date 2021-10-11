@@ -43,7 +43,7 @@ const GestionarVendedor =()=>{
     useEffect(() => {
         //Si esta en true deberia volver a hacer la peticion a la api
         if (mostrarTabla) {
-            setEjecutarConsulta(true);
+          setEjecutarConsulta(true);
         }
     }, [mostrarTabla]);
 
@@ -60,8 +60,6 @@ const GestionarVendedor =()=>{
               ) : (
                 <AnadirVendedor
                 setMostrarTabla={setMostrarTabla}
-                listaVendedores={vendedores}
-                setVendedores={setVendedores}
                 />
             )}
           <ToastContainer position='bottom-center' autoClose={3000} />
