@@ -6,6 +6,8 @@ import TablaVendedores from 'components/TablaVendedores'
 import TablaUsuarios from 'components/TablaUsuarios'
 import AnadirUsuario from 'components/AnadirUsuario';
 import 'styles/estiloIndex.css';
+import {obtenerUsuarios} from 'utils/api'
+
 let usuariosBackend = [
     {identificacion:"12123",nombre:"andres",rol:"Venta de calzado"},
     {identificacion:"9999",nombre:"andres",rol:"Venta de calzado"},
@@ -13,19 +15,26 @@ let usuariosBackend = [
     {identificacion:"55555",nombre:"andres",rol:"Venta de calzado"},
     {identificacion:"66666",nombre:"andres",rol:"Venta de calzado"},
 ]
+
 const AdministrarUsuarios = () => {
     const [usuarios, setUsuarios] = useState([]);
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [actualizaUsuario, setActualizaUsuario] = useState(false);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
     useEffect(() => {
-        setUsuarios(usuariosBackend);
-        console.log(actualizaUsuario)
-    }, []);
+        console.log('consulta', ejecutarConsulta);
+        if (ejecutarConsulta) {
+            obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+        }
+    }, [ejecutarConsulta]);
+    
     useEffect(() => {
-    }, [mostrarTabla]);
-
-
+        //obtener lista de vehículos desde el backend
+        if (mostrarTabla) {
+          setEjecutarConsulta(true);
+        }
+      }, [mostrarTabla]);
     return(
         <section>
             {mostrarTabla ? (

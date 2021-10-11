@@ -28,7 +28,15 @@ const GestionarVendedor =()=>{
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerVendedores(setVendedores, setEjecutarConsulta);
+            obtenerVendedores(
+            (response)=>{
+              setVendedores(response.data);
+              setEjecutarConsulta(false);
+            }
+            ,(error)=>{
+              console.log(error)
+            }
+            );
         }
     }, [ejecutarConsulta]);
 

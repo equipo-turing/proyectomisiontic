@@ -17,7 +17,8 @@ const AnadirUsuario = ({setMostrarTabla,listaUsuarios,setUsuarios}) => {
       console.log(nuevoVendedor)
       setMostrarTabla(true);
       // Spreed operator
-      setUsuarios([...listaUsuarios,nuevoVendedor])
+      //setUsuarios([...listaUsuarios,nuevoVendedor])
+      
     };
     return ( 
       <div  className="formularioCrearVentas">

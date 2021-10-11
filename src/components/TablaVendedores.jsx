@@ -5,31 +5,26 @@ import iconoDelete from 'media/delete.png';
 import Actualizarvendedor from 'components/ActualizarVendedor'
 import 'styles/estiloIndex.css';
 import { ToastContainer, toast } from 'react-toastify';
-
-import axios from 'axios';
 import swal from 'sweetalert';
+import {eliminarElVendedor} from 'utils/api'
+
 const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
     const eliminarVendedor = (id)=>{
 
       const elimina = async (id)=>{
-        const options = {
-          method: 'DELETE',
-          url: `http://localhost:5000/vendedores/${id}/`,
-          headers: { 'Content-Type': 'application/json' },
-        };
-    
-        await axios
-          .request(options)
-          .then(function (response) {
+        await eliminarElVendedor(id,
+          (response)=>{
             console.log(response.data);
             toast.success('Vendedor eliminado con éxito');
             setEjecutarConsulta(true);
-          })
-          .catch(function (error) {
+          },
+          (error)=>{
             console.error(error);
             toast.error('Error eliminando el vendedor');
-          });
+          }
+        )
+        
       }
       
       swal({

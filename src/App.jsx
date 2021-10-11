@@ -3,7 +3,6 @@ import Index from 'pages';
 import GestionarUsuario from 'pages/gestionarUsuarios';
 import GestionarVendedor from 'pages/gestionarVendedores';
 import AnadirVendedor from 'pages/anadirVendedor';
-import Actualizarvendedor from 'pages/actualizarvendedor';
 import FormularioCrearVentas from 'pages/formularioCrearVenta';
 import ActualizarVenta from 'pages/actualizarVenta';
 
@@ -52,9 +51,6 @@ function App() {
             </Route>
 
            
-            <Route path='/actualizarvendedor' exact>
-              <Actualizarvendedor />
-            </Route> 
             <Route path='/AdministrarUsuarios' exact>
               <AdministrarUsuarios />
             </Route> 

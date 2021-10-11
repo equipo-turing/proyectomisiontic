@@ -1,8 +1,7 @@
 import React, {useEffect,useState,useRef} from 'react';
 import plus_circle from 'media/plus-circle1.png';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import {actualizarElVendedor} from 'utils/api'
 import 'styles/estiloIndex.css';
 const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores ,identificacionVendedor,setEjecutarConsulta})=>{
     const form = useRef(null);
@@ -15,23 +14,17 @@ const Actualizarvendedor =({ listaVendedores , actualizaVendedor , setActualizaV
       fd.forEach((value, key) => {
         nuevoVendedor[key] = value;
       });
-      const options = {
-        method: 'PATCH',
-        url: `http://localhost:5000/vendedores/${identificacionVendedor._id}/`,
-        headers: { 'Content-Type': 'application/json' },
-        data: nuevoVendedor,
-      };
-      await axios
-      .request(options)
-      .then(function (response) {
+      await actualizarElVendedor(identificacionVendedor,nuevoVendedor,
+      (response)=>{
         console.log(response.data);
         toast.success('Vendedor modificado con éxito');
         setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
+      },
+      (error)=>{
         toast.error('Error modificando el vendedor');
         console.error(error);
-      });
+      }
+      )
       setActualizaVendedor(false);
     };
     return ( 
