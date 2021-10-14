@@ -17,7 +17,17 @@ import { nanoid } from 'nanoid';
 //Tabla para mostrar los productos
 const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,}) => {
 
-  const [codigo,setCodigo]=useState()
+  const [codigo,setCodigo]=useState();
+  const [busqueda, setBusqueda] = useState('');
+  const [vehiculosFiltrados, setVehiculosFiltrados] = useState(listaProducto);
+
+  useEffect(() => {
+    setVehiculosFiltrados(
+      listaProducto.filter((elemento) => {
+        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaProducto]);
 
  const actualizarProducto=(bdproducto)=>{
    setActualizarForm(!actualizarForm)
@@ -48,7 +58,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
         (
           <div>
                 <div>
-                  <input className="buscar" type="text" placeholder='buscar' />
+                  <input value={busqueda} onChange={(e)=>{setBusqueda(e.target.value)}} className="buscar" type="text" placeholder='Buscar Producto' />
 
                   <div className="contenedorImagenTitulo">                
                     <div className="iconoVentas">
@@ -75,7 +85,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                   </tr>
                 </thead>
                 <tbody>
-                    {listaProducto.map((bdproducto)=>{
+                    {vehiculosFiltrados.map((bdproducto)=>{
                         return(
                           <tr key={nanoid()} > 
                             <td>{bdproducto.identificacion}</td>

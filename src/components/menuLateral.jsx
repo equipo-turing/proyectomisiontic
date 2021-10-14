@@ -19,12 +19,7 @@ const Menu = () => {
                 </nav>  
             </li>
 
-            <li>
-            <Link to='/ventas' className="itemMenuLateral"> 
-                <img src={iconoVenta} alt="Ícono Venta" />
-                <h4>Ventas</h4>
-            </Link>                 
-            </li>
+            
 
             <li>    
                 <Link to='/gestionar_vendedor' className="itemMenuLateral">          
@@ -45,6 +40,13 @@ const Menu = () => {
                 <h4>Administración de Usuarios</h4>
             </Link>
 
+            </li>
+
+            <li>
+            <Link to='/ventas' className="itemMenuLateral"> 
+                <img src={iconoVenta} alt="Ícono Venta" />
+                <h4>Ventas</h4>
+            </Link>                 
             </li>
 
             <li>
