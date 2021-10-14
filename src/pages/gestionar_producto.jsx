@@ -15,13 +15,24 @@ import { nanoid } from 'nanoid';
 
 
 //Tabla para mostrar los productos
-const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,producto}) => {
-  const eliminarProducto=()=>{
+const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,}) => {
+
+  const [codigo,setCodigo]=useState()
+
+ const actualizarProducto=(bdproducto)=>{
+   setActualizarForm(!actualizarForm)
+   setCodigo(bdproducto)
+   
+
+   
+ }
+
+  const eliminarProducto=(productoid)=>{
     const options = {
       method: 'DELETE',
       url: 'http://localhost:5000/productoeliminar',
       headers: {'Content-Type': 'application/json'},
-      data: {id: producto._id}
+      data: {id: productoid._id}
     };
     
     axios.request(options).then(function (response) {
@@ -36,10 +47,12 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
   
     return (
       <>
-      {actualizarForm ? (<FormularioActualizarProducto setActualizarForm={setActualizarForm} actualizarForm={actualizarForm} listaProducto={listaProducto} producto={producto} setMostrarTabla={mostrarTabla}/>):
+      {actualizarForm ? (<FormularioActualizarProducto setActualizarForm={setActualizarForm} actualizarForm={actualizarForm} listaProducto={listaProducto}  setMostrarTabla={mostrarTabla} codigo={codigo}/>):
         (
           <div>
                 <div>
+                  <input className="buscar" type="text" placeholder='buscar' />
+
                   <div className="contenedorImagenTitulo">                
                     <div className="iconoVentas">
                       <button onClick={()=>{setMostrarTabla(!mostrarTabla)}}>
@@ -72,8 +85,8 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                             <td>{bdproducto.descripcion}</td>
                             <td>{bdproducto.valorUnitario}</td>
                             <td>{bdproducto.estado}</td> 
-                            <td>  <button onClick={()=>{setActualizarForm(!actualizarForm)}}> <img src={penciles} alt="" /> </button></td>
-                            <td>  <button onClick={()=>{eliminarProducto()}}> <img src={iconoDelete} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{actualizarProducto(bdproducto)}}> <img src={penciles} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{eliminarProducto(bdproducto)}}> <img src={iconoDelete} alt="" /> </button></td>
                             
                           </tr>
                             
@@ -190,10 +203,10 @@ const FormularioCrearProducto=({setMostrarTabla,mostrarTabla,setProducto,listaPr
 
 }
 
-const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProducto,producto,setMostrarTabla,mostrarTabla})=>{
+const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProducto,codigo})=>{
   const form=useRef(null)
   const actualizarProducto=async(e)=>{
-    console.log("resultado",producto._id);
+    console.log("resultado",codigo._id);
     e.preventDefault();
     const datosFormulario=new FormData(form.current);
     const editarProducto={};
@@ -208,8 +221,8 @@ const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProdu
           url: 'http://localhost:5000/productoeditar',
           headers: {'Content-Type': 'application/json'},
           data: {
-           //id: '6167704f1cd0c1c5c129bfc9',
-           id:producto._id,
+           id: codigo._id,
+          // id:producto._id,
             identificacion: editarProducto.identificacion,
             descripcion: editarProducto.descripcion,
             valorUnitario: editarProducto.valorUnitario,

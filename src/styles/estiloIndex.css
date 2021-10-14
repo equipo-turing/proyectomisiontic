@@ -54,6 +54,12 @@ td,th{
 .iconoElminarActualizar{
   text-align: center;
 }
+.buscar{
+  border-radius: 5px;
+  padding: 20px;
+  background-color: red;
+  width: 100px;
+}
 
 
 
