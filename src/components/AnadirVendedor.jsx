@@ -2,11 +2,10 @@ import React, {useEffect,useState,useRef} from 'react';
 
 import 'styles/estiloIndex.css';
 import plus_circle from 'media/plus-circle1.png';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
+import {crearVendedor} from 'utils/api'
+const AnadirVendedor =({setMostrarTabla})=>{
     const form = useRef(null);
     const [codigo,setCodigo]=useState('');
     const submitForm = async (e) => {
@@ -20,23 +19,22 @@ const AnadirVendedor =({setMostrarTabla,listaVendedores,setVendedores})=>{
       console.log(nuevoVendedor)
       // Spreed operator
       //setVendedores([...listaVendedores,nuevoVendedor])
-      const options = {
-        method: 'POST',
-        url: 'http://localhost:5000/vendedores',
-        headers: { 'Content-Type': 'application/json' },
-        data: { identificacion: nuevoVendedor.identificacion, nombre: nuevoVendedor.nombre, especialidad: nuevoVendedor.especialidad , telefono: nuevoVendedor.telefono, fecha_ingreso: nuevoVendedor.fecha_ingreso  },
-      };
-  
-      await axios
-        .request(options)
-        .then(function (response) {
+      await crearVendedor({ 
+        identificacion: nuevoVendedor.identificacion, 
+        nombre: nuevoVendedor.nombre, 
+        especialidad: nuevoVendedor.especialidad , 
+        telefono: nuevoVendedor.telefono, 
+        fecha_ingreso: nuevoVendedor.fecha_ingreso  },
+        (response)=>{
           console.log(response.data);
           toast.success('Vendedor agregado con éxito');
-        })
-        .catch(function (error) {
+        },
+        (error)=>{
           console.error(error);
           toast.error('Error creando un vendedor');
-        });
+        }
+      )
+      
       setMostrarTabla(true);
 
     };

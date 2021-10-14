@@ -1,7 +1,9 @@
 import React, {useEffect,useState,useRef} from 'react';
 import plus_circle from 'media/plus-circle1.png';
-
+import {actualizarElUsuario} from 'utils/api'
 import 'styles/estiloIndex.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario , setUsuarios ,identificacionUsuario}) => {
     const form = useRef(null);
     console.log("Desde el actualiza -> ",identificacionUsuario)
@@ -9,19 +11,19 @@ const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuar
       e.preventDefault();
       const fd = new FormData(form.current);
   
-      const nuevoVendedor = {};
+      const nuevoUsuario = {};
       fd.forEach((value, key) => {
-        nuevoVendedor[key] = value;
+        nuevoUsuario[key] = value;
       });
-      
-      console.log(nuevoVendedor);
-      let listaUsuariosTemp = [...listaUsuarios];
-      for(let i=0;i<listaUsuarios.length;i++){
-        if(listaUsuarios[i].identificacion===identificacionUsuario){
-          listaUsuarios[i] = nuevoVendedor;
-          break;
-        }
-      }
+      await actualizarElUsuario(identificacionUsuario,
+      nuevoUsuario,
+      (response)=>{
+        console.log(response.data);
+        toast.success('Vendedor modificado con éxito');
+      },(error)=>{
+        toast.error('Error modificando el vendedor');
+        console.error(error);
+      })
       setActualizaUsuario(false);
     };
     return ( 
@@ -32,16 +34,16 @@ const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuar
         <form ref={form} onSubmit={submitForm}>
           <label className="labelCampos" htmlFor="identificacion">
             Identificacion
-            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionUsuario}/>
+            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionUsuario.identificacion}/>
           </label>      
           <label className="labelCampos" htmlFor="nombre">
               Nombre
-            <input name='nombre' className="camposRegistroVenta" type="text" />
+            <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionUsuario.nombre}/>
           </label>
   
           <label className="labelCampos" htmlFor="rol">
             Rol
-            <input className="camposRegistroVenta" type="text" name='rol' />
+            <input className="camposRegistroVenta" type="text" name='rol'defaultValue={identificacionUsuario.rol} />
           </label>
 
   

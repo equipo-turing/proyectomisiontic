@@ -35,6 +35,7 @@ const usuario=()=>[
 
 
 ];
+
  const TablaGestionarUsuarios=({listaUsuarios})=> {
    return (
      <section>

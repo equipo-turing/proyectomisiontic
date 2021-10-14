@@ -21,10 +21,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
 
  const actualizarProducto=(bdproducto)=>{
    setActualizarForm(!actualizarForm)
-   setCodigo(bdproducto)
-   
-
-   
+   setCodigo(bdproducto)  
  }
 
   const eliminarProducto=(productoid)=>{
@@ -254,22 +251,22 @@ const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProdu
     <form ref={form} onSubmit={actualizarProducto}  >
     <label className="labelCampos">
         Identificacion
-        <input  name='identificacion' className="camposRegistroVenta" type="text" />
+        <input  name='identificacion' className="camposRegistroVenta" type="text"  value={codigo.identificacion}/>
     </label> 
 
     <label className="labelCampos" htmlFor="descripcion">
         Descripción
-        <input   name='descripcion' className="camposRegistroVenta" type="text"   />
+        <input   name='descripcion' className="camposRegistroVenta" type="text"  defaultValue={codigo.descripcion} />
     </label>
 
     <label className="labelCampos" htmlFor="valor unitario">
         Valor Unitario
-        <input   className="camposRegistroVenta" type="number" name='valorUnitario'  />
+        <input   className="camposRegistroVenta" type="number" name='valorUnitario' defaultValue={codigo.valorUnitario} />
     </label>
 
     <label className="labelCampos"  htmlFor="estado">
         Estado
-        <select  className="camposRegistroVenta" name="estado"  required>
+        <select  className="camposRegistroVenta" name="estado"  required defaultValue={codigo.estado}>
             <option value="" selected disabled>Seleccione una opción</option>
             <option >Disponible</option>
             <option >No disponible</option>
