@@ -23,7 +23,7 @@ const Menu = () => {
             </li>
 
             <li>
-            <Link to='/ventas' className="itemMenuLateral"> 
+            <Link to='/' className="itemMenuLateral"> 
                 <img src={iconoVenta} alt="Ícono Venta" />
                 <h4>Ventas</h4>
             </Link>                 
