@@ -16,6 +16,23 @@ import { nanoid } from 'nanoid';
 
 //Tabla para mostrar los productos
 const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,producto}) => {
+  const eliminarProducto=()=>{
+    const options = {
+      method: 'DELETE',
+      url: 'http://localhost:5000/productoeliminar',
+      headers: {'Content-Type': 'application/json'},
+      data: {id: producto._id}
+    };
+    
+    axios.request(options).then(function (response) {
+      console.log(response.data);
+      toast.success("Producto Eliminado !!");
+    }).catch(function (error) {
+      console.error(error);
+      toast.error("No se pudo eliminar")
+    });
+
+  }
   
     return (
       <>
@@ -56,7 +73,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                             <td>{bdproducto.valorUnitario}</td>
                             <td>{bdproducto.estado}</td> 
                             <td>  <button onClick={()=>{setActualizarForm(!actualizarForm)}}> <img src={penciles} alt="" /> </button></td>
-                            <td>  <button onClick={()=>{setMostrarTabla(!mostrarTabla)}}> <img src={iconoDelete} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{eliminarProducto()}}> <img src={iconoDelete} alt="" /> </button></td>
                             
                           </tr>
                             
@@ -176,7 +193,7 @@ const FormularioCrearProducto=({setMostrarTabla,mostrarTabla,setProducto,listaPr
 const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProducto,producto,setMostrarTabla,mostrarTabla})=>{
   const form=useRef(null)
   const actualizarProducto=async(e)=>{
-    console.log("resultado",producto.descripcion);
+    console.log("resultado",producto._id);
     e.preventDefault();
     const datosFormulario=new FormData(form.current);
     const editarProducto={};
@@ -191,8 +208,8 @@ const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProdu
           url: 'http://localhost:5000/productoeditar',
           headers: {'Content-Type': 'application/json'},
           data: {
-           id: '6167704f1cd0c1c5c129bfc9',
-           //id:editarProducto._id,
+           //id: '6167704f1cd0c1c5c129bfc9',
+           id:producto._id,
             identificacion: editarProducto.identificacion,
             descripcion: editarProducto.descripcion,
             valorUnitario: editarProducto.valorUnitario,
@@ -206,12 +223,9 @@ const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProdu
         }).catch(function (error) {
           console.error(error);
           toast.error("El producto no se actualizó")
-        });
-
-
+        });        
         
-        
-setActualizarForm(!actualizarForm)
+    setActualizarForm(!actualizarForm)
 
 
   } 
@@ -272,8 +286,8 @@ const Gestionar_producto = () => {
     const [producto,setProducto]=useState([])//es un arreglo que almacenará los productos que vengan de la bd
 
     useEffect(()=>{
+      if(mostrarTabla){
 
-        if(mostrarTabla){
             //para obtener los productos desde la base de datos y colocarla en la tabla, por medio de setProducto, response.data me trae los datos de la bd
         const options = {method: 'GET', url: 'http://localhost:5000/producto'};
         axios.request(options).then(function (response) {
@@ -282,8 +296,9 @@ const Gestionar_producto = () => {
           }).catch(function (error) {
             console.error(error);
           });
+        }
 
-        }      
+            
 
         
     },[mostrarTabla])
