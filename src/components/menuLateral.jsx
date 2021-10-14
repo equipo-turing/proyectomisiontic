@@ -7,6 +7,7 @@ import iconoVendedor from 'media/iconoVendedor.png';
 import iconoAdmin from 'media/iconoAdmin.png';
 import iconoSesion from 'media/iconoSesion.png';
 import { useAuth0 } from '@auth0/auth0-react';
+import iconoProducto from 'media/producto.png';
 
 const Menu = () => {
     const { logout } = useAuth0();
@@ -32,6 +33,12 @@ const Menu = () => {
                 <Link to='/gestionar_vendedor' className="itemMenuLateral">          
                 <img src={iconoVendedor} alt="Ícono Vendedor" />
                 <h4>Vendedores</h4>      
+                </Link> 
+            </li>
+            <li>    
+                <Link to='/gestionar_producto' className="itemMenuLateral">          
+                <img src={iconoProducto} alt="Ícono Producto" />
+                <h4>Productos</h4>      
                 </Link> 
             </li>
 
