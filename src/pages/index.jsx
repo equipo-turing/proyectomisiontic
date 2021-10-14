@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useEffect,useState,useRef} from 'react'
 import { Link } from 'react-router-dom';
 import 'styles/login.css';
 import iconoVenta from 'media/usuario.png';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
-
+{/*
 const Index = () => {
     return (
 
@@ -45,6 +46,26 @@ const Index = () => {
     );
 }
 
+*/}
+const Index = () => {
+  const { loginWithRedirect } = useAuth0();
+  const { user,isAuthenticated, isLoading } = useAuth0();
+  console.log(isAuthenticated);
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  return (
+    <div>
+      
+     
+      
+      <button onClick={()=>{loginWithRedirect({returnTo: 'http://localhost:3000/ventas'})}}> Login</button>
 
+        
+      
+       
+    </div>
+  );
+}
 
 export default Index;
