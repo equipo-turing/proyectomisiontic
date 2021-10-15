@@ -7,7 +7,7 @@ import 'styles/estiloIndex.css';
 import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
 import {eliminarElVendedor} from 'utils/api'
-
+import { nanoid } from 'nanoid';
 const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVendedor , setVendedores, setMostrarTabla, mostrarTabla ,setEjecutarConsulta}) =>{
     const [identificacionVendedor, setIdentificacionVendedor] = useState();
 

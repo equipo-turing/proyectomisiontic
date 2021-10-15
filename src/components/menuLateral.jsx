@@ -6,9 +6,12 @@ import iconoVenta from 'media/iconoVenta.png';
 import iconoVendedor from 'media/iconoVendedor.png';
 import iconoAdmin from 'media/iconoAdmin.png';
 import iconoSesion from 'media/iconoSesion.png';
+import { useAuth0 } from '@auth0/auth0-react';
 import iconoProducto from 'media/producto.png';
 
 const Menu = () => {
+    const { logout } = useAuth0();
+
     return (
        <nav className="menuLateral"> 
         <ul>
@@ -20,6 +23,12 @@ const Menu = () => {
             </li>
 
             
+            <li>
+            <Link to='/' className="itemMenuLateral"> 
+                <img src={iconoVenta} alt="Ícono Venta" />
+                <h4>Ventas</h4>
+            </Link>                 
+            </li>
 
             <li>    
                 <Link to='/gestionar_vendedor' className="itemMenuLateral">          
@@ -52,7 +61,8 @@ const Menu = () => {
             <li>
             <Link to='/' className="itemMenuLateral"> 
                 <img src={iconoSesion} alt="Ícono cerrar sesión" />
-                <h4>Cerrar Sesión</h4>
+               
+                <button onClick={() => logout({ returnTo: 'http://localhost:3000/' })}>Cerrar Sesión</button>
             </Link>
 
             </li>
