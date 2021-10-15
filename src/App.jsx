@@ -64,23 +64,18 @@ function App() {
             <Route path='/formularioCrearUsuario' exact>
               <formularioCrearUsuario/>
             </Route> 
-
             <Route path='/gestionarUsuarios' exact>
               <GestionarUsuario />
             </Route> 
-
             <Route path='/formularioCrearVenta' exact>
               <FormularioCrearVentas />
             </Route> 
-
             <Route path='/gestionar_vendedor' exact>
               <GestionarVendedor />
             </Route>
-
             <Route path='/anadirVendedor' exact>
               <AnadirVendedor />
             </Route>
-
             
            
             <Route path='/gestionar_producto' exact>
@@ -89,7 +84,6 @@ function App() {
             <Route path='/AdministrarUsuarios' exact>
               <AdministrarUsuarios />
             </Route> 
-
           </Layout>
         */}
         </Switch>
