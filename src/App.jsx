@@ -34,26 +34,25 @@ function App() {
               <Switch>
               
                 <Route path='/' exact >
-                  <PrivateRoute roleList={['admin','vendedor']}>
+                  <PrivateRoute roleList={['admin','vendedor']} estadoList={['autorizado']} >
                     <Ventas />
                   </PrivateRoute>
                 </Route>
               
-                <Route path='/gestionar_vendedor' exact>
-                  <PrivateRoute roleList={['admin']}>
+                <Route path='/gestionar_vendedor'  exact>
+                  <PrivateRoute roleList={['admin']} estadoList={['autorizado']}>
                     <GestionarVendedor />
                   </PrivateRoute>
                 </Route>
-                <Route path='/AdministrarUsuarios' exact>
-                  <PrivateRoute roleList={['admin']}>
+                <Route path='/AdministrarUsuarios'  exact>
+                  <PrivateRoute roleList={['admin']} estadoList={['autorizado']}>
                     <AdministrarUsuarios />
                   </PrivateRoute>
                 </Route> 
                   
               
-                <Route path='/gestionar_producto' exact>
-                  <PrivateRoute roleList={['admin','vendedor']}>
-
+                <Route path='/gestionar_producto'  exact>
+                  <PrivateRoute roleList={['admin','vendedor']} estadoList={['autorizado']}>
                     <Productos />
                   </PrivateRoute>
                 </Route> 

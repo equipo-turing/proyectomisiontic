@@ -72,6 +72,7 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                 <thead className="encabezadoTablaVentas">
                   <tr>
                     <th>Email</th>
+                    <th>Estado</th>
                     <th>Rol</th>
                     <th>Actualizar</th>
                     <th>Eliminar</th>
@@ -83,6 +84,7 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                       <tr >
                         <td>{usuario.email}</td>
                         <td>{usuario.rol}</td>
+                        <td>{usuario.estado}</td>
                         <td><button onClick={() => actUsuario(usuario)}><img  src={penciles } alt="actualizar usuario" /></button></td>
                         <td><button onClick={() => eliminaUsuario(usuario._id)}><img  src={iconoDelete } alt=" eliminar usuario" /></button></td>
                       </tr>

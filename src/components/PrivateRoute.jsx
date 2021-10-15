@@ -53,14 +53,21 @@ const PrivateRoute = ({ children }) => {
 };
 */
 
-const PrivateRoute = ({ roleList, children }) => {
+const PrivateRoute = ({ roleList,estadoList, children }) => {
   const { userData } = useUser();
   console.log("roleList ",roleList)
-
-  if (roleList.includes(userData.rol)) {
+  console.log("estadoList",estadoList)
+  if (roleList.includes(userData.rol) && estadoList.includes(userData.estado) ) {
     return children;
   }
+
+
+
+  
+
   return <div >No estás autorizado para ver este sitio.</div>;
+   
+  
 };
 
 export default PrivateRoute;

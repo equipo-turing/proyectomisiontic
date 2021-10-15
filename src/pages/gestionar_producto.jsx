@@ -6,6 +6,7 @@ import iconoDelete from 'media/delete.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
+import PrivateComponent from 'components/PrivateComponent';
 
 import { obtenerProductos ,ActualizarProducto ,eliminarElProducto,crearElProducto} from 'utils/api';
 
@@ -72,8 +73,10 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                     <th>Descripción</th>
                     <th>Valor Unitario</th>
                     <th>Estado</th> 
-                    <th>Actualizar</th> 
-                    <th>Eliminar</th>                  
+                    <PrivateComponent roleList={['admin']}>
+                      <th>Actualizar</th> 
+                      <th>Eliminar</th>
+                    </PrivateComponent>  
                   </tr>
                 </thead>
                 <tbody>
@@ -83,10 +86,11 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                             <td>{bdproducto.identificacion}</td>
                             <td>{bdproducto.descripcion}</td>
                             <td>{bdproducto.valorUnitario}</td>
-                            <td>{bdproducto.estado}</td> 
+                            <td>{bdproducto.estado}</td>
+                            <PrivateComponent roleList={['admin']}>
                             <td>  <button onClick={()=>{actualizarProducto(bdproducto)}}> <img src={penciles} alt="" /> </button></td>
                             <td>  <button onClick={()=>{eliminarProducto(bdproducto)}}> <img src={iconoDelete} alt="" /> </button></td>
-                            
+                            </PrivateComponent>
                           </tr>
                             
 

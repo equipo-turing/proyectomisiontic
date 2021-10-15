@@ -39,7 +39,13 @@ const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuar
               Nombre
             <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionUsuario.nickname}/>
           </label>
-
+          <label className="labelCampos" htmlFor="estado">
+            <select className="camposRegistroVenta" name='estado' defaultValue={identificacionUsuario.estado}>
+              <option value='autorizado'>Autorizado</option>
+              <option value='pendiente'>Pendiente</option>
+              <option value='rechazado'>Rechazado</option>
+            </select>
+          </label>
           <label className="labelCampos" htmlFor="rol">
             <select className="camposRegistroVenta" name='rol' defaultValue={identificacionUsuario.rol}>
               <option value='admin'>Admin</option>
