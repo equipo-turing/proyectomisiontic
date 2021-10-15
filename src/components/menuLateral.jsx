@@ -8,6 +8,7 @@ import iconoAdmin from 'media/iconoAdmin.png';
 import iconoSesion from 'media/iconoSesion.png';
 import { useAuth0 } from '@auth0/auth0-react';
 import iconoProducto from 'media/producto.png';
+import PrivateComponent from './PrivateComponent';
 
 const Menu = () => {
     const { logout } = useAuth0();
@@ -22,34 +23,42 @@ const Menu = () => {
                 </nav>  
             </li>
 
-            
-            <li>
-            <Link to='/' className="itemMenuLateral"> 
-                <img src={iconoVenta} alt="Ícono Venta" />
-                <h4>Ventas</h4>
-            </Link>                 
-            </li>
+            <PrivateComponent roleList={['admin','vendedor']}>
+                <li>
+                    <Link to='/' className="itemMenuLateral"> 
+                        <img src={iconoVenta} alt="Ícono Venta" />
+                        <h4>Ventas</h4>
+                    </Link>                 
+                </li>
+            </PrivateComponent>
+            <PrivateComponent roleList={['admin']}>
+                <li>    
+                    <Link to='/gestionar_vendedor' className="itemMenuLateral">          
+                    <img src={iconoVendedor} alt="Ícono Vendedor" />
+                    <h4>Vendedores</h4>      
+                    </Link> 
+                </li>
+            </PrivateComponent>
+            <PrivateComponent roleList={['admin','vendedor']}>
 
-            <li>    
-                <Link to='/gestionar_vendedor' className="itemMenuLateral">          
-                <img src={iconoVendedor} alt="Ícono Vendedor" />
-                <h4>Vendedores</h4>      
-                </Link> 
-            </li>
-            <li>    
-                <Link to='/gestionar_producto' className="itemMenuLateral">          
-                <img src={iconoProducto} alt="Ícono Producto" />
-                <h4>Productos</h4>      
-                </Link> 
-            </li>
+                <li>    
+                    <Link to='/gestionar_producto' className="itemMenuLateral">          
+                    <img src={iconoProducto} alt="Ícono Producto" />
+                    <h4>Productos</h4>      
+                    </Link> 
+                </li>
+            </PrivateComponent>
+            <PrivateComponent roleList={['admin']}>
+                <li>
+                    
+                <Link to='/AdministrarUsuarios' className="itemMenuLateral"> 
+                    <img src={iconoAdmin} alt="Ícono administración de usuarios" />
+                    <h4>Administración de Usuarios</h4>
+                </Link>
 
-            <li>
-            <Link to='/AdministrarUsuarios' className="itemMenuLateral"> 
-                <img src={iconoAdmin} alt="Ícono administración de usuarios" />
-                <h4>Administración de Usuarios</h4>
-            </Link>
-
-            </li>            
+                </li>      
+            </PrivateComponent>
+      
 
             <li>
             <Link to='/' className="itemMenuLateral"> 

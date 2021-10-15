@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario , setUsuarios ,identificacionUsuario}) => {
     const form = useRef(null);
-    console.log("Desde el actualiza -> ",identificacionUsuario)
     const submitForm = async (e) => {
       e.preventDefault();
       const fd = new FormData(form.current);
@@ -32,17 +31,17 @@ const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuar
           <h1>Actualizar Usuario</h1>                    
         </div>
         <form ref={form} onSubmit={submitForm}>
-          <label className="labelCampos" htmlFor="identificacion">
-            Identificacion
-            <input name='identificacion' className="camposRegistroVenta" type="text" value={identificacionUsuario.identificacion}/>
+          <label className="labelCampos" htmlFor="email">
+            Email
+            <input name='email' className="camposRegistroVenta" type="text" value={identificacionUsuario.email}/>
           </label>      
-          <label className="labelCampos" htmlFor="nombre">
+          <label className="labelCampos" htmlFor="nickname">
               Nombre
-            <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionUsuario.nombre}/>
+            <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionUsuario.nickname}/>
           </label>
 
           <label className="labelCampos" htmlFor="rol">
-            <select name='rol' defaultValue={identificacionUsuario.rol}>
+            <select className="camposRegistroVenta" name='rol' defaultValue={identificacionUsuario.rol}>
               <option value='admin'>Admin</option>
               <option value='vendedor'>Vendedor</option>
               <option value='inactivo'>Inactivo</option>

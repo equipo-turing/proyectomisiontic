@@ -1,17 +1,60 @@
 import MenuLateral from 'components/menuLateral';
 import Footer from 'components/Footer';
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import 'styles/estiloMenuLateral.css'
 import { Auth0Provider } from '@auth0/auth0-react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { obtenerDatosUsuario } from 'utils/api';
+import { useUser } from 'context/userContext';
+import ReactLoading from 'react-loading';
 
-import PrivateRoute from 'components/PrivateRoute';
 
 
 
 const Layout = ({ children }) => {
+  const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout } =
+    useAuth0();
+  const [loadingUserInformation, setLoadingUserInformation] = useState(false);
+  const { setUserData } = useUser();
+
+  useEffect(() => {
+    const fetchAuth0Token = async () => {
+
+      // 1. pedir token a auth0
+      setLoadingUserInformation(true);
+
+      const accessToken = await getAccessTokenSilently({
+        audience: `api-turing-mintic`,
+      });
+      // 2. recibir token de auth0
+      localStorage.setItem('token', accessToken);
+      console.log(accessToken);
+      // 3. enviarle el token a el backend
+      await obtenerDatosUsuario(
+        (response) => {
+          console.log('response con datos del usuario', response);
+          setUserData(response.data);
+          setLoadingUserInformation(false);
+        },
+        (err) => {
+          console.log('err', err);
+          setLoadingUserInformation(false);
+          logout({ returnTo: 'http://localhost:3000/' });
+        }
+      );
+    };
+    if (isAuthenticated) {
+      fetchAuth0Token();
+    }
+  }, [isAuthenticated, getAccessTokenSilently]);
+  
+  if (isLoading || loadingUserInformation)
+    return <ReactLoading type='cylon' color='#abc123' height={667} width={375} />;
+
+  if (!isAuthenticated) {
+    return loginWithRedirect();
+  }
   return (
-    <PrivateRoute>
     <div>
       <div className='mainContainer'>
         <MenuLateral />
@@ -19,7 +62,6 @@ const Layout = ({ children }) => {
       </div>
       <Footer />
     </div>
-  </PrivateRoute>
   );
 
 };

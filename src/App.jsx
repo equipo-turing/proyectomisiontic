@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { UserContext } from 'context/userContext';
 import React, { useState, useEffect } from 'react';
+import PrivateRoute from 'components/PrivateRoute';
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -31,20 +32,30 @@ function App() {
           <Route path={['/', '/gestionarUsuarios', '/gestionar_vendedor','/AdministrarUsuarios','/gestionar_producto']}>   
             <Layout>
               <Switch>
+              
                 <Route path='/' exact >
-                  <Ventas />
+                  <PrivateRoute roleList={['admin','vendedor']}>
+                    <Ventas />
+                  </PrivateRoute>
                 </Route>
               
                 <Route path='/gestionar_vendedor' exact>
-                  <GestionarVendedor />
+                  <PrivateRoute roleList={['admin']}>
+                    <GestionarVendedor />
+                  </PrivateRoute>
                 </Route>
                 <Route path='/AdministrarUsuarios' exact>
-                  <AdministrarUsuarios />
+                  <PrivateRoute roleList={['admin']}>
+                    <AdministrarUsuarios />
+                  </PrivateRoute>
                 </Route> 
                   
               
                 <Route path='/gestionar_producto' exact>
-                  <Productos />
+                  <PrivateRoute roleList={['admin','vendedor']}>
+
+                    <Productos />
+                  </PrivateRoute>
                 </Route> 
 
 

@@ -5,6 +5,8 @@ import ReactLoading from 'react-loading';
 import { useUser } from 'context/userContext';
 import { obtenerDatosUsuario } from 'utils/api';
 
+
+/*
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
   //Traemos el usuario del context
@@ -45,9 +47,20 @@ const PrivateRoute = ({ children }) => {
   }
   {/*if (!isAuthenticated){
     return loginWithRedirect();
-  }*/}
+  }}
   return <> {children} </>;
  
+};
+*/
+
+const PrivateRoute = ({ roleList, children }) => {
+  const { userData } = useUser();
+  console.log("roleList ",roleList)
+
+  if (roleList.includes(userData.rol)) {
+    return children;
+  }
+  return <div >No estás autorizado para ver este sitio.</div>;
 };
 
 export default PrivateRoute;
