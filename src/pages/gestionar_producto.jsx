@@ -5,14 +5,11 @@ import penciles from 'media/pencil1.png';
 import iconoDelete from 'media/delete.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
 import { nanoid } from 'nanoid';
 
+import { obtenerProductos ,ActualizarProducto ,eliminarElProducto,crearElProducto} from 'utils/api';
 
 //import TablaProductos from 'components/TablaProductos'
-
-//base de datos de productos
-
 
 //Tabla para mostrar los productos
 const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,}) => {
@@ -35,6 +32,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
  }
 
   const eliminarProducto=(productoid)=>{
+    /*
     const options = {
       method: 'DELETE',
       url: 'http://localhost:5000/productoeliminar',
@@ -49,7 +47,16 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
       console.error(error);
       toast.error("No se pudo eliminar")
     });
-
+    */
+   eliminarElProducto(productoid,
+    (response)=>{
+      console.log(response.data);
+      toast.success("Producto Eliminado !!");
+    },
+    (error)=>{
+      console.error(error);
+      toast.error("No se pudo eliminar")
+    })
   }
   
     return (
@@ -136,6 +143,16 @@ const FormularioCrearProducto=({setMostrarTabla,mostrarTabla,setProducto,listaPr
         //setProducto([...listaProducto,nuevoProducto])  esto se usaba cuando la bd estaba en el mismo codigo
 
        /*********ME PERMITE ENVIAR INFORMACION A LA BD */
+       crearElProducto(nuevoProducto,
+        (response)=>{
+          console.log(response.data);
+          toast.success("Producto Guardado !!");
+        },
+        (error)=>{
+          console.error(error);
+          toast.error("Error creando producto !!")
+        })
+       /*
       const options = {
         method: 'POST',
         url: 'http://localhost:5000/productonuevo',
@@ -154,7 +171,8 @@ const FormularioCrearProducto=({setMostrarTabla,mostrarTabla,setProducto,listaPr
       }).catch(function (error) {
         console.error(error);
         toast.error("Error creando producto !!")
-      }); 
+      });
+      */ 
       /******************************************************** */
       setMostrarTabla(!mostrarTabla)
 
@@ -221,29 +239,16 @@ const FormularioActualizarProducto=({setActualizarForm,actualizarForm,listaProdu
     datosFormulario.forEach((value,key)=>{//recorro todos los campos del formulario y los almaceno en un objeto nuevoProducto
       editarProducto[key]=value;
 
-        }); 
-
-        const options = {
-          method: 'PATCH',
-          url: 'http://localhost:5000/productoeditar',
-          headers: {'Content-Type': 'application/json'},
-          data: {
-           id: codigo._id,
-          // id:producto._id,
-            identificacion: editarProducto.identificacion,
-            descripcion: editarProducto.descripcion,
-            valorUnitario: editarProducto.valorUnitario,
-            estado: editarProducto.estado
-          }
-        };
+        });
         
-       await axios.request(options).then(function (response) {
+        ActualizarProducto(codigo,editarProducto,
+        (response)=>{
           console.log(response.data);
           toast.success("Producto actualizado!!");
-        }).catch(function (error) {
+        },(error)=>{
           console.error(error);
           toast.error("El producto no se actualizó")
-        });        
+        })
         
     setActualizarForm(!actualizarForm)
 
@@ -308,16 +313,19 @@ const Gestionar_producto = () => {
     useEffect(()=>{
       if(mostrarTabla){
 
-            //para obtener los productos desde la base de datos y colocarla en la tabla, por medio de setProducto, response.data me trae los datos de la bd
-        const options = {method: 'GET', url: 'http://localhost:5000/producto'};
-        axios.request(options).then(function (response) {
+        //para obtener los productos desde la base de datos y colocarla en la tabla, por medio de setProducto, response.data me trae los datos de la bd
+        
+        obtenerProductos(
+          (response)=>{
             console.log(response.data);
             setProducto(response.data)
-          }).catch(function (error) {
-            console.error(error);
-          });
-        }
+          }
+          ,(error)=>{
+            console.log(error)
+          }
+        );
 
+      }
             
 
         

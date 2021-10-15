@@ -71,8 +71,7 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
               <table>
                 <thead className="encabezadoTablaVentas">
                   <tr>
-                    <th>Identificacion</th>
-                    <th>Nombre</th>
+                    <th>Email</th>
                     <th>Rol</th>
                     <th>Actualizar</th>
                     <th>Eliminar</th>
@@ -82,8 +81,7 @@ const TablaUsuarios = ({ listaUsuarios , actualizaUsuario , setActualizaUsuario 
                   {listaUsuarios.map((usuario) => {
                     return (
                       <tr >
-                        <td>{usuario.identificacion}</td>
-                        <td>{usuario.nombre}</td>
+                        <td>{usuario.email}</td>
                         <td>{usuario.rol}</td>
                         <td><button onClick={() => actUsuario(usuario)}><img  src={penciles } alt="actualizar usuario" /></button></td>
                         <td><button onClick={() => eliminaUsuario(usuario._id)}><img  src={iconoDelete } alt=" eliminar usuario" /></button></td>

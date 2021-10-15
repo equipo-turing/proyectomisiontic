@@ -8,6 +8,8 @@ export const obtenerVendedores = async (callBackResponse,callBackError) => {
   ,headers: {
     Authorization: getToken(),
   },};
+  localStorage.setItem('options_vendedores', options.Authorization);
+
   await axios
     .request(options)
     .then(callBackResponse)
@@ -93,10 +95,63 @@ export const eliminarElUsuario = async (id,callBackResponse,callBackError) => {
     method: 'DELETE',
     url: `http://localhost:5000/usuarios/${id}/`,
     headers: { 'Content-Type': 'application/json' , Authorization: getToken(),},
-
   };
   await axios
     .request(options)
     .then(callBackResponse)
     .catch(callBackError);
 };
+
+export const obtenerProductos = async (callBackResponse,callBackError)=>{
+  const options = {method: 'GET', url: 'http://localhost:5000/producto/',headers: { Authorization: getToken(),}};
+  await axios 
+  .request(options)
+  .then(callBackResponse)
+  .catch(callBackError);
+}
+
+export const ActualizarProducto = async(codigo,editarProducto,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'PATCH',
+    url: 'http://localhost:5000/productoeditar',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {
+     id: codigo._id,
+      identificacion: editarProducto.identificacion,
+      descripcion: editarProducto.descripcion,
+      valorUnitario: editarProducto.valorUnitario,
+      estado: editarProducto.estado
+    }
+  };
+  await axios 
+  .request(options).then(callBackResponse).catch(callBackError);        
+}
+
+
+export const eliminarElProducto = async (productoid,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'DELETE',
+    url: 'http://localhost:5000/productoeliminar',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {id: productoid._id}
+  };
+  
+  await axios 
+  .request(options).then(callBackResponse).catch(callBackError);
+}
+
+export const crearElProducto = async (nuevoProducto,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:5000/productonuevo',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {
+      identificacion:nuevoProducto.identificacion,
+      descripcion: nuevoProducto.descripcion,
+      valorUnitario: nuevoProducto.valorUnitario,
+      estado: nuevoProducto.estado
+    }
+  };
+
+ await axios.request(options).then(callBackResponse).catch(callBackError);
+}

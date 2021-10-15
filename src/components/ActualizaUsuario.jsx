@@ -40,17 +40,18 @@ const ActualizaUsuario = ({ listaUsuarios , actualizaUsuario , setActualizaUsuar
               Nombre
             <input name='nombre' className="camposRegistroVenta" type="text" defaultValue={identificacionUsuario.nombre}/>
           </label>
-  
+
           <label className="labelCampos" htmlFor="rol">
-            Rol
-            <input className="camposRegistroVenta" type="text" name='rol'defaultValue={identificacionUsuario.rol} />
+            <select name='rol' defaultValue={identificacionUsuario.rol}>
+              <option value='admin'>Admin</option>
+              <option value='vendedor'>Vendedor</option>
+              <option value='inactivo'>Inactivo</option>
+            </select>
           </label>
 
-  
           <div className="contBotonGuardarVenta">     
             <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setActualizaUsuario(false)}>Cancelar</button>
             <button className="botonGuardar" type="submit" value="Guardar">Actualizar</button>
-  
           </div>          
   
         </form>
