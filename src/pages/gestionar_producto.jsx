@@ -32,22 +32,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
  }
 
   const eliminarProducto=(productoid)=>{
-    /*
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:5000/productoeliminar',
-      headers: {'Content-Type': 'application/json'},
-      data: {id: productoid._id}
-    };
-    
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-      toast.success("Producto Eliminado !!");
-    }).catch(function (error) {
-      console.error(error);
-      toast.error("No se pudo eliminar")
-    });
-    */
+
    eliminarElProducto(productoid,
     (response)=>{
       console.log(response.data);
@@ -152,28 +137,7 @@ const FormularioCrearProducto=({setMostrarTabla,mostrarTabla,setProducto,listaPr
           console.error(error);
           toast.error("Error creando producto !!")
         })
-       /*
-      const options = {
-        method: 'POST',
-        url: 'http://localhost:5000/productonuevo',
-        headers: {'Content-Type': 'application/json'},
-        data: {
-          identificacion:nuevoProducto.identificacion,
-          descripcion: nuevoProducto.descripcion,
-          valorUnitario: nuevoProducto.valorUnitario,
-          estado: nuevoProducto.estado
-        }
-      };
 
-     await axios.request(options).then(function (response) {
-        console.log(response.data);
-        toast.success("Producto Guardado !!");
-      }).catch(function (error) {
-        console.error(error);
-        toast.error("Error creando producto !!")
-      });
-      */ 
-      /******************************************************** */
       setMostrarTabla(!mostrarTabla)
 
     }
