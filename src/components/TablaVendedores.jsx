@@ -85,7 +85,7 @@ const TablaVendedores = ({ listaVendedores , actualizaVendedor , setActualizaVen
                 <tbody>
                   {listaVendedores.map((vendedor) => {
                     return (
-                      <tr >
+                      <tr key={nanoid()}>
                         <td>{vendedor.identificacion}</td>
                         <td>{vendedor.nombre}</td>
                         <td>{vendedor.especialidad}</td>

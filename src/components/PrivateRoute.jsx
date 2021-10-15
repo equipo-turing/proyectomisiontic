@@ -2,22 +2,33 @@ import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import { useUser } from 'context/userContext';
+import { obtenerDatosUsuario } from 'utils/api';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently } = useAuth0();
-
+  //Traemos el usuario del context
+  const { setUserData } = useUser();
   useEffect(() => {
     const fetchAuth0Token = async () => {
-      // si se quieren hacer validaciones con el token:
-      // if (localStorage.getItem('token')) {
-      //   // validar fecha de expiracion del token
-      // } else {
-      //   // pedir token
-      // }
+      // 1. pedir token a auth0
       const accessToken = await getAccessTokenSilently({
         audience: `api-turing-mintic`,
       });
+       // 2. recibir token de auth0
       localStorage.setItem('token', accessToken);
+      console.log(accessToken);
+      // 3. enviarle el token a el backend
+      console.log("hikaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+      await obtenerDatosUsuario(
+        (response) => {
+          console.log('response con datos del usuario', response);
+          setUserData(response.data);
+        },
+        (err) => {
+          console.log('err', err);
+        }
+      );
     };
     if (isAuthenticated) {
       fetchAuth0Token();

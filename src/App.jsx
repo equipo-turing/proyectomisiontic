@@ -11,8 +11,12 @@ import Ventas from 'pages/ventas';
 import Productos from 'pages/gestionar_producto';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
+import { UserContext } from 'context/userContext';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [userData, setUserData] = useState({});
+
   return (
     <Auth0Provider
     domain='turing-misiontic.us.auth0.com'
@@ -21,6 +25,7 @@ function App() {
     audience='api-turing-mintic'
     >
       <div className='App'>
+      <UserContext.Provider value={{ userData, setUserData }}>
       <Router>
           <Switch>
           <Route path={['/', '/gestionarUsuarios', '/gestionar_vendedor','/AdministrarUsuarios','/gestionar_producto']}>   
@@ -90,6 +95,7 @@ function App() {
         </Switch>
         
       </Router>
+      </UserContext.Provider>
       </div>
     </Auth0Provider>
   );

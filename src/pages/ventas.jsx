@@ -4,6 +4,7 @@ import React, {useEffect,useState,useRef} from 'react'
 import plus_circle from 'media/plus-circle1.png';
 import penciles from 'media/pencil1.png';
 import iconoDelete from 'media/delete.png';
+import { nanoid } from 'nanoid';
 
 import 'styles/estiloIndex.css';
 
@@ -152,7 +153,7 @@ const TablaVentas=({ listaVenta , actualizarVenta , setActualizarVentas , setVen
                
                     {listaVenta.map((venta)=>{
                         return (
-                            <tr>
+                            <tr key={nanoid()}>
                                 <td>{venta.codigo}</td>
                                 <td>{venta.valorVenta}</td>
                                 <td>{venta.fechaVenta}</td>

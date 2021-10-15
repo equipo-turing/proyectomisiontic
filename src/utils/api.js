@@ -46,7 +46,16 @@ export const eliminarElVendedor = async (id,callBackResponse,callBackError) => {
     .then(callBackResponse)
     .catch(callBackError);
 };
-
+export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:5000/usuarios/self',
+    headers: {
+      Authorization: getToken(), // 3. enviarle el token a backend
+    },
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
 export const obtenerUsuarios = async (callBackResponse,callBackError) => {
   const options = { method: 'GET', url: 'http://localhost:5000/usuarios/',headers: {
     Authorization: getToken(),
