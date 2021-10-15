@@ -49,14 +49,7 @@ const Menu = () => {
                 <h4>Administración de Usuarios</h4>
             </Link>
 
-            </li>
-
-            <li>
-            <Link to='/ventas' className="itemMenuLateral"> 
-                <img src={iconoVenta} alt="Ícono Venta" />
-                <h4>Ventas</h4>
-            </Link>                 
-            </li>
+            </li>            
 
             <li>
             <Link to='/' className="itemMenuLateral"> 
