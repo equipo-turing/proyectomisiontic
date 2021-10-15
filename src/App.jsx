@@ -18,6 +18,7 @@ function App() {
     domain='turing-misiontic.us.auth0.com'
     clientId='Qm4xSXJVM3aMW3xtufmLsJauTGHwxevb'
     redirectUri={window.location.origin}
+    audience='api-turing-mintic'
     >
       <div className='App'>
       <Router>
