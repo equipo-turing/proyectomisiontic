@@ -13,13 +13,19 @@ code {
     monospace;
 }
 .contenedorTablaVentas{
-  margin-top: 10px;
+  margin: 10px;
+  width: 98%;
 }
 .contenedorImagenTitulo{
   display: flex;
   justify-content: center; 
   margin-top: 20px; 
  
+}
+
+.formularioCrearVentas > form{
+ 
+  
 }
 
 .contenedorImagenTitulo>h1{
