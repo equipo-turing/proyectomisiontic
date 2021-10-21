@@ -9,7 +9,8 @@ import iconoSesion from 'media/iconoSesion.png';
 import { useAuth0 } from '@auth0/auth0-react';
 import iconoProducto from 'media/producto.png';
 import PrivateComponent from './PrivateComponent';
-
+//const baseURL = "http://localhost:5000"
+const baseURL = "https://fathomless-mesa-97310.herokuapp.com"
 const Menu = () => {
     const { logout } = useAuth0();
 
@@ -64,7 +65,7 @@ const Menu = () => {
             <Link to='/' className="itemMenuLateral"> 
                 <img src={iconoSesion} alt="Ícono cerrar sesión" />
                
-                <button onClick={() => logout({ returnTo: 'https://fathomless-mesa-97310.herokuapp.com' })}>Cerrar Sesión</button>
+                <button onClick={() => logout({ returnTo: baseURL })}>Cerrar Sesión</button>
             </Link>
 
             </li>
