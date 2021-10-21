@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
         (err) => {
           console.log('err', err);
           setLoadingUserInformation(false);
-          logout({ returnTo: 'https://fathomless-mesa-97310.herokuapp.com/' });
+          logout({ returnTo: 'https://fathomless-mesa-97310.herokuapp.com' });
         }
       );
     };

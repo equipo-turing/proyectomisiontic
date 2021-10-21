@@ -1,10 +1,13 @@
 import axios from 'axios';
 
+//const baseURL = "http://localhost:5000"
+const baseURL = "https://fathomless-mesa-97310.herokuapp.com"
+
 const getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;
 };
 export const obtenerVendedores = async (callBackResponse,callBackError) => {
-  const options = { method: 'GET', url: 'https://fathomless-mesa-97310.herokuapp.com/vendedores/' 
+  const options = { method: 'GET', url: `${baseURL}/vendedores/`
   ,headers: {
     Authorization: getToken(),
   },};
@@ -17,7 +20,7 @@ export const obtenerVendedores = async (callBackResponse,callBackError) => {
 };
 
 export const crearVendedor = async (data,callBackResponse,callBackError) => {
-  const options = { method: 'POST', url: 'https://fathomless-mesa-97310.herokuapp.com/vendedores/' ,data,headers: { Authorization: getToken(), }};
+  const options = { method: 'POST', url: `${baseURL}/vendedores/` ,data,headers: { Authorization: getToken(), }};
   await axios
     .request(options)
     .then(callBackResponse)
@@ -27,7 +30,7 @@ export const crearVendedor = async (data,callBackResponse,callBackError) => {
 export const actualizarElVendedor = async (identificacionVendedor,nuevoVendedor,callBackResponse,callBackError) => {
   const options = {
     method: 'PATCH',
-    url: `https://fathomless-mesa-97310.herokuapp.com/vendedores/${identificacionVendedor._id}/`,
+    url: `${baseURL}/vendedores/${identificacionVendedor._id}/`,
     headers: { 'Content-Type': 'application/json',Authorization: getToken(), },
     data: nuevoVendedor,
   };
@@ -40,7 +43,7 @@ export const actualizarElVendedor = async (identificacionVendedor,nuevoVendedor,
 export const eliminarElVendedor = async (id,callBackResponse,callBackError) => {
   const options = {
     method: 'DELETE',
-    url: `https://fathomless-mesa-97310.herokuapp.com/vendedores/${id}/`,
+    url: `${baseURL}/vendedores/${id}/`,
     headers: { 'Content-Type': 'application/json',Authorization: getToken(), },
   };
   await axios
@@ -51,7 +54,7 @@ export const eliminarElVendedor = async (id,callBackResponse,callBackError) => {
 export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',
-    url: 'https://fathomless-mesa-97310.herokuapp.com/usuarios/self',
+    url: `${baseURL}/usuarios/self`,
     headers: {
       Authorization: getToken(), // 3. enviarle el token a backend
     },
@@ -59,7 +62,7 @@ export const obtenerDatosUsuario = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 export const obtenerUsuarios = async (callBackResponse,callBackError) => {
-  const options = { method: 'GET', url: 'https://fathomless-mesa-97310.herokuapp.com/usuarios/',headers: {
+  const options = { method: 'GET', url: `${baseURL}/usuarios/`,headers: {
     Authorization: getToken(),
   }, };
   await axios
@@ -69,7 +72,7 @@ export const obtenerUsuarios = async (callBackResponse,callBackError) => {
 };
 
 export const crearUsuario = async (nuevoUsuario,callBackResponse,callBackError) => {
-  const options = { method: 'POST', url: 'https://fathomless-mesa-97310.herokuapp.com/usuarios/' ,data:nuevoUsuario,headers: { 'Content-Type': 'application/json',Authorization: getToken(), }};
+  const options = { method: 'POST', url: `${baseURL}/usuarios/` ,data:nuevoUsuario,headers: { 'Content-Type': 'application/json',Authorization: getToken(), }};
   await axios
     .request(options)
     .then(callBackResponse)
@@ -79,7 +82,7 @@ export const crearUsuario = async (nuevoUsuario,callBackResponse,callBackError) 
 export const actualizarElUsuario = async (identificacionUsuario,nuevoUsuario,callBackResponse,callBackError) => {
   const options = {
     method: 'PATCH',
-    url: `https://fathomless-mesa-97310.herokuapp.com/usuarios/${identificacionUsuario._id}/`,
+    url: `${baseURL}/usuarios/${identificacionUsuario._id}/`,
     headers: { 'Content-Type': 'application/json',Authorization: getToken(), },
     data: nuevoUsuario,
 
@@ -93,7 +96,7 @@ export const actualizarElUsuario = async (identificacionUsuario,nuevoUsuario,cal
 export const eliminarElUsuario = async (id,callBackResponse,callBackError) => {
   const options = {
     method: 'DELETE',
-    url: `https://fathomless-mesa-97310.herokuapp.com/usuarios/${id}/`,
+    url: `${baseURL}/usuarios/${id}/`,
     headers: { 'Content-Type': 'application/json' , Authorization: getToken(),},
   };
   await axios
@@ -103,7 +106,7 @@ export const eliminarElUsuario = async (id,callBackResponse,callBackError) => {
 };
 
 export const obtenerProductos = async (callBackResponse,callBackError)=>{
-  const options = {method: 'GET', url: 'https://fathomless-mesa-97310.herokuapp.com/producto/',headers: { Authorization: getToken(),}};
+  const options = {method: 'GET', url: `${baseURL}/producto/`,headers: { Authorization: getToken(),}};
   await axios 
   .request(options)
   .then(callBackResponse)
@@ -113,7 +116,7 @@ export const obtenerProductos = async (callBackResponse,callBackError)=>{
 export const ActualizarProducto = async(codigo,editarProducto,callBackResponse,callBackError)=>{
   const options = {
     method: 'PATCH',
-    url: 'https://fathomless-mesa-97310.herokuapp.com/productoeditar',
+    url: `${baseURL}/productoeditar`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {
      id: codigo._id,
@@ -131,7 +134,7 @@ export const ActualizarProducto = async(codigo,editarProducto,callBackResponse,c
 export const eliminarElProducto = async (productoid,callBackResponse,callBackError)=>{
   const options = {
     method: 'DELETE',
-    url: 'https://fathomless-mesa-97310.herokuapp.com/productoeliminar',
+    url: `${baseURL}/productoeliminar`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {id: productoid._id}
   };
@@ -143,7 +146,7 @@ export const eliminarElProducto = async (productoid,callBackResponse,callBackErr
 export const crearElProducto = async (nuevoProducto,callBackResponse,callBackError)=>{
   const options = {
     method: 'POST',
-    url: 'https://fathomless-mesa-97310.herokuapp.com/productonuevo',
+    url: `${baseURL}/productonuevo`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {
       identificacion:nuevoProducto.identificacion,
@@ -158,7 +161,7 @@ export const crearElProducto = async (nuevoProducto,callBackResponse,callBackErr
 
 //**********API REST VENTAS */
 export const obtenerVentas = async(callBackResponse,callBackError)=>{
-  const options = {method: 'GET', url: 'https://fathomless-mesa-97310.herokuapp.com/venta/'};
+  const options = {method: 'GET', url: `${baseURL}/venta/`};
 await axios.request(options).then(callBackResponse).catch(callBackError);
  
 }
@@ -171,7 +174,7 @@ export const eliminarLaVenta = () => {
 export const crearLaVenta = async (nuevaVenta,callBackResponse,callBackError)=>{
   const options = {
     method: 'POST',
-    url: 'https://fathomless-mesa-97310.herokuapp.com/ventanueva/',
+    url: `${baseURL}/ventanueva/`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {
       identificador: nuevaVenta.identificador,
