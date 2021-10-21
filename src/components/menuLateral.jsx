@@ -64,7 +64,7 @@ const Menu = () => {
             <Link to='/' className="itemMenuLateral"> 
                 <img src={iconoSesion} alt="Ícono cerrar sesión" />
                
-                <button onClick={() => logout({ returnTo: 'http://localhost:3000/' })}>Cerrar Sesión</button>
+                <button onClick={() => logout({ returnTo: 'https://fathomless-mesa-97310.herokuapp.com/' })}>Cerrar Sesión</button>
             </Link>
 
             </li>
