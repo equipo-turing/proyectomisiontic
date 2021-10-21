@@ -1,333 +1,333 @@
-//La gestion de ventas será nuestro pagina de inicio o index
-import React, {useEffect,useState,useRef} from 'react'
-
+import React, {useEffect,useState,useRef} from 'react';
+import 'styles/estiloIndex.css';
 import plus_circle from 'media/plus-circle1.png';
 import penciles from 'media/pencil1.png';
 import iconoDelete from 'media/delete.png';
+import {Dialog} from '@material-ui/core';
+import swal from 'sweetalert';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
+import PrivateComponent from 'components/PrivateComponent';
 
-import 'styles/estiloIndex.css';
+import { obtenerVentas,eliminarLaVenta,crearLaVenta} from 'utils/api';
 
-//objeto venta con ventas ya creadas manualmente;
-const venta=()=>[
-    {
-        codigo:"12345",
-        valorVenta:"5.700.600",
-        fechaVenta:"22/09/2021",
-        fechaPago:"22/10/2021",
-        responsable:"Andres Rojas",
-        descripcion:"Venta Zapatos"
-    },
-
-    {
-        codigo:"15555",
-        valorVenta:"600000",
-        fechaVenta:"21/09/2021",
-        fechaPago:"05/10/2021",
-        responsable:"Walter Medina",
-        descripcion:"Venta Tenis"
-    },
-    {
-        codigo:"15555",
-        valorVenta:"600000",
-        fechaVenta:"21/09/2021",
-        fechaPago:"05/10/2021",
-        responsable:"Walter Medina",
-        descripcion:"Venta Tenis"
-    },
-    
-    
-];
-
-//funcion donde está el formulario ventas, recibe como parámeto una lista de ventas
-
-//funcion principal la cual se importa para ser enrutada en el archivo app.jsx
-const Venta =()=>{  
-    const [ventas,setVentas]=useState([]);//el [] indica que el arreglo será vacío inicialmente
-    const [mostrarTabla, setMostrarTabla] = useState(true);
-    const [actualizarVenta, setActualizarVentas] = useState(false);
-
-    useEffect(()=>{
-        //se trae la lista de ventas desde el backend, en este caso desde el objeto venta y lo coloca en setVentas
-        setVentas(venta);
-       },[]);  //si [] se deja vacio se ejecuta una sola vez, para este contexto necesitamos que la tabla se muestre una sola vez cuando la pagina se renderiza
-    
-    useEffect(()=>{
-
-    },[mostrarTabla]);
-
-    return(  
-        <div>
-        
-        {mostrarTabla ? (
-              
-                  <TablaVentas listaVenta={ventas} actualizarVenta={actualizarVenta} setActualizarVentas={setActualizarVentas} setVentas={setVentas} setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla}/>
-              
-              ) : 
-              (
-                <AnadirVenta
-                setMostrarTabla={setMostrarTabla}
-                listaVenta={ventas}
-                setVentas={setVentas}
-                />
-             )
-            
-        }       
-        
-
-        </div>
-        //llamo a la funcion TablaVentas  y le paso a la lista la variable ventas, variable que tiene todos las ventas de la bd
-        
-        );
-}
-
-
-const TablaVentas=({ listaVenta , actualizarVenta , setActualizarVentas , setVentas, setMostrarTabla, mostrarTabla })=>{
-
-
-    const [codigoVenta, setcodigoVenta] = useState();
-    const eliminarVenta =(codigo)=>{
-      let listaVentaTemp = [...listaVenta];
-      for(let i=0;i<listaVenta.length;i++){
-        if(listaVenta[i].codigo===codigo){
-            listaVentaTemp.splice(i, 1);
-          break;
-        }
-      }
-      setVentas([...listaVentaTemp])
-    }
-
-    
-    const actVenta =(codigo)=>{
-      console.log("codigo => ",codigo)
-      for(let i=0;i<listaVenta.length;i++){
-        console.log('indice = >',i," -> ",listaVenta[i]);
-      }
-      setcodigoVenta(codigo);
-      setActualizarVentas(!actualizarVenta);
-    }
-    return (
-        <section>
-            {actualizarVenta? 
-            (<ActualizarVenta listaVenta={listaVenta} actualizarVenta={actualizarVenta} setActualizarVentas={setActualizarVentas} setVentas={setVentas} codigoVenta={codigoVenta}/>
-                ):
-            (
-
-                <div>
-
-               
-             
-                <div className="contenedorImagenTitulo">
-                
-                
-                <div className="iconoVentas">
-                      <button 
-                        onClick={() => {
-                          setMostrarTabla(!mostrarTabla);
-                        }}
-                      ><img src={plus_circle} alt="" /></button>
-                    </div>     
-                
-                           
-                <h1 className="tituloGestionarVenta">LISTADO DE VENTAS</h1>                
-
-            </div>         
-            
-            
-            <div className="contenedorTablaVentas">
-            <table>
-                <thead className="encabezadoTablaVentas">
-                    <tr>
-                        <th>Código</th>
-                        <th>Valor Venta</th>
-                        <th>Fecha Venta</th>
-                        <th>Fecha Pago</th>
-                        <th>Responsable</th>
-                        <th>Descripción</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  
-               
-                    {listaVenta.map((venta)=>{
-                        return (
-                            <tr key={nanoid()}>
-                                <td>{venta.codigo}</td>
-                                <td>{venta.valorVenta}</td>
-                                <td>{venta.fechaVenta}</td>
-                                <td>{venta.fechaPago}</td>
-                                <td>{venta.responsable}</td>
-                                <td>{venta.descripcion}</td>                              
-
-                                <td>  <img onClick={() => actVenta(venta.codigo)} src={penciles } alt="actualizar usuario" /></td>
-                                <td>  <img onClick={() => eliminarVenta(venta.codigo)} src={iconoDelete } alt=" eliminar usuario" /></td>                   
-                            </tr>
-                        )                      
-
-                    })}                   
-
-                </tbody>                
-            </table>
-      
-
-
-            </div>
-            </div>
-            
-
-            )
-            
-        
-        }
-            
-           
-        </section>
-    )
-
-}
-
-
-
-const AnadirVenta =({setMostrarTabla,listaVenta,setVentas})=>{
-    const form = useRef(null);
-    const [codigo,setcodigo]=useState('');
-    const submitForm = async (e) => {
-      e.preventDefault();
-      const fd = new FormData(form.current);
+const FormularioCrearVenta=({setMostrarTabla,mostrarTabla,setVenta,listaVenta})=>{
+  const form=useRef(null)//es como tener todo el html del formulario en una variable y de esta manera accedo a todo lo que tenga el form
   
-      const nuevaVenta = {};
-      fd.forEach((value, key) => {
-        nuevaVenta[key] = value;
-      });
-      console.log(nuevaVenta)
-      setMostrarTabla(true);
-      // Spreed operator
-      setVentas([...listaVenta,nuevaVenta])
-    };
-    return ( 
+
+  /*METODO PARA GUARDAR UNA VENTA EN BD*/
+  const guardarVenta= async(e)=>{  
+      e.preventDefault()
+      const infoFormulario=new FormData(form.current);//me traigo todos los campos del formulario y los tengo en una variable
+      const nuevoProducto={};
+
+      infoFormulario.forEach((value,key)=>{//recorro todos los campos del formulario y los almaceno en un objeto nuevoProducto
+          nuevoProducto[key]=value;
+
+      });      
+      
+      //setProducto([...listaProducto,nuevoProducto])  esto se usaba cuando la bd estaba en el mismo codigo
+
+     /*********ME PERMITE ENVIAR INFORMACION A LA BD */
+     crearLaVenta(nuevoProducto,
+      (response)=>{
+        console.log(response.data);
+        toast.success("Producto Guardado !!");
+      },
+      (error)=>{
+        console.error(error);
+        toast.error("Error creando producto !!")
+      })
+
+    setMostrarTabla(!mostrarTabla)
+
+  }
+
+ 
+  return(
+  
       <div  className="formularioCrearVentas">
-        
+          
           <div className="contenedorTituloRegistroVenta">
           <h1>Crear Venta</h1>                    
           </div>
-        <form ref={form} onSubmit={submitForm}>
-          <label className="labelCampos" htmlFor="codigo">
-            codigo
-            <input name='codigo' className="camposRegistroVenta" type="text" />
-          </label>      
-          <label className="labelCampos" htmlFor="nombre">
-              Valor Venta
-            <input name='valorVenta' className="camposRegistroVenta" type="text" />
-          </label>
-  
-          <label className="labelCampos" htmlFor="especialidad">
-            Fecha Venta
-            <input className="camposRegistroVenta" type="date" name='fechaVenta' />
-          </label>
-  
-          <label className="labelCampos"  htmlFor="telefono">
-            Fecha Pago
-            <input name='fechaPago' className="camposRegistroVenta" type="date" />
-          </label>
-  
-          <label className="labelCampos"  htmlFor="fecha_ingreso">
-            Responsable
-            <input name='responsable' className="camposRegistroVenta" type="text" />
-          </label>
 
-          <label className="labelCampos"  htmlFor="fecha_ingreso">
-            Descripcion
-            <input name='descripcion' className="camposRegistroVenta" type="text" />
-          </label>
-  
-          <div className="contBotonGuardarVenta">
-            {/*<input className="botonCancelar" type="submit" value="Cancelar" />
-            <input type="submit" className="botonGuardar"  value="Guardar" />*/}
-            <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setMostrarTabla(true)}>Cancelar</button>
-            <button className="botonGuardar" type="submit" value="Guardar">Crear</button>
-  
-          </div>          
-  
-      </form>
-  
+          <form ref={form} onSubmit={guardarVenta}>
+              <label className="labelCampos">
+                  Identificador
+                  <input  name='identificador' className="camposRegistroVenta" type="text" required/>
+              </label> 
+
+              <label className="labelCampos" htmlFor="descripcion">
+                  Valor Total Venta
+                  <input   name='valorTotalVenta' className="camposRegistroVenta" type="number" required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Cantidad
+                  <input   className="camposRegistroVenta" type="number" name='cantidad' required />
+              </label>
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Precio Unitario
+                  <input   className="camposRegistroVenta" type="number" name='precioUnitario' required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Fecha de Venta
+                  <input   className="camposRegistroVenta" type="date" name='fechaVenta' required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Identificación Cliente
+                  <input   className="camposRegistroVenta" type="text" name='identificacionCliente' required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                Nombre Cliente
+                  <input   className="camposRegistroVenta" type="text" name='nombreCliente' required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                Nombre Vendedor
+                  <input   className="camposRegistroVenta" type="text" name='nombreVendedor' required />
+              </label>
+
+              <label className="labelCampos"  htmlFor="estado">
+                  Estado
+                  <select  className="camposRegistroVenta" name="estado"  required>
+                      <option value="" selected disabled>Seleccione una opción</option>
+                      <option >En Proceso</option>
+                      <option >Cancelada</option>
+                      <option >Entregada</option>
+                  </select>
+                  
+              </label>                
+              
+
+              <div className="contBotonGuardarVenta">
+                  
+                  <button onClick={()=>{setMostrarTabla(!mostrarTabla)}} className="botonCancelar" type="submit" value="Cancelar" >Cancelar</button>
+                  <button type='submit'  className="botonGuardar" value="Guardar">Crear</button>
+
+              </div>          
+
+          </form>
+
       </div>
-        
-      )
-  }
-  
-  const ActualizarVenta =({ listaVenta , actualizarVenta , setActualizarVentas , setVentas ,codigoVenta})=>{
-    const form = useRef(null);
-    console.log("Desde el actualiza -> ",codigoVenta)
-    const submitForm = async (e) => {
-      e.preventDefault();
-      const fd = new FormData(form.current);
-  
-      const nuevaVenta = {};
-      fd.forEach((value, key) => {
-        nuevaVenta[key] = value;
-      });
-      
-      console.log(nuevaVenta);
-      let listaVentaTemp = [...listaVenta];
-      for(let i=0;i<listaVenta.length;i++){
-        if(listaVenta[i].codigo===codigoVenta){
-          listaVenta[i] = nuevaVenta;
-          break;
+       )
+
+}
+
+
+const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setActualizarForm,}) => {
+
+  const [codigo,setCodigo]=useState();
+  const [busqueda, setBusqueda] = useState('');
+  const [vehiculosFiltrados, setVehiculosFiltrados] = useState(listaVenta);
+  //const [openDialog, setOpenDialog] = useState(false);
+
+  useEffect(() => {
+    setVehiculosFiltrados(
+      listaVenta.filter((elemento) => {
+        return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda,listaVenta]);
+
+ const actualizarProducto=(venta)=>{
+   setActualizarForm(!actualizarForm)
+   setCodigo(venta)  
+ }
+ 
+ 
+
+  const eliminarVenta = (venta) => { 
+    console.log(venta.descripcion)
+    //setOpenDialog(true);
+
+    const eliminar=async(venta)=>{
+      await eliminarLaVenta(
+        venta,
+        (response) => {
+          console.log(response.data);
+          toast.success('producto eliminado con éxito');
+          setMostrarTabla(true); 
+          
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error eliminando el producto');
         }
-      }
-      setActualizarVentas(false);
-    };
-    return ( 
-      <div className="formularioCrearVentas">
-        <div className="contenedorTituloRegistroVenta">
-          <h1>Actualizar Venta</h1>                    
-        </div>
-        <form ref={form} onSubmit={submitForm}>
-          <label className="labelCampos" htmlFor="codigo">
-            Código
-            <input name='codigo' className="camposRegistroVenta" type="text" value={codigoVenta}/>
-          </label>      
-          <label className="labelCampos" htmlFor="nombre">
-              Valor Venta
-            <input name='valorVenta' className="camposRegistroVenta" type="text" />
-          </label>
-  
-          <label className="labelCampos" htmlFor="especialidad">
-            Fecha Venta
-            <input className="camposRegistroVenta" type="date" name='fechaVenta' />
-          </label>
-  
-          <label className="labelCampos"  htmlFor="telefono">
-            Fecha Pago
-            <input name='fechaPago' className="camposRegistroVenta" type="date" />
-          </label>
-  
-          <label className="labelCampos"  htmlFor="fecha_ingreso">
-            Responsable
-            <input name='responsable' className="camposRegistroVenta" type="text" />
-          </label>
+      );
 
-          <label className="labelCampos"  htmlFor="fecha_ingreso">
-            Descripcion
-            <input name='descripcion' className="camposRegistroVenta" type="text" />
-          </label>
+    }
+
+    swal({
+      title:"Eliminar",
+      text:`Está seguro de eliminar el producto ${venta.descripcion}`,
+      icon:"warning",
+      buttons:["No","Si"]
+    }).then(respuesta=>{
+      if(respuesta){
+        eliminar(venta);
+      }
+    })   
+
+       
+  };
+ 
   
-          <div className="contBotonGuardarVenta">
-            {/*<input className="botonCancelar" type="submit" value="Cancelar" />
-            <input type="submit" className="botonGuardar"  value="Guardar" />   */}        
-            <button className="botonCancelar" type="submit" value="Cancelar" onClick={() => setActualizarVentas(false)}>Cancelar</button>
-            <button className="botonGuardar" type="submit" value="Guardar">Actualizar</button>
-  
-          </div>          
-  
-        </form>
-  
-      </div>
+    return (
+      <>
+      {actualizarForm ? (<aquievaeleformjlariodeventas/>):
+        (
+          <div>
+                <div>
+                  <input value={busqueda} onChange={(e)=>{setBusqueda(e.target.value)}} className="buscar" type="text" placeholder='Buscar Venta' />
+
+                  <div className="contenedorImagenTitulo">                
+                    <div className="iconoVentas">
+                      <button onClick={()=>{setMostrarTabla(!mostrarTabla)}}>
+                          <img src={plus_circle} alt="" />
+                     </button>
+                    </div>
+                  
+                    <div className="tituloGestionarProducto">
+                      <h1>GESTIONAR VENTA</h1>
+                    </div>
+                  </div>
+                </div>
+            <div className='contenedorTablaVentas'>
+              <table>
+                <thead className="encabezadoTablaVentas">
+                  <tr>
+                    <th>Identificador</th>
+                    <th>Valor Total Venta</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th> 
+                    <th>Fecha Venta</th> 
+                    <th>Identificacion Cliente</th> 
+                    <th>Nombre Cliente</th> 
+                    <th>Nombre Vendedor</th> 
+                    <th>Estado</th> 
+                    <PrivateComponent roleList={['admin']}>
+                      <th>Actualizar</th> 
+                      <th>Eliminar</th>
+                    </PrivateComponent>  
+                  </tr>
+                </thead>
+                <tbody>
+                    {vehiculosFiltrados.map((venta)=>{                 
+                       
+                        return(
+                         <>                        
+                          <tr key={nanoid()} > 
+                            <td>{venta.identificador}</td>
+                            <td>{venta.valorTotalVenta}</td>
+                            <td>{venta.cantidad}</td>
+                            <td>{venta.precioUnitario}</td>
+                            <td>{venta.fechaVenta}</td>
+                            <td>{venta.identificacionCliente}</td>
+                            <td>{venta.nombreCliente}</td>
+                            <td>{venta.nombreVendedor}</td>
+                            <td>{venta.estado}</td>
+                            <PrivateComponent roleList={['admin']}>
+                            <td>  <button onClick={()=>{actualizarProducto(venta)}}> <img src={penciles} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{eliminarVenta(venta)}}> <img src={iconoDelete} alt="" /> </button></td>
+                                                 
+                            </PrivateComponent>                              
+                          </tr> 
+                          
+                          {/* <Dialog open={openDialog}>
+                              <div className="contenedorDialogoEliminar">
+                                <h1 >
+                                  ¿Está seguro de querer eliminar el producto {venta.descripcion}?
+                                </h1>
+                                <div className='contBotonesDiagEliminar'>
+                                  <button onClick={()=>eliminarVenta(venta)}
+                                    
+                                    className='botonSi'
+                                  >
+                                    Sí
+                                  </button>
+                                  <button 
+                                    onClick={() => setOpenDialog(false)}
+                                    className='botonNo'
+                                  >
+                                    No
+                                  </button>
+                                </div>
+                              </div>
+                           </Dialog>    */}                                           
+
+                          </>                 
+
+                        )
+
+                    })}
+                                  
+                      
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+        )
+      }
+
+      </>
+      
+
         
-      )
-  }
+    )
+}
+
+
+
+
+const Venta= () => {
+  const [mostrarTabla,setMostrarTabla]=useState(true)
+  const [actualizarForm,setActualizarForm]=useState(false)
+ 
+  const [venta,setVenta]=useState([])//es un arreglo que almacenará los ventas que vengan de la bd
+
+  useEffect(()=>{
+    if(mostrarTabla){
+      
+      obtenerVentas(
+        (response)=>{
+          console.log(response.data);
+          setVenta(response.data)
+        }
+        ,(error)=>{
+          console.log(error)
+        }
+      );
+
+    }
+          
+
+      
+  },[mostrarTabla])
+
+ 
+  return (
+      <div>   
+         
+
+          {mostrarTabla ? (
+           <TablaVenta setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} listaVenta={venta} actualizarForm={actualizarForm} setActualizarForm={setActualizarForm} venta={venta} /> 
+          )
+          :(<FormularioCrearVenta setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setVenta={setVenta } listaVenta={venta}/>
+          )
+          }           
+          <ToastContainer  position="top-center"  autoClose={3000} />            
+
+      </div>
+            
+  );
+}
 
 
 
