@@ -10,9 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
 import PrivateComponent from 'components/PrivateComponent';
 
-import { obtenerVentas,eliminarLaVenta,crearLaVenta} from 'utils/api';
+import { obtenerVentas,eliminarLaVenta,crearLaVenta,actualizarLaVenta} from 'utils/api';
 
-const FormularioCrearVenta=({setMostrarTabla,mostrarTabla,setVenta,listaVenta})=>{
+const FormularioCrearVenta=({setMostrarTabla,mostrarTabla})=>{
   const form=useRef(null)//es como tener todo el html del formulario en una variable y de esta manera accedo a todo lo que tenga el form
   
 
@@ -27,7 +27,7 @@ const FormularioCrearVenta=({setMostrarTabla,mostrarTabla,setVenta,listaVenta})=
 
       });      
       
-      //setProducto([...listaProducto,nuevoProducto])  esto se usaba cuando la bd estaba en el mismo codigo
+      //setProducto([...listaProducto,nuevoProducto])  esto se usaba cuando la bd estaba en el mismo venta
 
      /*********ME PERMITE ENVIAR INFORMACION A LA BD */
      crearLaVenta(nuevoProducto,
@@ -122,7 +122,7 @@ const FormularioCrearVenta=({setMostrarTabla,mostrarTabla,setVenta,listaVenta})=
 
 const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setActualizarForm,}) => {
 
-  const [codigo,setCodigo]=useState();
+  const [venta,setVenta]=useState();
   const [busqueda, setBusqueda] = useState('');
   const [vehiculosFiltrados, setVehiculosFiltrados] = useState(listaVenta);
   //const [openDialog, setOpenDialog] = useState(false);
@@ -135,9 +135,9 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
     );
   }, [busqueda,listaVenta]);
 
- const actualizarProducto=(venta)=>{
+ const actualizarVenta=(venta)=>{
    setActualizarForm(!actualizarForm)
-   setCodigo(venta)  
+   setVenta(venta)  
  }
  
  
@@ -180,7 +180,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
   
     return (
       <>
-      {actualizarForm ? (<aquievaeleformjlariodeventas/>):
+      {actualizarForm ? (<FormularioActualizarVenta setActualizarForm={setActualizarForm} actualizarForm={actualizarForm} venta={venta}/>):
         (
           <div>
                 <div>
@@ -233,7 +233,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
                             <td>{venta.nombreVendedor}</td>
                             <td>{venta.estado}</td>
                             <PrivateComponent roleList={['admin']}>
-                            <td>  <button onClick={()=>{actualizarProducto(venta)}}> <img src={penciles} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{actualizarVenta(venta)}}> <img src={penciles} alt="" /> </button></td>
                             <td>  <button onClick={()=>{eliminarVenta(venta)}}> <img src={iconoDelete} alt="" /> </button></td>
                                                  
                             </PrivateComponent>                              
@@ -282,6 +282,110 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
         
     )
 }
+
+const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta})=>{
+  const form=useRef(null)
+  const actualizarVenta=async(e)=>{
+   
+    e.preventDefault();
+    const datosFormulario=new FormData(form.current);
+    const editarVenta={};
+
+    datosFormulario.forEach((value,key)=>{//recorro todos los campos del formulario y los almaceno en un objeto nuevoProducto
+      editarVenta[key]=value;
+
+        });
+        
+        actualizarLaVenta(venta,editarVenta,
+        (response)=>{
+          console.log(response.data);
+          toast.success("Venta actualizada!!");
+        },(error)=>{
+          console.error(error);
+          toast.error("La venta no se actualizó")
+        })
+        
+    setActualizarForm(!actualizarForm)
+
+
+  } 
+
+
+  return(
+    <div  className="formularioCrearVentas">
+            
+    <div className="contenedorTituloRegistroVenta">
+    <h1>Editar Venta</h1>                    
+    </div>
+
+    
+    <form ref={form} onSubmit={actualizarVenta}>
+              <label className="labelCampos">
+                  Identificador
+                  <input  name='identificador' className="camposRegistroVenta" type="text" value={venta.identificador} required/>
+              </label> 
+
+              <label className="labelCampos" htmlFor="descripcion">
+                  Valor Total Venta
+                  <input   name='valorTotalVenta' className="camposRegistroVenta" type="number" defaultValue={venta.valorTotalVenta}required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Cantidad
+                  <input   className="camposRegistroVenta" type="number" name='cantidad' defaultValue={venta.cantidad} required />
+              </label>
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Precio Unitario
+                  <input   className="camposRegistroVenta" type="number" name='precioUnitario' defaultValue={venta.precioUnitario} required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Fecha de Venta
+                  <input   className="camposRegistroVenta" type="date" name='fechaVenta'defaultValue={venta.fechaVenta} required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                  Identificación Cliente
+                  <input   className="camposRegistroVenta" type="text" name='identificacionCliente' defaultValue={venta.identificacionCliente} required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                Nombre Cliente
+                  <input   className="camposRegistroVenta" type="text" name='nombreCliente' defaultValue={venta.nombreCliente} required />
+              </label>
+
+              <label className="labelCampos" htmlFor="valor unitario">
+                Nombre Vendedor
+                  <input   className="camposRegistroVenta" type="text" name='nombreVendedor' defaultValue={venta.nombreVendedor} required />
+              </label>
+
+              <label className="labelCampos"  htmlFor="estado">
+                  Estado
+                  <select  className="camposRegistroVenta" name="estado" defaultValue={venta.estado} required>
+                      <option value="" selected disabled>Seleccione una opción</option>
+                      <option >En Proceso</option>
+                      <option >Cancelada</option>
+                      <option >Entregada</option>
+                  </select>
+                  
+              </label>                
+              
+
+              <div className="contBotonGuardarVenta">
+                  
+                  <button onClick={()=>{setActualizarForm(!actualizarForm)}} className="botonCancelar" type="submit" value="Cancelar" >Cancelar</button>
+                  <button type='submit'  className="botonGuardar" value="Actualizar">Actualizar</button>
+
+              </div>          
+
+          </form>
+
+
+</div>
+  )
+
+}
+
 
 
 

@@ -110,17 +110,17 @@ export const obtenerProductos = async (callBackResponse,callBackError)=>{
   .catch(callBackError);
 }
 
-export const ActualizarProducto = async(codigo,editarProducto,callBackResponse,callBackError)=>{
+export const ActualizarProducto = async(codigo,venta,callBackResponse,callBackError)=>{
   const options = {
     method: 'PATCH',
     url: 'http://localhost:5000/productoeditar',
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {
      id: codigo._id,
-      identificacion: editarProducto.identificacion,
-      descripcion: editarProducto.descripcion,
-      valorUnitario: editarProducto.valorUnitario,
-      estado: editarProducto.estado
+      identificacion: venta.identificacion,
+      descripcion: venta.descripcion,
+      valorUnitario: venta.valorUnitario,
+      estado: venta.estado
     }
   };
   await axios 
@@ -197,4 +197,26 @@ export const crearLaVenta = async (nuevaVenta,callBackResponse,callBackError)=>{
    await axios.request(options).then(callBackResponse).catch(callBackError);
   
  
+}
+
+export const actualizarLaVenta = async(idVenta,editarVenta,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'PATCH',
+    url: 'http://localhost:5000/ventaeditar',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {
+      id: idVenta._id,
+      identificador: editarVenta.identificador,
+      valorTotalVenta: editarVenta.valorTotalVenta,
+      cantidad: editarVenta.cantidad,
+      precioUnitario: editarVenta.precioUnitario,
+      fechaVenta: editarVenta.fechaVenta,
+      identificacionCliente: editarVenta.identificacionCliente,
+      nombreCliente: editarVenta.nombreCliente,
+      nombreVendedor: editarVenta.nombreVendedor,
+      estado: editarVenta.estado
+    }
+  };
+  await axios 
+  .request(options).then(callBackResponse).catch(callBackError);        
 }
