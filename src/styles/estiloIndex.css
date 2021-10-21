@@ -68,6 +68,40 @@ td,th{
   align-content: center;
 }
 
+.contenedorDialogoEliminar{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.contBotonesDiagEliminar{
+  
+  text-align: center;
+  padding: 10px;
+}
+.botonSi{
+  background-color: rgb(62, 179, 148);
+  padding: 20px;
+  margin-right: 50px;
+  color: white;
+  width: 70px;
+  border-radius: 5px;
+}
+.botonSi:hover{
+  background-color: rgb(24, 123, 52);
+
+}
+
+.botonNo{
+  background-color: rgb(158, 55, 48);
+  padding: 20px;
+  color: white;
+  width: 70px;
+  border-radius: 5px;
+}
+
+.botonNo:hover{
+  background-color: rgb(196, 29, 11);
+}
 
 
 

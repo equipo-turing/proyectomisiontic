@@ -3,6 +3,8 @@ import 'styles/estiloIndex.css';
 import plus_circle from 'media/plus-circle1.png';
 import penciles from 'media/pencil1.png';
 import iconoDelete from 'media/delete.png';
+import {Dialog} from '@material-ui/core';
+import swal from 'sweetalert';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { nanoid } from 'nanoid';
@@ -12,12 +14,14 @@ import { obtenerProductos ,ActualizarProducto ,eliminarElProducto,crearElProduct
 
 //import TablaProductos from 'components/TablaProductos'
 
+
 //Tabla para mostrar los productos
 const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,}) => {
 
   const [codigo,setCodigo]=useState();
   const [busqueda, setBusqueda] = useState('');
   const [vehiculosFiltrados, setVehiculosFiltrados] = useState(listaProducto);
+  //const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     setVehiculosFiltrados(
@@ -25,25 +29,50 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
         return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
       })
     );
-  }, [busqueda, listaProducto]);
+  }, [busqueda,listaProducto]);
 
  const actualizarProducto=(bdproducto)=>{
    setActualizarForm(!actualizarForm)
    setCodigo(bdproducto)  
  }
+ 
+ 
 
-  const eliminarProducto=(productoid)=>{
+  const eliminarProducto = (bdproducto) => { 
+    console.log(bdproducto.descripcion)
+    //setOpenDialog(true);
 
-   eliminarElProducto(productoid,
-    (response)=>{
-      console.log(response.data);
-      toast.success("Producto Eliminado !!");
-    },
-    (error)=>{
-      console.error(error);
-      toast.error("No se pudo eliminar")
-    })
-  }
+    const eliminar=async(bdproducto)=>{
+      await eliminarElProducto(
+        bdproducto,
+        (response) => {
+          console.log(response.data);
+          toast.success('producto eliminado con éxito');
+          setMostrarTabla(true); 
+          
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error eliminando el producto');
+        }
+      );
+
+    }
+
+    swal({
+      title:"Eliminar",
+      text:`Está seguro de eliminar el producto ${bdproducto.descripcion}`,
+      icon:"warning",
+      buttons:["No","Si"]
+    }).then(respuesta=>{
+      if(respuesta){
+        eliminar(bdproducto);
+      }
+    })   
+
+       
+  };
+ 
   
     return (
       <>
@@ -80,8 +109,10 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                   </tr>
                 </thead>
                 <tbody>
-                    {vehiculosFiltrados.map((bdproducto)=>{
+                    {vehiculosFiltrados.map((bdproducto)=>{                 
+                       
                         return(
+                         <>                        
                           <tr key={nanoid()} > 
                             <td>{bdproducto.identificacion}</td>
                             <td>{bdproducto.descripcion}</td>
@@ -90,14 +121,38 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                             <PrivateComponent roleList={['admin']}>
                             <td>  <button onClick={()=>{actualizarProducto(bdproducto)}}> <img src={penciles} alt="" /> </button></td>
                             <td>  <button onClick={()=>{eliminarProducto(bdproducto)}}> <img src={iconoDelete} alt="" /> </button></td>
-                            </PrivateComponent>
-                          </tr>
-                            
+                                                 
+                            </PrivateComponent>                              
+                          </tr> 
+                          
+                          {/* <Dialog open={openDialog}>
+                              <div className="contenedorDialogoEliminar">
+                                <h1 >
+                                  ¿Está seguro de querer eliminar el producto {bdproducto.descripcion}?
+                                </h1>
+                                <div className='contBotonesDiagEliminar'>
+                                  <button onClick={()=>eliminarProducto(bdproducto)}
+                                    
+                                    className='botonSi'
+                                  >
+                                    Sí
+                                  </button>
+                                  <button 
+                                    onClick={() => setOpenDialog(false)}
+                                    className='botonNo'
+                                  >
+                                    No
+                                  </button>
+                                </div>
+                              </div>
+                           </Dialog>    */}                                           
+
+                          </>                 
 
                         )
 
                     })}
-                    <tr></tr>                  
+                                  
                       
                  
               </tbody>

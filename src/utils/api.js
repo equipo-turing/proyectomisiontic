@@ -155,3 +155,38 @@ export const crearElProducto = async (nuevoProducto,callBackResponse,callBackErr
 
  await axios.request(options).then(callBackResponse).catch(callBackError);
 }
+
+//**********API REST VENTAS */
+export const obtenerVentas = async(callBackResponse,callBackError)=>{
+  const options = {method: 'GET', url: 'http://localhost:5000/venta/'};
+await axios.request(options).then(callBackResponse).catch(callBackError);
+ 
+}
+
+
+export const eliminarLaVenta = () => {
+  
+};
+
+export const crearLaVenta = async (nuevaVenta,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:5000/ventanueva/',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {
+      identificador: nuevaVenta.identificador,
+      valorTotalVenta: nuevaVenta.valorTotalVenta,
+      cantidad:nuevaVenta.cantidad,
+      precioUnitario: nuevaVenta.precioUnitario,
+      fechaVenta:nuevaVenta.fechaVenta,
+      identificacionCliente:nuevaVenta.identificacionCliente,
+      nombreCliente: nuevaVenta.nombreCliente,
+      nombreVendedor: nuevaVenta.nombreVendedor,
+      estado: nuevaVenta.estado
+    }
+  };
+
+   await axios.request(options).then(callBackResponse).catch(callBackError);
+  
+ 
+}
