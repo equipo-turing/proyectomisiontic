@@ -58,9 +58,12 @@ const Layout = ({ children }) => {
     <div>
       <div className='mainContainer'>
         <MenuLateral />
-        <main>{children}</main>      
+        <main>{children}
+        <Footer />   
+        </main> 
+         
       </div>
-      <Footer />
+    
     </div>
   );
 

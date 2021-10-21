@@ -1,18 +1,26 @@
 .menuLateral{
-  width: 380px;    
+  width: 380px;
+  height: 120vh;
+  
   background-color:#255AAA;
  
   
 }
 .mainContainer{
-display: flex;    
-height:100vh;
+display: flex;
+
+
 
  
 }
 .mainContainer>main{    
-  width: 100%;    
+  display: flex;
+  width: 100%;
+ 
+ 
+  flex-direction: column;
 }
+
 .navMenuLateral{
 display: flex;  
 border-bottom:  1px solid rgb(17, 15, 15);

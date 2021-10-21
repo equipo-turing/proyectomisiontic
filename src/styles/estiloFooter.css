@@ -3,10 +3,16 @@ footer{
     background-color:#05243E;
     color: white;
     width: 100%;
-    height: 100px;
+    padding: 15px;
+   
+   
+    position: fixed;
+    bottom: 0;
+    
     display:flex;   
     flex-direction: column;    
-    align-items: center; 
+   text-align: center;
+   align-items: center;
 }
 
 footer>h1,h5{
