@@ -16,12 +16,12 @@ import { obtenerProductos ,ActualizarProducto ,eliminarElProducto,crearElProduct
 
 
 //Tabla para mostrar los productos
-const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm,}) => {
+const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarForm,setActualizarForm}) => {
 
   const [codigo,setCodigo]=useState();
   const [busqueda, setBusqueda] = useState('');
   const [vehiculosFiltrados, setVehiculosFiltrados] = useState(listaProducto);
-  //const [openDialog, setOpenDialog] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     setVehiculosFiltrados(
@@ -31,20 +31,36 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
     );
   }, [busqueda,listaProducto]);
 
- const actualizarProducto=(bdproducto)=>{
+ const actualizarProducto=(producto)=>{
    setActualizarForm(!actualizarForm)
-   setCodigo(bdproducto)  
+   setCodigo(producto)  
  }
  
  
 
-  const eliminarProducto = (bdproducto) => { 
-    console.log(bdproducto.descripcion)
-    //setOpenDialog(true);
-
-    const eliminar=async(bdproducto)=>{
+  const eliminarProducto = async(producto) => {
+    console.log("resultado",producto)
+   
       await eliminarElProducto(
-        bdproducto,
+        producto,
+        (response) => {
+          console.log(response.data);
+          toast.success('producto eliminado con éxito');
+          setMostrarTabla(true); 
+          
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error eliminando el producto');
+        }
+      );
+      setOpenDialog(false)
+
+        
+
+   /*  const eliminar=async(producto)=>{
+      await eliminarElProducto(
+        producto,
         (response) => {
           console.log(response.data);
           toast.success('producto eliminado con éxito');
@@ -58,17 +74,17 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
       );
 
     }
-
-    swal({
+ */
+   /*  swal({
       title:"Eliminar",
-      text:`Está seguro de eliminar el producto ${bdproducto.descripcion}`,
+      text:`Está seguro de eliminar el producto ${producto.descripcion}`,
       icon:"warning",
       buttons:["No","Si"]
     }).then(respuesta=>{
       if(respuesta){
-        eliminar(bdproducto);
+        eliminar(producto);
       }
-    })   
+    })  */  
 
        
   };
@@ -109,29 +125,29 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                   </tr>
                 </thead>
                 <tbody>
-                    {vehiculosFiltrados.map((bdproducto)=>{                 
+                    {vehiculosFiltrados.map((producto)=>{                 
                        
                         return(
                          <>                        
                           <tr key={nanoid()} > 
-                            <td>{bdproducto.identificacion}</td>
-                            <td>{bdproducto.descripcion}</td>
-                            <td>{bdproducto.valorUnitario}</td>
-                            <td>{bdproducto.estado}</td>
+                            <td>{producto.identificacion}</td>
+                            <td>{producto.descripcion}</td>
+                            <td>{producto.valorUnitario}</td>
+                            <td>{producto.estado}</td>
                             <PrivateComponent roleList={['admin']}>
-                            <td>  <button onClick={()=>{actualizarProducto(bdproducto)}}> <img src={penciles} alt="" /> </button></td>
-                            <td>  <button onClick={()=>{eliminarProducto(bdproducto)}}> <img src={iconoDelete} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{actualizarProducto(producto)}}> <img src={penciles} alt="" /> </button></td>
+                            <td>  <button onClick={()=>{setOpenDialog(true)}}> <img src={iconoDelete} alt="" /> </button></td>
                                                  
                             </PrivateComponent>                              
                           </tr> 
                           
-                          {/* <Dialog open={openDialog}>
+                           <Dialog open={openDialog}>
                               <div className="contenedorDialogoEliminar">
                                 <h1 >
-                                  ¿Está seguro de querer eliminar el producto {bdproducto.descripcion}?
+                                  ¿Está seguro de querer eliminar el producto {producto.descripcion}?
                                 </h1>
                                 <div className='contBotonesDiagEliminar'>
-                                  <button onClick={()=>eliminarProducto(bdproducto)}
+                                  <button onClick={()=>eliminarProducto(producto)}
                                     
                                     className='botonSi'
                                   >
@@ -145,7 +161,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                                   </button>
                                 </div>
                               </div>
-                           </Dialog>    */}                                           
+                           </Dialog>                                               
 
                           </>                 
 
@@ -360,7 +376,7 @@ const Gestionar_producto = () => {
            
 
             {mostrarTabla ? (
-             <TablaProductos setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} listaProducto={producto} actualizarForm={actualizarForm} setActualizarForm={setActualizarForm} producto={producto} /> 
+             <TablaProductos setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} listaProducto={producto} actualizarForm={actualizarForm} setActualizarForm={setActualizarForm}  /> 
             )
             :(<FormularioCrearProducto setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setProducto={setProducto } listaProducto={producto}/>
             )
