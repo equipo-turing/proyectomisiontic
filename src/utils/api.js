@@ -164,9 +164,17 @@ await axios.request(options).then(callBackResponse).catch(callBackError);
 }
 
 
-export const eliminarLaVenta = () => {
+export const eliminarLaVenta = async (venta,callBackResponse,callBackError)=>{
+  const options = {
+    method: 'DELETE',
+    url: 'http://localhost:5000/ventaeliminar/',
+    headers: {'Content-Type': 'application/json',Authorization: getToken(),},
+    data: {id: venta._id}
+  };
   
-};
+  await axios 
+  .request(options).then(callBackResponse).catch(callBackError);
+}
 
 export const crearLaVenta = async (nuevaVenta,callBackResponse,callBackError)=>{
   const options = {

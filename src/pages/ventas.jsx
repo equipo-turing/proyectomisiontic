@@ -143,7 +143,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
  
 
   const eliminarVenta = (venta) => { 
-    console.log(venta.descripcion)
+   
     //setOpenDialog(true);
 
     const eliminar=async(venta)=>{
@@ -151,13 +151,13 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
         venta,
         (response) => {
           console.log(response.data);
-          toast.success('producto eliminado con éxito');
+          toast.success('venta eliminada con éxito');
           setMostrarTabla(true); 
           
         },
         (error) => {
           console.error(error);
-          toast.error('Error eliminando el producto');
+          toast.error('Error eliminando la venta');
         }
       );
 
@@ -165,7 +165,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
 
     swal({
       title:"Eliminar",
-      text:`Está seguro de eliminar el producto ${venta.descripcion}`,
+      text:`Está seguro de eliminar el la venta ${venta.identificador}`,
       icon:"warning",
       buttons:["No","Si"]
     }).then(respuesta=>{
