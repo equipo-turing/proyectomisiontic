@@ -298,10 +298,10 @@ const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta})=>{
         
         actualizarLaVenta(venta,editarVenta,
         (response)=>{
-          console.log(response.data);
+          //console.log(response.data);
           toast.success("Venta actualizada!!");
         },(error)=>{
-          console.error(error);
+          //console.error(error);
           toast.error("La venta no se actualizó")
         })
         
