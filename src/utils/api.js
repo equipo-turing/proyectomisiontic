@@ -174,10 +174,10 @@ export const eliminarLaVenta = async (venta,callBackResponse,callBackError)=>{
   const options = {
     method: 'DELETE',
    // url: 'http://localhost:5000/ventaeliminar/',
-    //url:`${baseURL}/ventaeliminar/`,
-    url: `${baseURL}/ventaeliminar/${venta._id}/`,
+    url:`${baseURL}/ventaeliminar/`,
+    //url: `${baseURL}/ventaeliminar/${venta._id}/`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
-    //data: {id: venta._id}
+    data: {id: venta._id}
   };
   
   await axios 
