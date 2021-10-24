@@ -144,7 +144,7 @@ const TablaProductos = ({setMostrarTabla,mostrarTabla,listaProducto,actualizarFo
                            <Dialog open={openDialog}>
                               <div className="contenedorDialogoEliminar">
                                 <h1 >
-                                  ¿Está seguro de querer eliminar el producto {producto.descripcion}?
+                                  ¿Está seguro de querer eliminar el producto?
                                 </h1>
                                 <div className='contBotonesDiagEliminar'>
                                   <button onClick={()=>eliminarProducto(producto)}
