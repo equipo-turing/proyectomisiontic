@@ -170,7 +170,8 @@ await axios.request(options).then(callBackResponse).catch(callBackError);
 export const eliminarLaVenta = async (venta,callBackResponse,callBackError)=>{
   const options = {
     method: 'DELETE',
-    url: 'http://localhost:5000/ventaeliminar/',
+   // url: 'http://localhost:5000/ventaeliminar/',
+    url:`${baseURL}/ventaeliminar/`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {id: venta._id}
   };
