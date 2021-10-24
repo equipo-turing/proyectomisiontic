@@ -165,7 +165,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
 
     swal({
       title:"Eliminar",
-      text:`Está seguro de eliminar el la venta ${venta.identificador}`,
+      text:`Está seguro de eliminar el la venta`,
       icon:"warning",
       buttons:["No","Si"]
     }).then(respuesta=>{
