@@ -160,10 +160,14 @@ export const crearElProducto = async (nuevoProducto,callBackResponse,callBackErr
 }
 
 //**********API REST VENTAS */
-export const obtenerVentas = async(callBackResponse,callBackError)=>{
-  const options = {method: 'GET', url: `${baseURL}/venta/`};
-await axios.request(options).then(callBackResponse).catch(callBackError);
- 
+
+
+export const obtenerVentas = async (callBackResponse,callBackError)=>{
+  const options = {method: 'GET', url: `${baseURL}/venta/`,headers: { Authorization: getToken(),}};
+  await axios 
+  .request(options)
+  .then(callBackResponse)
+  .catch(callBackError);
 }
 
 
