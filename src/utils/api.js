@@ -206,7 +206,8 @@ export const crearLaVenta = async (nuevaVenta,callBackResponse,callBackError)=>{
 export const actualizarLaVenta = async(idVenta,editarVenta,callBackResponse,callBackError)=>{
   const options = {
     method: 'PATCH',
-    url: 'http://localhost:5000/ventaeditar',
+    //url: 'http://localhost:5000/ventaeditar',
+    url: `${baseURL}/ventaeditar/`,
     headers: {'Content-Type': 'application/json',Authorization: getToken(),},
     data: {
       id: idVenta._id,
