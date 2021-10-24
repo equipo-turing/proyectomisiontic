@@ -7,9 +7,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { obtenerDatosUsuario } from 'utils/api';
 import { useUser } from 'context/userContext';
 import ReactLoading from 'react-loading';
-
-
-
+//const baseURL = 'http://localhost:3000'
+const baseURL = 'https://shrouded-beach-28471.herokuapp.com'
 
 const Layout = ({ children }) => {
   const { isAuthenticated, isLoading, loginWithRedirect, getAccessTokenSilently, logout } =
@@ -39,7 +38,7 @@ const Layout = ({ children }) => {
         (err) => {
           console.log('err', err);
           setLoadingUserInformation(false);
-          logout({ returnTo: 'http://localhost:3000/' });
+          logout({ returnTo: baseURL });
         }
       );
     };
