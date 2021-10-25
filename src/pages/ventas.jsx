@@ -180,7 +180,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
   
     return (
       <>
-      {actualizarForm ? (<FormularioActualizarVenta setActualizarForm={setActualizarForm} actualizarForm={actualizarForm} venta={venta}/>):
+      {actualizarForm ? (<FormularioActualizarVenta setActualizarForm={setActualizarForm} actualizarForm={actualizarForm} venta={venta} setEjecutarConsulta={setEjecutarConsulta}/>):
         (
           <div>
                 <div>
@@ -283,7 +283,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
     )
 }
 
-const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta})=>{
+const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta,setEjecutarConsulta})=>{
   const form=useRef(null)
   const actualizarVenta=async(e)=>{
    
@@ -300,6 +300,7 @@ const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta})=>{
         (response)=>{
           //console.log(response.data);
           toast.success("Venta actualizada!!");
+          setEjecutarConsulta(true)
         },(error)=>{
           //console.error(error);
           toast.error("La venta no se actualizó")
