@@ -120,7 +120,7 @@ const FormularioCrearVenta=({setMostrarTabla,mostrarTabla})=>{
 }
 
 
-const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setActualizarForm,}) => {
+const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setActualizarForm,setEjecutarConsulta}) => {
 
   const [venta,setVenta]=useState();
   const [busqueda, setBusqueda] = useState('');
@@ -152,7 +152,7 @@ const TablaVenta = ({setMostrarTabla,mostrarTabla,listaVenta,actualizarForm,setA
         (response) => {
           console.log(response.data);
           toast.success('venta eliminada con éxito');
-          setMostrarTabla(true); 
+          setEjecutarConsulta(true)
           
         },
         (error) => {
@@ -393,27 +393,31 @@ const FormularioActualizarVenta=({setActualizarForm,actualizarForm,venta})=>{
 const Venta= () => {
   const [mostrarTabla,setMostrarTabla]=useState(true)
   const [actualizarForm,setActualizarForm]=useState(false)
+  const [ejecutarConsulta,setEjecutarConsulta]=useState(true)
  
   const [venta,setVenta]=useState([])//es un arreglo que almacenará los ventas que vengan de la bd
 
-  useEffect(()=>{
-    if(mostrarTabla){
-      
+  useEffect(() => {
+   
+    if (ejecutarConsulta) {
       obtenerVentas(
         (response)=>{
-          console.log(response.data);
-          setVenta(response.data)
+          setVenta(response.data);
+          setEjecutarConsulta(false);
         }
         ,(error)=>{
           console.log(error)
         }
-      );
-
+        );
     }
-          
+}, [ejecutarConsulta]);
 
-      
-  },[mostrarTabla])
+useEffect(() => {
+    //Si esta en true deberia volver a hacer la peticion a la api
+    if (mostrarTabla) {
+      setEjecutarConsulta(true);
+    }
+}, [mostrarTabla]);
 
  
   return (
@@ -421,7 +425,7 @@ const Venta= () => {
          
 
           {mostrarTabla ? (
-           <TablaVenta setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} listaVenta={venta} actualizarForm={actualizarForm} setActualizarForm={setActualizarForm} venta={venta} /> 
+           <TablaVenta setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} listaVenta={venta} actualizarForm={actualizarForm} setActualizarForm={setActualizarForm} venta={venta} setEjecutarConsulta={setEjecutarConsulta} /> 
           )
           :(<FormularioCrearVenta setMostrarTabla={setMostrarTabla} mostrarTabla={mostrarTabla} setVenta={setVenta } listaVenta={venta}/>
           )
