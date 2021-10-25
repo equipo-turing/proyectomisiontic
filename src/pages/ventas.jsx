@@ -33,11 +33,11 @@ const FormularioCrearVenta=({setMostrarTabla,mostrarTabla})=>{
      crearLaVenta(nuevoProducto,
       (response)=>{
         console.log(response.data);
-        toast.success("Producto Guardado !!");
+        toast.success("venta Guardada !!");
       },
       (error)=>{
         console.error(error);
-        toast.error("Error creando producto !!")
+        toast.error("Error creando venta !!")
       })
 
     setMostrarTabla(!mostrarTabla)
